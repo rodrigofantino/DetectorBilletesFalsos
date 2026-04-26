@@ -1,0 +1,47 @@
+Game Design Document
+Detector de Billetes Falsos
+
+Note: this is an app, not a game. The GDD name is kept only to match the repository convention.
+
+1. Product goal
+Help users inspect bills with simulated UV lighting, highlight security marks, and review currency security information in a simple mobile app.
+
+2. Target user
+- People checking bills in daily use.
+- Users who want a quick visual aid for security marks.
+- Users who want country-by-country currency reference info.
+
+3. Core experience
+- Open the app.
+- Choose a mode from the main menu.
+- Use the screen as a tool, not as a game loop.
+- Return to the menu when finished.
+
+4. Feature pillars
+- UV detector: a strong blue/violet light mode that simulates UV inspection.
+- Watermark viewer: rotating colors to help visualize marks and paper differences.
+- Currency info browser: country selection plus bill security details.
+- No ads in the first Godot release. Monetization is a later decision, not part of the port baseline.
+
+5. Content scope
+- The app currently focuses on the currencies and notes already present in the legacy data files.
+- New countries or notes can be added later by extending the JSON data and the Godot UI.
+
+6. Porting goals
+- Keep the app simple, fast, and readable.
+- Preserve the three core modes.
+- Preserve the feeling of an instant utility app.
+- Avoid adding unnecessary gameplay systems.
+
+7. Roadmap
+Phase 1: rebuild the menu and navigation.
+Phase 2: rebuild the UV screen.
+Phase 3: rebuild the watermark screen.
+Phase 4: rebuild the currency info flow.
+Phase 5: restore ads only if needed.
+Phase 6: polish UI and publish an Android build.
+
+8. Open questions
+- Which ad network should be used in the new build.
+- Whether the legacy paid removal path still matters.
+- Whether the current currency content needs cleanup before the port.

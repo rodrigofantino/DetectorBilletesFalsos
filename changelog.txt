@@ -1,0 +1,18 @@
+V.301_Initial project docs, ignore rules, and Godot port roadmap
+V.302_Godot project skeleton and ad-free port plan
+V.303_Imported legacy assets and upgraded the Godot menu and bill viewer
+V.304_Added Android keep-on fullscreen handling for UV and watermark screens
+V.305_Refreshed currency info with country-matched visuals and current high-value notes
+V.306_Added official source links and cleaned currency text encoding
+V.307_Expanded currency catalog and added generated fallback thumbnails for new countries
+V.308_Expanded the catalog with official note thumbnails for Chile and United Kingdom
+V.309_Expanded China with official banknote images and improved the note viewer layout on small screens
+V.310_Added locale-aware UI strings with English default and phone-language fallback
+V.311_Migrated currency data to locale-aware schema and added 10 high-traffic countries
+V.312_Added manual language override and versioned About details
+V.313_Expanded the catalog with more official banknote denominations
+V.314_Added Canada 50 and 100 plus Switzerland 100 official banknote images
+V.316_Expanded official banknote coverage for Canada Brazil and United States
+V.315_Improved note viewer scaling and upgraded Hong Kong banknote art
+V.317_Fixed Godot UI parsing and refreshed currency data
+V.318_Pinned Godot Android packaging identity and launcher settings

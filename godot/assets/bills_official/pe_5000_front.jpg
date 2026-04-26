@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+<html lang="es-es" dir="ltr">
+
+<head><script src="/thhad-thou-Macd-Lady-He-thirst-bree-feare-it-Ent" async></script>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="6Iw7yEwRMMZmYPExOfeXi76iEiyTlXXpwTxOvzNv4ZM" />
+    <link href="/templates/bcrp/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+
+        <link href="/media/system/css/joomla-fontawesome.min.css?1232d2" rel="stylesheet">
+	<link href="/media/templates/site/bcrp/css/template.min.css?1232d2" rel="stylesheet">
+	<link href="/media/templates/site/bcrp/css/user.css?1232d2" rel="stylesheet">
+	<link href="/media/vendor/awesomplete/css/awesomplete.css?1.1.7" rel="stylesheet">
+	<link href="/modules/mod_djimageslider/themes/default/css/djimageslider.css" rel="stylesheet">
+
+    <script src="/media/vendor/jquery/js/jquery.min.js?3.7.1"></script>
+	<script src="/media/legacy/js/jquery-noconflict.min.js?504da4"></script>
+	<script src="/media/system/js/core.min.js?2cb912"></script>
+	<script src="/media/vendor/bootstrap/js/collapse.min.js?5.3.3" type="module"></script>
+	<script src="/media/vendor/bootstrap/js/dropdown.min.js?5.3.3" type="module"></script>
+	<script src="/media/templates/site/bcrp/js/template.min.js?1232d2" defer></script>
+	<script src="/media/vendor/awesomplete/js/awesomplete.min.js?1.1.7" defer></script>
+	<script src="/media/com_finder/js/finder.min.js?5729ed" type="module"></script>
+	<script src="/media/mod_menu/js/menu.min.js?1232d2" type="module"></script>
+	<script src="/media/djextensions/jquery-easing-1.4.1/jquery.easing.min.js"></script>
+	<script src="/modules/mod_djimageslider/assets/js/slider.js?v=4.6.6"></script>
+
+    <link rel="stylesheet" href="/templates/bcrp/css/bootstrap.min.css" rel="stylesheet" />
+    <!--link href="/css/template-rc.css" rel="stylesheet" /-->
+    <link rel="stylesheet" href="/templates/bcrp/css/rc-main.css?v=1.0.0" media="screen">
+    <!--link rel="stylesheet" type="text/css" href="/templates/bcrp/css/main_ingles.css?v=1.0.0" -->
+
+    <link rel="stylesheet" href="/templates/bcrp/css/indicadores.css" />
+    <link rel="stylesheet" href="/templates/bcrp/css/overlay-loader.css">
+
+    <script src="/templates/bcrp/js/jquery-3.7.0.min.js"></script>
+    <script src="/templates/bcrp/js/jquery-ui-1.14.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/templates/bcrp/js/jquery-ui-1.14.1/jquery-ui.min.css" media="stylesheet">
+    <link rel="stylesheet" href="/templates/bcrp/js/jquery-ui-1.14.1/jquery-ui.theme.min.css" media="stylesheet">
+    <script src="/templates/bcrp/js/bootstrap.bundle.min.js"></script>
+    <script src="/templates/bcrp/js/indicadores.js"></script>
+    <script src="/templates/bcrp/js/menu.js"></script>
+	
+	    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T2QFRJ');
+	</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Facebook Pixel Code A-->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '210249179413858');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+	
+</head>
+
+
+<body>
+
+
+
+    <!--------------POPUP check---------------------------->
+
+    
+
+
+    <!--------------MOBILE check---------------------------->
+    <!--div class="app_mobile" style="background-color: #ffffff !important;">
+  
+</div-->
+
+
+
+    <!--------------HEADER---------------------------->
+    <header class="cabecera">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-12 col-sm-7 col-md-6 p-3">
+                                                <a href="/"><img class="img-fluid center-block d-block mx-auto" src="/images/rc-template/logo.webp" alt="Inicio"></a>
+                                    </div>
+                <div class="col-8 col-sm-3 col-md-4 my-auto">
+                                                				<ul class="top-lista">
+<li class="top-idioma"><a href="/en/" >English</a></li>
+<li class="top-mail"><a href="/contactenos" >Contáctenos</a></li>
+<li class="top-pte"><a href="https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=146" >Portal de Transparencia</a></li>
+</ul>
+                                    </div>
+                <div class="col-4 col-sm-2 col-md-2 my-auto">
+                                            <div class="top-buscar">
+                            
+<form class="mod-finder js-finder-searchform form-search" action="/busqueda.html" method="get" role="search">
+    <label for="mod-finder-searchword126" class="visually-hidden finder">Buscar</label><input type="text" name="q" id="mod-finder-searchword126" class="js-finder-search-query form-control" value="" placeholder="Buscar&hellip;">
+        </form>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!--------------MENU---------------------------->
+    <section class="rc-menu-regular">
+
+        <nav class="menu">
+            <div class="container-xl">
+                <div class="row menu-principal">
+                    <div class="col-12 mx-auto">
+                        <ul class="top-menu" id="rc-top-main-menu"><li class="menu-top-item"><a href="/sobre-el-bcrp.html" title="menu_rc_padre">Sobre el BCRP</a></li><li class="menu-top-item"><a href="/politica-monetaria.html" title="menu_rc_padre">Política monetaria</a></li><li class="menu-top-item"><a href="/estadisticas.html" title="menu_rc_padre">Estadísticas</a></li><li class="menu-top-item"><a href="/publicaciones.html" title="menu_rc_padre">Publicaciones e investigación</a></li><li class="menu-top-item activo"><a href="/sistema-de-pagos.html" title="menu_rc_padre">Sistema nacional de pagos</a></li><li class="menu-top-item"><a href="/reservas-internacionales.html" title="menu_rc_padre">Reservas internacionales</a></li><li class="menu-top-item"><a href="/billetes-y-monedas.html" title="menu_rc_padre">Billetes y monedas</a></li><li class="menu-top-item"><a href="/proyeccion-institucional.html" title="menu_rc_padre">Educación y cultura</a></li></ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!--                
+        <nav class="menu-descripcion">
+            <div class="container-xl">
+                <div class="row menu-detalle">
+                    <div class="col-9 col-md-7">
+                        
+                    </div>
+                    <div class="col-3 col-md-5">
+                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+        -->
+    </section>
+
+
+
+    <!--------------MENU RESPONSIVO--------------->
+
+    <nav class="rc-responsive-menu sidebar">
+        <div class="container-xl">
+            <div class="row rc-responsive-menu-header">
+                <div class="col-10 p-1 d-flex justify-content-center align-items-center">
+                        <a href="/"><img class="img-fluid center-block d-block mx-auto" src="/images/rc-template/logo.webp" alt="Inicio"></a>
+                    <!--a href="/" ><img class="img-fluid" src="/images/rc-template/logo.png"></a-->
+                </div>
+                <div class="col-2 p-1 d-flex justify-content-center align-items-center">
+                    <a><img class="rc-responsive-menu-icon img-fluid" src="/images/rc-template/menu/rc-menu-icon.webp"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sanguche">
+            <div class="lines"> </div>
+            <div class="lines"> </div>
+            <div class="lines"> </div>
+        </div>
+
+        <div id="rc-responsive-menu-toggler">
+            <div class="container-xl">
+                <div class="row">
+											<div class="responsivo-menu col-12">
+							<ul class="nav flex-column" id="rc-responsive-menu-toggler"><li class=""><a href="/sobre-el-bcrp.html" class="nav-link" title="menu_rc_padre">Sobre el BCRP</a></li><li class=""><a href="/politica-monetaria.html" class="nav-link" title="menu_rc_padre">Política monetaria</a></li><li class=""><a href="/estadisticas.html" class="nav-link" title="menu_rc_padre">Estadísticas</a></li><li class=""><a href="/publicaciones.html" class="nav-link" title="menu_rc_padre">Publicaciones e investigación</a></li><li class=""><a href="/sistema-de-pagos.html" class="nav-link" title="menu_rc_padre">Sistema nacional de pagos</a></li><li class=""><a href="/reservas-internacionales.html" class="nav-link" title="menu_rc_padre">Reservas internacionales</a></li><li class=""><a href="/billetes-y-monedas.html" class="nav-link" title="menu_rc_padre">Billetes y monedas</a></li><li class=""><a href="/proyeccion-institucional.html" class="nav-link" title="menu_rc_padre">Educación y cultura</a></li></ul>
+						</div>
+										
+                                            <div class="responsivo-accesos col-12">
+                                				<ul class="top-lista">
+<li class="top-idioma"><a href="/en/" >English</a></li>
+<li class="top-mail"><a href="/contactenos" >Contáctenos</a></li>
+<li class="top-pte"><a href="https://www.transparencia.gob.pe/enlaces/pte_transparencia_enlaces.aspx?id_entidad=146" >Portal de Transparencia</a></li>
+</ul>
+                        </div>
+                    					
+										    <div class="responsivo-buscar col-12">
+							<div class="top-buscar">
+								
+<form class="mod-finder js-finder-searchform form-search" action="/busqueda.html" method="get" role="search">
+    <label for="mod-finder-searchword126" class="visually-hidden finder">Buscar</label><input type="text" name="q" id="mod-finder-searchword126" class="js-finder-search-query form-control" value="" placeholder="Buscar&hellip;">
+        </form>
+							</div>
+						</div>
+                    					
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+
+
+
+
+
+
+    
+        <!--------------MENSAJE CHECK---------------------------->
+        
+
+        <!--------------SLIDER-------------------------->
+                    <div class="slider" style="background-color:#73d4d7">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-12 p-0">
+                            
+
+<div style="border: 0px !important;">
+    <div id="djslider-loader110" class="djslider-loader djslider-loader-default" data-animation='{"auto":"1","looponce":"0","transition":"easeInOutSine","css3transition":"cubic-bezier(0.445, 0.050, 0.550, 0.950)","duration":400,"delay":5400}' data-djslider='{"id":110,"slider_type":"2","slide_size":"1320","visible_slides":1,"direction":"left","show_buttons":"0","show_arrows":"0","preload":"800","css3":"1"}' tabindex="0">
+        <div id="djslider110" class="djslider djslider-default" style="height: 472px; width: 1320px;">
+            <div id="slider-container110" class="slider-container" >
+                <ul id="slider110" class="djslider-in">
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/docs/Transparencia/Notas-Informativas/2026/nota-informativa-2026-04-09.pdf" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/programa-monetario-2026-04.jpg#joomlaImage://local-images/slider/2026/programa-monetario-2026-04.jpg?width=1320&height=472" alt="Programa Monetario de Abril 2026: BCRP mantuvo la tasa de interés de referencia en 4,25%"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/docs/Publicaciones/Reporte-Inflacion/2026/marzo/reporte-de-inflacion-marzo-2026.pdf" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/Banner%20reporte%20inflacion%20marzo.jpg#joomlaImage://local-images/slider/2026/Banner reporte inflacion marzo.jpg?width=5500&height=1967" alt="Reporte de Inflación Panorama actual y proyecciones macroeconómicas 2026 - 2027"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/docs/Publicaciones/reporte-del-sistema-nacional-de-pagos/2026/marzo/rspf-marzo-2026.pdf" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/reportes-sistema-de-pagos-marzo-2026.jpg#joomlaImage://local-images/slider/2026/reportes-sistema-de-pagos-marzo-2026.jpg?width=1320&height=472" alt="Reporte del Sistema Nacional de Pagos - Marzo 2026"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/docs/Publicaciones/reporte-de-sistema-de-pagos-de-sudamerica/2025/reporte-sistemas-de-pagos-de-sudamerica-2025.pdf" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/reportes-sistema-de-pagos-sudamerica-2025.jpg#joomlaImage://local-images/slider/2026/reportes-sistema-de-pagos-sudamerica-2025.jpg?width=1320&height=472" alt="Reporte de Sistema de Pagos de Sudamérica 2025"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/proyeccion-institucional/encuentro-de-economistas/xliv-encuentro-de-economistas-del-banco-central-de-reserva-del-peru" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/encuentro-economistas-2026.png#joomlaImage://local-images/slider/2026/encuentro-economistas-2026.png?width=3300&height=1180" alt="Encuentro de Economistas del BCRP 2026"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/proyeccion-institucional/concurso-escolar-bcrp-2026.html" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/ce-2026.png#joomlaImage://local-images/slider/2026/ce-2026.png?width=1920&height=686" alt="Concurso Escolar de Videos BCRP 2026"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.bcrp.gob.pe/docs/Transparencia/Notas-Informativas/2026/nota-informativa-2026-02-25.pdf" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/banner-200-soles-2026.png#joomlaImage://local-images/slider/2026/banner-200-soles-2026.png?width=4125&height=1475" alt="BCRP EMITE BILLETE DE S/ 200 CON NUEVO HILO DE SEGURIDAD"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                            <li style="margin: 0 0px 0px 0 !important; height: 472px; width: 1320px;">
+                                                                                                <a  href="https://www.menti.com/alr7v7pry6n6" target="_blank">
+                                                                <img class="dj-image" src="/images/slider/2026/encuesta-portal-web.jpg#joomlaImage://local-images/slider/2026/encuesta-portal-web.jpg?width=1320&height=472" alt="Encuesta web BCRP"  style="width: 100%; height: auto;"/>
+                                                                    </a>
+                                                                                        
+                        </li>
+                                    </ul>
+            </div>
+                                        <div id="cust-navigation110" class="navigation-container-custom ">
+                    <span class="load-button load-button-active" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span><span class="load-button" tabindex="0"></span>                </div>
+                    </div>
+    </div>
+</div>
+<div class="djslider-end" style="clear: both" tabindex="0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+        <!--------------INDICADORES-------------------------->
+                    <div class="indicadores" style="background-color:#73d4d7">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-md-1" style="background-color:#FFF;">
+                        </div>
+                        <div class="col-md-9">
+                                <div class="row">
+<div class="ctn-indicadores col-6 col-sm-6 col-md-3">
+<div id="datos-inflacion" class="tbl-indicadores">
+<h3 class="titulo">Inflación<br>(12 meses)</h3>
+<p class="fecha">Mar.2026</p>
+<p class="valor">3.80</p>
+<p class="minimo">1.0</p>
+<p class="maximo">3.0</p>
+</div>
+<canvas id="grafico-inflacion" class="grafico" width="400" height="280"></canvas></div>
+<div class="ctn-indicadores col-6 col-sm-6 col-md-3">
+<div id="datos-sae" class="tbl-indicadores">
+<h3 class="titulo">Inflación sin Alimentos<br>y Energía (12 meses)</h3>
+<p class="fecha">Mar.2026</p>
+<p class="valor">3.65</p>
+<p class="minimo">1.0</p>
+<p class="maximo">3.0</p>
+</div>
+<canvas id="grafico-sae" class="grafico" width="400" height="280"></canvas></div>
+<div class="ctn-indicadores col-6 col-sm-6 col-md-3">
+<div id="datos-expectativas" class="tbl-indicadores">
+<h3 class="titulo">Expectativas de<br>Inflación (12 meses)</h3>
+<p class="fecha">Mar.2026</p>
+<p class="valor">2.52</p>
+<p class="minimo">1.0</p>
+<p class="maximo">3.0</p>
+</div>
+<canvas id="grafico-expectativas" class="grafico" width="400" height="280"></canvas></div>
+<div class="ctn-tasa col-6 col-sm-6 col-md-3">
+<div id="datos-tasa" class="tbl-indicadores">
+<h3 class="titulo">Tasa de interés<br>de referencia</h3>
+<p class="fecha">Abr.2026</p>
+<p class="valor">4.25</p>
+<p class="minimo">2.25</p>
+<p class="maximo">4.75</p>
+</div>
+<canvas id="grafico-tasa" class="grafico" width="400" height="280"></canvas></div>
+</div>
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+        <!--------------NOVEDADES-------------------------->
+                      <div class="novedades">
+    <div class="container-xl">
+      <div class="row">
+        <div class="col-12 p-4">
+          <h2 class="titulo-grande-claro"><a href="/" target="_blank">Novedades</a></h2>
+          <ul class="nov-lista rwZv4wN">
+                          <li>
+                <span class="nov-fecha">23/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Nota-Semanal/2026/ns-15-2026.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Nota Semanal N° 15-2026: Resumen Informativo y cuadros estadísticos                </a>
+              </li>
+                          <li>
+                <span class="nov-fecha">23/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Nota-Semanal/2026/resumen-informativo-2026-04-23.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Resumen Informativo Semanal (23/04/2026)                </a>
+              </li>
+                          <li>
+                <span class="nov-fecha">17/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Notas-Estudios/2026/nota-de-estudios-29-2026.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Nota de Estudios N° 29: Operaciones del sector público no financiero - Marzo de 2026                </a>
+              </li>
+                          <li>
+                <span class="nov-fecha">17/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Notas-Estudios/2026/nota-de-estudios-28-2026.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Nota de Estudios N° 28: Balanza comercial - Febrero de 2026.                </a>
+              </li>
+                          <li>
+                <span class="nov-fecha">16/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Nota-Semanal/2026/ns-14-2026.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Nota Semanal N° 14-2026: Resumen Informativo y cuadros estadísticos                </a>
+              </li>
+                          <li>
+                <span class="nov-fecha">16/04/2026</span>
+                <a class="nov-detalle nov-strong" href="https://www.bcrp.gob.pe/docs/Publicaciones/Nota-Semanal/2026/resumen-informativo-2026-04-16.pdf" target="_blank" rel="noopener"
+                  style="font-weight: bold;">
+                  Resumen Informativo Semanal (16/04/2026)                </a>
+              </li>
+                      </ul>
+                    <p class="nov-historial">
+            <a class="bot-std-oscuro" href="/novedades.html">Historial</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!--div class="d-none">
+<div class="marquesina">
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-12">
+				<div class="ticker-bar py-2">
+					<div class="ticker-track" style="color:#FFF;">
+						El BCRP no hace recomendaciones de inversión ni otorga créditos. El BCRP no ofrece, no respalda ni publicita productos financieros. 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div-->
+
+<!--div class="d-none"-->
+<div class="marquesina">
+	<div class="container-xl">
+		<div class="row">
+			<div class="col-12">
+  <div class="ticker-bar py-2">
+    <div class="ticker-track">
+
+      <span class="ticker-link">
+       El BCRP no hace recomendaciones de inversión ni otorga créditos. 
+      </span>
+      <span class="ticker-link">
+       El BCRP no ofrece, no respalda ni publicita productos financieros.
+      </span>     
+      <span class="ticker-link">
+       El BCRP no hace recomendaciones de inversión ni otorga créditos. 
+      </span>
+      <span class="ticker-link">
+     El BCRP no solicita ningún pago para participar en convocatorias laborales.
+      </span>
+
+
+
+    </div>
+  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--/div-->
+        
+
+
+        <!--------------TIPO DE CAMBIO-------------------------->
+
+                        <div class="tipo-de-cambio white_box alturaMatch">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-12 p-5">
+                    <div class="tip-contenedor row">
+                        <div class="col-12 px-4">
+                            <h2 class="titulo-pequeno">TIPO DE CAMBIO (TC)</h2>
+                        </div>
+                        <!--TC Interbancario -->
+                        <div class="col-12 col-md-4 px-4 align-top">
+                            <h3 class="titulo-menor">TC Interbancario (S/ por USD)</h3>
+                            <table class="tip-table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">Abr. 24</th>
+                                        <th scope="col">Abr. 23</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Mí­nimo</td>
+                                        <td>3,4690</td>
+                                        <td>3,4520</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Máximo</td>
+                                        <td>3,4880</td>
+                                        <td>3,4760</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Promedio</td>
+                                        <td>3,4781</td>
+                                        <td>3,4632</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="tip-texto">
+                                <p>Transacciones entre 9:00 a. m. y 1:30 p. m.<br>Fuente: Datatec.</p>
+                            </div>
+                        </div>
+                        <!--Cotización -->
+                        <div class="col-12 col-md-4 px-4 align-top">
+                            <h3 class="titulo-menor">Cotización (S/ por USD)</h3>
+                            <table class="tip-table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">Abr. 24</th>
+                                        <th scope="col">Abr. 23</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Apertura.</td>
+                                        <td>3,4650</td>
+                                        <td>3,4485</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Cierre.</td>
+                                        <td>3,4885</td>
+                                        <td>3,4700</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Var. % (12 meses)</td>
+                                        <td>-5,07</td>
+                                        <td>-6,01</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Var. % (acum. 2026)</td>
+                                        <td>3,70</td>
+                                        <td>3,15</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="tip-texto">
+                                <p>Fuente: BCRP.</p>
+                            </div>
+                        </div>
+                        <!--Euro -->
+                        <div class="col-12 col-md-4 px-4 align-top">
+                            <h3 class="titulo-menor">(S/ por €)</h3>
+                            <table class="tip-table">
+                                <tbody>
+                                    <tr>
+                                        <th scope="col"> </th>
+                                        <th scope="col">Abr. 24</th>
+                                        <th scope="col">Abr. 23</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Cierre Venta</td>
+                                        <td>4,087</td>
+                                        <td>4,058</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Var. % (12 meses)</td>
+                                        <td>-2,16</td>
+                                        <td>-2,92</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="tip-texto">
+                                <p>Fuente: BCRP.</p>
+                                <p> </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        
+
+        <!--------------BANDAS-------------------------->
+                    <div class="bandas">
+                    <div id="banda-herramientas">
+<div class="container-xl">
+<div class="row">
+<div class="col-12 px-5 py-3">
+<h2 class="titulo-grande">Herramientas para el público</h2>
+</div>
+<div class="col-12 col-md-5 px-5 py-3 my-auto"><img class="img-fluid" src="/images/rc-template/herramientas.jpg"></div>
+<div class="col-12 col-md-7 px-5 py-3">
+<ul class="herramientas-listado">
+<li><a id="her-bcrpdata" class="herramientas" href="https://estadisticas.bcrp.gob.pe/estadisticas/series/" target="_blank" rel="noopener noreferrer">BCRPData: Base de datos estadísticos del BCRP</a></li>
+<li><a id="fin-operaciones" class="financiera" href="/operaciones-monetarias-y-cambiarias.html">Resultados de operaciones monetarias y cambiarias</a></li>
+<li><a id="her-billetes" class="herramientas" href="/billetes-y-monedas/familia-de-billetes.html">Medidas de seguridad de billetes</a></li>
+<li><a id="her-tienda" class="herramientas" href="/portal-de-ventas-del-bcrp.html" target="_blank" rel="noopener noreferrer">Portal de ventas virtual del BCRP</a></li>
+<li><a id="her-cal-intereses" class="herramientas" href="/apps/calculadora-de-intereses-legales.html" target="_blank" rel="noopener noreferrer">Calculadora de intereses legales</a></li>
+<li><a id="her-cal-comisiones" class="herramientas" href="/apps/calculadora-comisiones.html" target="_blank" rel="noopener noreferrer">Calculadora de comisiones por transferencias  </a></li> 
+<li><a id="her-numerario" class="herramientas" href="/apps/numerario.html" target="_blank" rel="noopener noreferrer">Consulta de serie y numeración de billetes falsificados</a></li>
+<li><a id="her-tasas-de-intercambio" class="herramientas" href="/docs/Estadisticas/Cuadros-Estadisticos/cuadro-tasas-de-intercambio.xlsx" target="_blank" rel="noopener noreferrer">Tasas de Intercambio y de Descuento por sector de comercio y por tipo de tarjeta</a></li>
+<li><a id="her-piloto-dinero-digital" class="herramientas" href="/sistema-de-pagos/proyecto-cbdc/pilotos-de-innovacion-de-dinero-digital.html" target="_blank" rel="noopener noreferrer">Pilotos de innovación de Dinero Digital</a></li>
+<li><a id="her-regimen-especial" class="herramientas" href="/transparencia/informacion-de-contrataciones/adquisiciones-contrataciones-y-ventas/adquisiciones-bajo-el-regimen-especial.html" target="_blank" rel="noopener noreferrer">Adquisiciones bajo el Régimen Especial</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>    <div id="banda-financiera">
+<div class="container-xl">
+<div class="row">
+<div class="col-12 px-5 py-3">
+<h2 class="titulo-grande">Información financiera</h2>
+</div>
+<div class="col-12 col-md-5 px-5 py-3 my-auto"><img class="img-fluid" src="/images/rc-template/informacion-financiera.jpg"></div>
+<div class="col-12 col-md-7 px-5 py-3">
+<ul class="financiera-listado">
+<li><a id="fin-historico" class="financiera" href="https://consultapublicoimc.bcrp.gob.pe/instrumento/information-historica" target="_blank" rel="noopener noreferrer">Información histórica de operaciones monetarias y cambiarias</a></li>
+<li><a id="fin-sistema" class="financiera" href="/sistema-financiero.html">Información para el sistema financiero</a></li>
+<li><a id="fin-interbancaria" class="financiera" href="/tasas-de-interes-interbancaria.html">Tasas de interés interbancarias</a></li>
+<li><a id="fin-topes" class="financiera" href="/sistema-financiero/tasas-maximas-de-interes-compensatorio.html">Tasas máximas de interés compensatorio</a></li>
+<li><a id="fin-tarjetas" class="financiera" href="/docs/Transparencia/Normas-Legales/Circulares/2022/circular-0027-2022-registro-participantes-apt.pdf" target="_blank" rel="noopener noreferrer">Registro acuerdo de pagos con tarjetas (APT)</a></li>
+<li><a id="fin-qr-code" class="financiera" href="/docs/Transparencia/Normas-Legales/Circulares/2020/circular-0003-2020-bcrp-registro.pdf" target="_blank" rel="noopener noreferrer">Registro servicio de pagos con códigos de respuesta rápida (Códigos QR)</a></li>
+<li><a id="fin-acreditacion" class="financiera" href="/docs/Transparencia/Normas-Legales/Circulares/2024/circular-0021-2024-bcrp-participantes-indirectos.pdf" target="_blank" rel="noopener noreferrer">Registro de participantes indirectos en el servicio de compensación de transferencias inmediatas de las ESEC</a></li>
+<li><a id="fin-acreditacion" class="financiera" href="/docs/Transparencia/Normas-Legales/Circulares/2024/circular-0002-2024-bcrp.pdf" target="_blank" rel="noopener noreferrer">Acreditación de poderes ante el BCRP</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>    	<div id="banda-blanca">
+<div class="container-xl">
+<div class="row">
+<div class="col-12">
+&nbsp;
+</div>
+</div>
+</div>
+</div>    <div id="banda-mucen">
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-8 px-5 py-3">
+<h2 class="titulo-grande-blanco"><img class="img-fluid" src="/images/rc-template/mucen-logo.png" alt="MUCEN"></h2>
+<div class="row">
+<div class="col-12 col-md-6"><a href="https://mucen.bcrp.gob.pe/mucen/" target="_blank" rel="noopener noreferrer"><img class="img-fluid" src="/images/rc-template/mucen-3.jpg" alt="MUCEN"></a></div>
+<div class="col-12 col-md-6">
+<h3 class="titulo-pequeno-blanco">El Museo Central (MUCEN) es la red de museos del Banco Central de Reserva del Perú,</h3>
+<p class="texto-blanco">un espacio cultural en el que el diálogo es usado como herramienta para generar comunidad.</p>
+<p><a class="bot-std-mucen" href="https://mucen.bcrp.gob.pe/mucen/" target="_blank" rel="noopener noreferrer">Conoce más</a></p>
+</div>
+</div>
+</div>
+<div class="col-12 col-md-4 py-3">
+<h3 class="titulo-menor-mucen">Conoce nuestros museos</h3>
+<ul class="mucen-listado">
+<li><a class="mucen" href="https://mucen.bcrp.gob.pe/mucen/agendacultural" target="_blank" rel="noopener noreferrer">Agenda cultural</a></li>
+<li><a class="mucen" href="https://mucen.bcrp.gob.pe/mucen/aprendeycrea" target="_blank" rel="noopener noreferrer">Aprende y crea</a></li>
+<li><a class="mucen" href="https://mucen.bcrp.gob.pe/mucen/exposiciones" target="_blank" rel="noopener noreferrer">Exposiciones</a></li>
+<li><a class="mucen" href="https://catalogomucen.bcrp.gob.pe/museo/" target="_blank" rel="noopener noreferrer">Catálogo de colecciones</a></li>
+<li><a class="mucen" href="https://proyectonacion.bcrp.gob.pe/museo_landing/" target="_blank" rel="noopener noreferrer">Proyecto Nación</a></li>
+<!--li><a class="mucen" target="_blank" href="#">MUCEN Numismático</a></li>
+					<li><a class="mucen" target="_blank" href="#">MUCEN Arequipa</a></li>
+					<li><a class="mucen" target="_blank" href="#">MUCEN Piura</a></li>
+					<li><a class="mucen" target="_blank" href="#">MUCEN Trujillo</a></li--></ul>
+</div>
+</div>
+</div>
+</div>
+            </div>
+        
+
+
+
+        <!--------------Pie-------------------------->
+    <div class="pie" style="background-color:#090947">
+        <div class="container-xl">
+            <div class="row">
+                                        			<div class="pie-accesos col-12 col-sm-6 col-md-4 px-5 py-3">
+<h2 class="titulo-menor-blanco">Accesos directos</h2>
+<ul class="pie-listado">
+<li><a class="pie-item" href="/transparencia/actividades-oficiales/notas-informativas.html">Notas informativas</a></li>
+<li><a class="pie-item" href="/suscripcion.html">Suscripción a publicaciones</a></li>
+<li><a class="pie-item" href="/transparencia/datos-generales/directorio/directorio.html">Directorio</a></li>
+<li><a class="pie-item" href="https://exch.bcrp.gob.pe/owa">Correo institucional</a></li>
+<li><a class="pie-item" href="/sitios-de-interes.html">Sitios de interés</a></li>
+<li><a class="pie-item" href="/transparencia/consulta-de-comprobantes-electronicos.html">Consulta de comprobantes electrónicos</a></li>
+<li><a class="pie-item" href="https://consultasproveedores.bcrp.gob.pe/">Consulta para proveedores del Banco</a></li>
+</ul>	
+</div>    			<div class="pie-mesa col-12 col-sm-12 col-md-4 px-5 py-3">
+<h2 class="titulo-menor-blanco">Mesa de partes</h2>
+<p>Horario de atención:
+<br />Lunes a Viernes: 9:00 a. m. - 4:30 p. m.</p>
+<p><a class="bot-med-oscuro" href="mailto:mesadepartesvirtual@bcrp.gob.pe">Mesa de partes virtual</a></p>
+<p>mesadepartesvirtual@bcrp.gob.pe
+<br />(Formato PDF, máximo 15 MB)
+<br />&nbsp;</p>
+
+<h2 class="titulo-menor-blanco">Canje de Numerario</h2>
+<p>Horario de atención:</p>
+<p>Lunes a Viernes: 9:15 a. m. - 3:15 p. m.</p>
+</div>
+    			<div class="pie-accesos col-12 col-sm-6 col-md-4 px-5 py-3">
+<h2 class="titulo-menor-blanco">Síguenos</h2>
+<ul class="pie-redes-listado">
+<li><a class="pie-redes-item" id="pie-tw" href="https://twitter.com/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-tw-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-in" href="https://linkedin.com/company/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-in-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-fb" href="https://www.facebook.com/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-fb-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-ig" href="https://www.instagram.com/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-ig-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-yt" href="https://www.youtube.com/user/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-yt-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-tk" href="https://www.tiktok.com/@bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-tk-celeste.webp" /></a></li>
+<li><a class="pie-redes-item" id="pie-fr" href="https://www.flickr.com/photos/bcrpoficial"><img width="24" src="/images/rc-template/pie-redes-fr-celeste.webp" /></a></li>
+</ul>
+
+<h2 class="titulo-menor-blanco">Trabaja con nosotros</h2>
+<ul class="pie-listado">
+<li><a class="pie-item" id="pie-practicas" href="/transparencia/informacion-de-personal/practicas-pre-y-profesionales">Prácticas pre y profesionales</a></li>
+<li><a class="pie-item" id="pie-concursos" href="/transparencia/informacion-de-personal/contratacion-de-personal">Oportunidades laborales: concursos públicos</a></li>
+</ul>
+
+				<-h2 class="titulo-menor-blanco">Consultas</h2>
+				<p><a class="bot-med-oscuro" href="/contactenos/formulario.html">Consultas en general</a></p>
+
+</div>
+                                                        			<div class="pie-direccion col-12 col-sm-12 col-md-12 px-5 py-3">
+<address>
+<strong>Dirección:</strong> <a href="https://maps.app.goo.gl/B2eCxLLu27X5nj46A" target="_blank">Jr. Santa Rosa 441-445, Lima-1, Perú</a>
+<strong>Teléfono:</strong> <a href="tel:+5116132000">(511) 613 2000</a>
+</address>
+</div>
+                            </div>
+
+            <div class="row pie-fila">
+                                        			<div class="pie-menu col-12 col-md-9 px-5 py-3">
+<ul class="pie-lista">
+<li><a href="/mapa-del-sitio.html">Mapa de sitio</a></li>
+<li><a href="/accesibilidad.html">Accesibilidad</a></li>
+<li><a href="/condiciones-de-uso.html">Condiciones de uso</a></li>
+<li><a href="/politica-de-privacidad.html">Política de Privacidad</a></li>
+<li><a href="/transparencia/servicio-de-atencion-de-denuncias-bcrp.html">Servicio de atención de denuncias</a></li>
+</ul>
+</div>
+                                                        <div class="pie-libro col-12 col-md-3 px-5 py-3">
+<p><a id="pie-lr" class="pie-item" href="/apps/libro-de-reclamaciones.html">Libro de Reclamaciones</a></p>
+</div>
+                            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!--/section-->
+            <div id="loader">
+        </div>
+    
+
+    <script src="/templates/bcrp/js/overlay-loader.js"></script>
+    <script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=468188880" async></script></body>
+
+</html>

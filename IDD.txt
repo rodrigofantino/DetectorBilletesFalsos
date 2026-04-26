@@ -1,0 +1,38 @@
+Implemented Design Document
+Detector de Billetes Falsos
+
+1. Purpose
+This document records the current implementation state of the legacy Android app and the migration path to Godot 4.5.
+
+2. Current app state
+- Legacy platform: Android Java project created in Eclipse.
+- Target product: an app for detecting counterfeit bills and reviewing currency security features.
+- Main launcher flow: `Splash -> NewMainActivity`.
+- Legacy alternate flow: `Menu`, `Information`, and `PesosArgentinos` still exist in the codebase.
+- Godot port baseline: `Boot -> MainMenu -> feature scenes`, with ads removed from the first release.
+
+3. Implemented features
+- UV detector screen.
+- Multicolor watermark / security-light screen.
+- Currency information browser by country.
+- Bill-specific information screen for selected notes.
+- Legacy ad hooks exist only in the Android tree and are excluded from the Godot port.
+
+4. Current implementation risks
+- StartApp is referenced in the manifest, but the source SDK is not present.
+- Currency JSON exists in more than one place and one path has a casing mismatch.
+- Old Android permissions and old SDK assumptions may not survive the port unchanged.
+- Signing keys are missing from the repo and must stay local.
+
+5. Migration roadmap to Godot
+Phase 1: inventory the legacy screens, assets, and data files.
+Phase 2: recreate the launcher and main menu in Godot.
+Phase 3: port the UV light screen with full-screen brightness control.
+Phase 4: port the RGB watermark light screen with timed color cycling.
+Phase 5: port the currency browser and note details using JSON data.
+Phase 6: test Android export on device and compare behavior against the legacy app.
+Phase 7: add ads only if they are still desired after the core app is stable.
+
+6. Working notes
+- Android Studio can help validate the old Android project and inspect legacy behavior if needed.
+- Godot remains the target engine for the port because the app is UI-heavy and simple enough to rebuild there.

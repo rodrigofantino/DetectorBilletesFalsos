@@ -1,0 +1,113 @@
+Technical Design Document
+Detector de Billetes Falsos
+
+1. Target stack
+- Engine: Godot 4.5.x
+- Language: GDScript, typed where practical
+- Export target: Android
+- Legacy validation tool: Android Studio only if we need to inspect or run the old Java project
+- Ads are excluded from the first Godot implementation.
+
+2. Architecture target
+- One root scene with menu navigation.
+- Separate scenes for each feature mode.
+- One shared data loader for currency JSON.
+- One shared utility layer for screen brightness, full-screen state, and app lifecycle handling.
+
+3. Java screen to Godot scene map
+- `Splash.java` -> `Boot.tscn` or fold into `MainMenu.tscn`.
+- `NewMainActivity.java` -> `MainMenu.tscn`.
+- `Menu.java` -> merged into `MainMenu.tscn`.
+- `MainActivity.java` -> `UvDetector.tscn`.
+- `SecondActivity.java` -> `WatermarkViewer.tscn`.
+- `CountryNoteSelectorActivity.java` -> `CountrySelect.tscn`.
+- `NoteInfoActivity.java` -> `CurrencyInfo.tscn`.
+- `InfoShowpa100.java` -> `BillViewer.tscn` or a reusable note subscene.
+- `Information.java` and `PesosArgentinos.java` -> merged into the currency browser flow.
+- Ads-related manifest routes -> excluded from the first Godot release.
+
+4. Proposed Godot scene map
+- `Boot.tscn`: short boot/branding transition.
+- `MainMenu.tscn`: launcher and feature selection.
+- `UvDetector.tscn`: blue/violet light mode.
+- `WatermarkViewer.tscn`: RGB cycle mode.
+- `CountrySelect.tscn`: country list for currency info.
+- `CurrencyInfo.tscn`: note security details and images.
+- `About.tscn`: app info, share, and support links if still needed.
+- `BillViewer.tscn`: reusable note carousel/detail scene for image or data-rich note inspection.
+
+5. Data model
+- Keep currency data in JSON.
+- Load the data from a single canonical file in the Godot project.
+- Normalize currency keys and country identifiers before building UI.
+- Remove duplicate or stale copies during the migration once the source of truth is confirmed.
+
+6. Rendering and UX rules
+- Use full-screen, portrait-first layouts.
+- Keep the UV screen visually simple and immediate.
+- Keep the watermark viewer responsive and lightweight.
+- Keep the currency info screens readable on small devices.
+- Never upscale a banknote texture beyond its native resolution; cap preview rendering to avoid pixelation on small official assets.
+- Do not block the first release on ads or external SDKs.
+
+7. Android-specific concerns
+- Brightness control and screen wake behavior must be re-implemented using Godot-friendly Android hooks or a lightweight plugin.
+- Legacy ad integration should not block the core port.
+- Old manifest-era permissions should not be copied blindly.
+- Current implementation baseline: use Godot's `DisplayServer.screen_set_keep_on(true)` plus Android fullscreen mode for UV and watermark screens before considering a native plugin.
+
+8. Migration steps
+Step 1: identify canonical assets and data files.
+Step 2: recreate the menu flow in Godot.
+Step 3: port the UV screen.
+Step 4: port the watermark color cycle.
+Step 5: port currency browsing and detail screens.
+Step 6: add Android export testing and device verification.
+Step 7: decide on ads and release packaging after the core app is stable.
+Step 8: import and reuse the legacy logo, note images, and button sound for a closer visual match.
+Step 9: add a native Android plugin only if hardware-level brightness control is still needed after device testing.
+Step 10: refresh currency content from official bank sources only.
+Step 11: keep Argentina on current high-denomination notes only; remove obsolete low-value bills from the browsing flow.
+Step 12: map each country to a country-correct visual asset so the info cards and note viewer never show mismatched imagery.
+Step 13: expose the official source URL in the currency detail screens so each note can be verified directly.
+Step 14: expand the currency catalog with additional countries using official central-bank sources.
+Step 15: prefer official banknote art for every included country and keep generated thumbnails only as a future fallback for newly added markets without local assets.
+Step 16: expand China from a single denomination into the current 1, 5, 10, 20, 50 and 100 yuan flow using official People's Bank of China pages.
+Step 17: keep the note viewer readable on compact Android screens by making the detail view scrollable and shrinking the preview area when the viewport is narrow.
+Step 18: centralize visible UI strings behind a locale helper so English remains the default and supported phone languages can override it.
+Step 19: treat note-content translation as a schema problem, not a scene problem, so future multilingual banknote data can be added without rewiring navigation.
+Step 20: migrate note content to locale-aware dictionaries while keeping the legacy flat fields as fallback during transition.
+Step 21: add the next 10 high-traffic countries with official central-bank art, one clean denomination per country first.
+Step 22: keep official banknote art as the default for every included country and reserve generated thumbnails only for future gaps.
+Step 23: add a manual language selector in the main menu so the user can override the phone language when desired.
+Step 24: persist the selected language override in `user://settings.cfg`, with system language as the fallback when no override is set.
+Step 25: translate the note content in this order: English source, then Spanish, Portuguese, and Chinese, country by country.
+Step 26: localize the visible country labels and currency labels for each newly supported country as the content is translated.
+
+9. Known legacy issues to verify
+- `currencyInfo.json` casing mismatch in the old Java code.
+- Duplicate JSON file in `res/raw` versus `assets`.
+- StartApp manifest reference without source SDK in the repo.
+- Old Eclipse/Android dependency assumptions in `project.properties`.
+
+10. Acceptance criteria
+- The Godot build opens to a working menu.
+- The three core modes behave like the legacy app.
+- Currency data loads correctly on Android and each card matches its country.
+- Security notes are traceable to central bank or official currency program sources.
+- Argentina's info view only exposes current high-denomination notes.
+- Currency cards and note viewers expose the official source link for direct verification.
+- Current included countries use official banknote art, not placeholders or mismatched flag images.
+- New countries can still be added without breaking the UI if they need a temporary generated thumbnail.
+- China exposes the current note set instead of a single denomination, and each Chinese note points to an official PBC page.
+- The note viewer stays usable on narrow phone screens without clipping the thumbnail or pushing detail text off-screen.
+- The app picks the phone language when supported, otherwise it falls back to English.
+- The user can manually override the language from the main menu and the choice persists across launches.
+- Note text localization is now represented in `currencyinfo.json` with locale-aware dictionaries, while the flat fields remain as compatibility fallback.
+- The translation backlog is documented in a stable order so note content can be localized without scene rewiring.
+- The next catalog expansion targets about 10 additional countries prioritized by traffic and official source quality.
+- The app exports and runs on a modern Android device.
+
+11. Recommendation
+- Use Android Studio only as a verification tool for the legacy project if needed.
+- Build the new app in Godot 4.5, not in Android Studio.

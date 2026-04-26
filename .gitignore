@@ -1,0 +1,40 @@
+# Eclipse / legacy Android
+bin/
+gen/
+build/
+local.properties
+.classpath
+.project
+.settings/
+captures/
+*.apk
+*.aab
+*.dex
+*.class
+*.log
+*.tmp
+exports/
+# Android Studio
+.idea/
+*.iml
+.gradle/
+
+# Godot
+godot/.godot/
+godot/.import/
+godot/.mono/
+godot/export/
+godot/*.translation
+
+# Signing / secrets
+keys posibles/
+run_codex_full_permisions.bat
+*.keystore
+*.jks
+*.p12
+*.pem
+*.keystore.bak
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
