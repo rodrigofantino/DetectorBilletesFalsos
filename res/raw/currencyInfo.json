@@ -11,14 +11,14 @@
 	"country":"Argentina",
 	"currency":"peso argentino",
 	"denomination":"50",
-	"watermark":"peso_ar_100_watermark"
+	"watermark":"peso_ar_50_watermark",
 	"description":"peso_ar_50_description"
 },
 {
 	"country":"Brasil",
 	"currency":"real",
 	"denomination":"100",
-	"watermark":"real_100_watermark"
+	"watermark":"real_100_watermark",
 	"description":"real_100_description"
 },
 
@@ -26,48 +26,48 @@
 	"country":"Brasil",
 	"currency":"real",
 	"denomination":"50",
-	"watermark":"real_50_watermark"
+	"watermark":"real_50_watermark",
 	"description":"real_50_description"
 },
 {
 	"country":"EEUU",
 	"currency":"usd",
 	"denomination":"100",
-	"watermark":"usd_100_watermark"
+	"watermark":"usd_100_watermark",
 	"description":"usd_100_description"
 },
 {
 	"country":"EEUU",
 	"currency":"usd",
 	"denomination":"50",
-	"watermark":"usd_100_watermark"
+	"watermark":"usd_50_watermark",
 	"description":"usd_50_description"
 },
 {
 	"country":"EUROPE",
 	"currency":"euro",
 	"denomination":"500",
-	"watermark":"usd_100_watermark"
+	"watermark":"euro_500_watermark",
 	"description":"euro_500_watermark"
 },
 {
 	"country":"Europe",
 	"currency":"euro",
 	"denomination":"100",
-	"watermark":"euro_100_watermark"
+	"watermark":"euro_100_watermark",
 	"description":"euro_100_description"
 },
 {
 	"country":"Colombia",
 	"currency":"peso colombiano",
-	"denomination":"100000",
-	"watermark":"peso_100K_watermark"
-	"description":"peso_col_100k_description"
+	"denomination":"10000",
+	"watermark":"peso_col_10K_watermark",
+	"description":"peso_col_10k_description"
 },
 {
 	"country":"Colombia",
 	"currency":"peso colombiano",
 	"denomination":"50000",
-	"watermark":"peso_50K_watermark"
+	"watermark":"peso_col_50K_watermark",
 	"description":"peso_col_50k_description"
 }]
