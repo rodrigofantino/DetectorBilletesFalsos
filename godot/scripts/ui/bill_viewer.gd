@@ -14,6 +14,7 @@ var _margin: MarginContainer
 var _preview: PanelContainer
 var _root: VBoxContainer
 var _preview_box: VBoxContainer
+var _artwork_max_size: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
@@ -78,7 +79,7 @@ func _build_ui() -> void:
 	_root.add_child(_title_label)
 
 	_preview = PanelContainer.new()
-	_preview.custom_minimum_size = Vector2(0, 340)
+	_preview.custom_minimum_size = Vector2(0, 380)
 	_preview.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_root.add_child(_preview)
 
@@ -88,8 +89,10 @@ func _build_ui() -> void:
 	_preview.add_child(_preview_box)
 
 	_artwork_holder = Control.new()
-	_artwork_holder.custom_minimum_size = Vector2(0, 180)
+	_artwork_holder.custom_minimum_size = Vector2(0, 240)
 	_artwork_holder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_artwork_holder.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_artwork_holder.clip_contents = true
 	_preview_box.add_child(_artwork_holder)
 
 	_denomination_label = Label.new()
@@ -147,11 +150,12 @@ func _apply_layout() -> void:
 	var margin_size := 14 if compact else 24
 	var title_size := 24 if compact else 32
 	var denomination_size := 32 if compact else 40
-	var preview_height := 280 if compact else 340
-	var artwork_height := 150 if compact else 180
+	var preview_height := 520 if compact else 760
+	var artwork_height := 360 if compact else 560
 	var separation := 10 if compact else 14
 	var preview_separation := 8 if compact else 10
 	var align := HORIZONTAL_ALIGNMENT_LEFT if compact else HORIZONTAL_ALIGNMENT_CENTER
+	_artwork_max_size = Vector2(viewport_size.x - float(margin_size * 2), float(artwork_height))
 
 	_margin.add_theme_constant_override("margin_left", margin_size)
 	_margin.add_theme_constant_override("margin_top", margin_size)
@@ -185,7 +189,7 @@ func _refresh() -> void:
 		_source_label.text = ""
 		_source_button.visible = false
 		_clear_features()
-		_set_artwork(load("res://assets/ui/appsimplelogo.jpg"))
+		_set_artwork(_load_texture("res://assets/ui/appsimplelogo.jpg"))
 		return
 
 	_title_label.text = AppState.get_note_title(note)
@@ -207,9 +211,9 @@ func _refresh() -> void:
 		bullet.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_feature_box.add_child(bullet)
 
-	var texture_path := AppState.get_note_texture_path(note)
-	if ResourceLoader.exists(texture_path):
-		_set_artwork(load(texture_path))
+	var texture := _load_note_texture(note)
+	if texture != null:
+		_set_artwork(texture)
 	else:
 		_set_artwork(_build_fallback_artwork(note))
 
@@ -225,17 +229,23 @@ func _set_artwork(content: Variant) -> void:
 	if content is Texture2D:
 		var texture := content as Texture2D
 		var image := TextureRect.new()
-		image.custom_minimum_size = _cap_texture_size(texture, _artwork_holder.custom_minimum_size)
+		image.set_anchors_preset(Control.PRESET_FULL_RECT)
 		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		image.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		image.custom_minimum_size = _cap_texture_size(texture, _artwork_max_size)
 		image.texture = texture
 		_artwork_holder.add_child(image)
 	elif content is Node:
+		if content is Control:
+			(content as Control).set_anchors_preset(Control.PRESET_FULL_RECT)
 		_artwork_holder.add_child(content)
 
 
 func _build_fallback_artwork(note: Dictionary) -> Control:
 	var root := Control.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root.custom_minimum_size = _artwork_holder.custom_minimum_size
 	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
@@ -308,3 +318,18 @@ func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:
 
 	var scale: float = min(1.0, min(max_size.x / source_size.x, max_size.y / source_size.y))
 	return source_size * scale
+
+
+func _load_texture(texture_path: String) -> Texture2D:
+	if texture_path.is_empty() or not ResourceLoader.exists(texture_path):
+		return null
+
+	var resource := ResourceLoader.load(texture_path)
+	if resource is Texture2D:
+		return resource as Texture2D
+	return null
+
+
+func _load_note_texture(note: Dictionary) -> Texture2D:
+	var texture_path := AppState.get_note_texture_path(note)
+	return _load_texture(texture_path)

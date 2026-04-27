@@ -138,18 +138,17 @@ func _open_source(url: String) -> void:
 
 
 func _build_thumbnail(note: Dictionary) -> Control:
-	var texture_path := AppState.get_note_texture_path(note)
-	if not texture_path.is_empty() and ResourceLoader.exists(texture_path):
-		var texture := load(texture_path) as Texture2D
+	var texture := _load_note_texture(note)
+	if texture != null:
 		var image := TextureRect.new()
-		image.custom_minimum_size = _cap_texture_size(texture, Vector2(96, 96))
+		image.custom_minimum_size = Vector2(112, 112)
 		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 		image.texture = texture
 		return image
 
 	var thumb := Control.new()
-	thumb.custom_minimum_size = Vector2(96, 96)
+	thumb.custom_minimum_size = Vector2(112, 112)
 
 	var bg := ColorRect.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -208,3 +207,14 @@ func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:
 
 	var scale: float = min(1.0, min(max_size.x / source_size.x, max_size.y / source_size.y))
 	return source_size * scale
+
+
+func _load_note_texture(note: Dictionary) -> Texture2D:
+	var texture_path := AppState.get_note_texture_path(note)
+	if texture_path.is_empty() or not ResourceLoader.exists(texture_path):
+		return null
+
+	var resource := ResourceLoader.load(texture_path)
+	if resource is Texture2D:
+		return resource as Texture2D
+	return null

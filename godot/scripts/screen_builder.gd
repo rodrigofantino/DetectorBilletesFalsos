@@ -1,8 +1,26 @@
+class_name ScreenBuilder
 extends Node
 
-func setup_root(root: Control, background: Color = Color(0.06, 0.07, 0.11, 1.0)) -> VBoxContainer:
+const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
+
+static func _ui_scale(control: Control) -> float:
+	if control == null:
+		return 1.0
+
+	var viewport := control.get_viewport()
+	if viewport == null:
+		return 1.0
+
+	var size := viewport.get_visible_rect().size
+	if size.x <= 0.0 or size.y <= 0.0:
+		return 1.0
+
+	return clamp(min(size.x / BASE_VIEWPORT.x, size.y / BASE_VIEWPORT.y), 0.75, 1.5)
+
+static func setup_root(root: Control, background: Color = Color(0.06, 0.07, 0.11, 1.0)) -> VBoxContainer:
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	root.mouse_filter = Control.MOUSE_FILTER_STOP
+	var scale := _ui_scale(root)
 
 	var background_rect := ColorRect.new()
 	background_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -11,10 +29,11 @@ func setup_root(root: Control, background: Color = Color(0.06, 0.07, 0.11, 1.0))
 
 	var margin := MarginContainer.new()
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	margin.add_theme_constant_override("margin_left", 24)
-	margin.add_theme_constant_override("margin_top", 24)
-	margin.add_theme_constant_override("margin_right", 24)
-	margin.add_theme_constant_override("margin_bottom", 24)
+	var margin_size := int(round(24.0 * scale))
+	margin.add_theme_constant_override("margin_left", margin_size)
+	margin.add_theme_constant_override("margin_top", margin_size)
+	margin.add_theme_constant_override("margin_right", margin_size)
+	margin.add_theme_constant_override("margin_bottom", margin_size)
 	root.add_child(margin)
 
 	var panel := PanelContainer.new()
@@ -25,51 +44,55 @@ func setup_root(root: Control, background: Color = Color(0.06, 0.07, 0.11, 1.0))
 	var content := VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", 16)
+	content.add_theme_constant_override("separation", int(round(16.0 * scale)))
 	panel.add_child(content)
 
 	return content
 
-func add_title(parent: VBoxContainer, text: String) -> Label:
+static func add_title(parent: Control, text: String) -> Label:
 	var label := Label.new()
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.add_theme_font_size_override("font_size", 30)
+	label.add_theme_font_size_override("font_size", int(round(30.0 * _ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
-func add_subtitle(parent: VBoxContainer, text: String) -> Label:
+static func add_subtitle(parent: Control, text: String) -> Label:
 	var label := Label.new()
 	label.text = text
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.modulate = Color(0.88, 0.9, 0.98, 1.0)
+	label.add_theme_font_size_override("font_size", int(round(18.0 * _ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
-func add_body(parent: VBoxContainer, text: String) -> Label:
+static func add_body(parent: Control, text: String) -> Label:
 	var label := Label.new()
 	label.text = text
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.add_theme_font_size_override("font_size", int(round(16.0 * _ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
-func add_button(parent: Container, text: String) -> Button:
+static func add_button(parent: Control, text: String) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	button.custom_minimum_size = Vector2(0.0, 88.0 * _ui_scale(parent))
 	parent.add_child(button)
 	return button
 
-func add_spacer(parent: Container, height: float = 8.0) -> Control:
+static func add_spacer(parent: Container, height: float = 8.0) -> Control:
 	var spacer := Control.new()
 	spacer.custom_minimum_size = Vector2(0.0, height)
 	parent.add_child(spacer)
 	return spacer
 
-func add_scroll_content(parent: VBoxContainer) -> VBoxContainer:
+static func add_scroll_content(parent: VBoxContainer) -> VBoxContainer:
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -78,6 +101,6 @@ func add_scroll_content(parent: VBoxContainer) -> VBoxContainer:
 	var content := VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", 12)
+	content.add_theme_constant_override("separation", int(round(12.0 * _ui_scale(parent))))
 	scroll.add_child(content)
 	return content

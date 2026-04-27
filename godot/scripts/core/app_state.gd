@@ -2,14 +2,14 @@
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.316"
+const APP_VERSION := "V.319"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Expanded official banknote coverage for Canada, Brazil, and the United States.",
-	"es": "Se amplio la cobertura oficial de billetes para Canada, Brasil y Estados Unidos.",
-	"pt": "A cobertura oficial de cedulas foi ampliada para Canada, Brasil e Estados Unidos.",
-	"zh": "已扩展加拿大、巴西和美国的官方纸币覆盖。"
+	"en": "Refreshed official banknote images and improved viewer scaling.",
+	"es": "Se actualizaron las imagenes oficiales de billetes y se mejoro la escala del visor.",
+	"pt": "As imagens oficiais de cedulas foram atualizadas e o zoom do visor foi melhorado.",
+	"zh": "已刷新官方纸币图片并改进查看器缩放。"
 }
 
 const UI_TEXTS := {
