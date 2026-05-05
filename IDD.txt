@@ -9,17 +9,18 @@ This document records the current implementation state of the legacy Android app
 - Target product: an app for detecting counterfeit bills and reviewing currency security features.
 - Main launcher flow: `Splash -> NewMainActivity`.
 - Legacy alternate flow: `Menu`, `Information`, and `PesosArgentinos` still exist in the codebase.
-- Godot port baseline: `Boot -> MainMenu -> feature scenes`, with ads removed from the first release.
+- Godot port baseline: `Boot -> MainMenu -> feature scenes`, with ads limited to the main menu.
 
 3. Implemented features
 - UV detector screen.
 - Multicolor watermark / security-light screen.
 - Currency information browser by country.
 - Bill-specific information screen for selected notes.
-- Legacy ad hooks exist only in the Android tree and are excluded from the Godot port.
+- Legacy ad hooks exist only in the Android tree and are not reused by the Godot port.
+- Start.io banner support exists only for the Godot main menu using Android SDK 5.3.0; UV, watermark, and note-inspection screens stay ad-free.
 
 4. Current implementation risks
-- StartApp is referenced in the manifest, but the source SDK is not present.
+- StartApp is referenced by the legacy Android tree and by the Godot Start.io banner export plugin pinned to Android SDK 5.3.0.
 - Currency JSON exists in more than one place and one path has a casing mismatch.
 - Old Android permissions and old SDK assumptions may not survive the port unchanged.
 - Signing keys are missing from the repo and must stay local.
@@ -31,7 +32,7 @@ Phase 3: port the UV light screen with full-screen brightness control.
 Phase 4: port the RGB watermark light screen with timed color cycling.
 Phase 5: port the currency browser and note details using JSON data.
 Phase 6: test Android export on device and compare behavior against the legacy app.
-Phase 7: add ads only if they are still desired after the core app is stable.
+Phase 7: keep ads limited to the main menu banner and verify Android export/privacy requirements.
 
 6. Working notes
 - Android Studio can help validate the old Android project and inspect legacy behavior if needed.

@@ -22,6 +22,11 @@ func _ready() -> void:
 	_build_ui()
 	resized.connect(_apply_responsive_layout)
 	_apply_responsive_layout()
+	AppAds.show_main_menu_banner()
+
+
+func _exit_tree() -> void:
+	AppAds.hide_banner()
 
 
 func _build_ui() -> void:
@@ -158,7 +163,8 @@ func _apply_responsive_layout() -> void:
 		margin_container.add_theme_constant_override("margin_left", margin)
 		margin_container.add_theme_constant_override("margin_top", margin)
 		margin_container.add_theme_constant_override("margin_right", margin)
-		margin_container.add_theme_constant_override("margin_bottom", margin)
+		var reserved_ad_space: int = int(round(float(AppAds.get_reserved_banner_height()) * ui_scale))
+		margin_container.add_theme_constant_override("margin_bottom", margin + reserved_ad_space)
 
 	for button in _action_buttons:
 		button.custom_minimum_size = Vector2(0, button_height)

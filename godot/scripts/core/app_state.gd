@@ -2,14 +2,14 @@
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.319"
+const APP_VERSION := "V.1.604"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Refreshed official banknote images and improved viewer scaling.",
-	"es": "Se actualizaron las imagenes oficiales de billetes y se mejoro la escala del visor.",
-	"pt": "As imagens oficiais de cedulas foram atualizadas e o zoom do visor foi melhorado.",
-	"zh": "已刷新官方纸币图片并改进查看器缩放。"
+	"en": "Updated Start.io Android SDK to 5.3.0.",
+	"es": "Se actualizo el SDK Android de Start.io a 5.3.0.",
+	"pt": "O SDK Android da Start.io foi atualizado para 5.3.0.",
+	"zh": "Updated Start.io Android SDK to 5.3.0."
 }
 
 const UI_TEXTS := {
@@ -49,7 +49,7 @@ const UI_TEXTS := {
 		"language_label": "Language",
 		"follow_phone_language": "Follow phone language",
 		"menu_subtitle": "UV light, watermark checking, and currency info in one app.",
-		"menu_baseline": "Portrait-first, offline-friendly, no ads.",
+		"menu_baseline": "Portrait-first, offline-friendly, with ads only on the main menu.",
 		"help_title": "How to use",
 		"help_body": "Put a bill on the screen and check the UV tone or the watermark colors.\nUse a dark place for the UV mode and keep the phone screen at maximum brightness.",
 		"about_title": "About",
@@ -93,7 +93,7 @@ const UI_TEXTS := {
 		"language_label": "Idioma",
 		"follow_phone_language": "Seguir idioma del telÃ©fono",
 		"menu_subtitle": "Luz UV, marca de agua e informaciÃ³n de moneda en una sola app.",
-		"menu_baseline": "Port sin publicidad, pensado para vertical.",
+		"menu_baseline": "Port pensado para vertical, con anuncios solo en el menu principal.",
 		"help_title": "CÃ³mo usar",
 		"help_body": "PonÃ© un billete sobre la pantalla y revisÃ¡ el tono UV o los colores de la marca de agua.\nUsÃ¡ un lugar oscuro para el modo UV y mantenÃ© el brillo del telÃ©fono al mÃ¡ximo.",
 		"about_title": "Acerca de",
@@ -137,7 +137,7 @@ const UI_TEXTS := {
 		"language_label": "Idioma",
 		"follow_phone_language": "Usar idioma do telefone",
 		"menu_subtitle": "Luz UV, checagem de marca-d'Ã¡gua e informaÃ§Ã£o de cÃ©dulas em um app.",
-		"menu_baseline": "Porta ad-free, priorizando retrato.",
+		"menu_baseline": "App em retrato, com anuncios apenas no menu principal.",
 		"help_title": "Como usar",
 		"help_body": "Coloque uma cÃ©dula sobre a tela e confira o tom UV ou as cores da marca-d'Ã¡gua.\nUse um lugar escuro para o modo UV e mantenha o brilho do telefone no mÃ¡ximo.",
 		"about_title": "Sobre",
@@ -181,7 +181,7 @@ const UI_TEXTS := {
 		"language_label": "è¯­è¨€",
 		"follow_phone_language": "è·Ÿéšæ‰‹æœºè¯­è¨€",
 		"menu_subtitle": "åœ¨ä¸€ä¸ªåº”ç”¨é‡Œæä¾› UV å…‰ã€çœ‹æ°´å°å’Œè´§å¸ä¿¡æ¯ã€‚",
-		"menu_baseline": "ä»¥ç«–å±å’Œæ— å¹¿å‘Šä½œä¸ºåŸºç¡€ç‰ˆæœ¬ã€‚",
+		"menu_baseline": "Portrait-first utility with ads only on the main menu.",
 		"help_title": "ä½¿ç”¨è¯´æ˜Ž",
 		"help_body": "æŠŠçº¸å¸æ”¾åœ¨å±å¹•ä¸Šï¼ŒæŸ¥çœ‹ UV é¢œè‰²æˆ–æ°´å°é¢œè‰²ã€‚\nUV æ¨¡å¼è¯·åœ¨é»‘æš—çŽ¯å¢ƒä½¿ç”¨ï¼Œå¹¶æŠŠæ‰‹æœºäº®åº¦è°ƒåˆ°æœ€å¤§ã€‚",
 		"about_title": "å…³äºŽ",

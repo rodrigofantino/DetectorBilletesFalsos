@@ -9,7 +9,7 @@ func _ready() -> void:
 	var content := ScreenBuilder.setup_root(self, Color(0.05, 0.08, 0.12, 1.0))
 	ScreenBuilder.add_spacer(content, 24)
 	ScreenBuilder.add_title(content, "Main Menu")
-	ScreenBuilder.add_subtitle(content, "Portrait-first, offline-friendly, no ads")
+	ScreenBuilder.add_subtitle(content, "Portrait-first, offline-friendly utility")
 	ScreenBuilder.add_spacer(content, 12)
 	ScreenBuilder.add_body(content, "Choose a tool to inspect bills or review the currency reference data.")
 	ScreenBuilder.add_spacer(content, 12)
@@ -33,7 +33,7 @@ func _ready() -> void:
 	bill_button.pressed.connect(_on_bill_pressed)
 
 	ScreenBuilder.add_spacer(content, 8)
-	ScreenBuilder.add_body(content, "The legacy ads and monetization hooks are intentionally excluded from this skeleton.")
+	ScreenBuilder.add_body(content, "Legacy ad SDKs are not reused in this Godot port.")
 
 func _on_uv_pressed() -> void:
 	AppState.go_to_scene(UV_SCENE)
@@ -46,4 +46,3 @@ func _on_country_pressed() -> void:
 
 func _on_bill_pressed() -> void:
 	AppState.go_to_scene(BILL_SCENE)
-

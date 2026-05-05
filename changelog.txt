@@ -17,3 +17,7 @@ V.315_Improved note viewer scaling and upgraded Hong Kong banknote art
 V.317_Fixed Godot UI parsing and refreshed currency data
 V.318_Pinned Godot Android packaging identity and launcher settings
 V.319_Refreshed official banknote images and improved viewer scaling
+V.1.601_Added Start.io banner ads on the main menu
+V.1.602_Removed Start.io Android export collection hooks
+V.1.603_Updated Start.io Android SDK to 4.10.1
+V.1.604_Updated Start.io Android SDK to 5.3.0

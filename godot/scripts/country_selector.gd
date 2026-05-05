@@ -27,17 +27,15 @@ func _ready() -> void:
 	var menu_button := ScreenBuilder.add_button(actions, "Back to menu")
 	menu_button.pressed.connect(_on_menu_pressed)
 
-func _add_country_button(parent: VBoxContainer, country: Dictionary) -> void:
-	var label := str(country.get("label", ""))
-	var count := int(country.get("count", 0))
-	var key: StringName = country.get("key", &"")
+func _add_country_button(parent: VBoxContainer, country: String) -> void:
+	var label := AppState.get_country_label(country)
+	var count := AppState.get_notes_for_country(country).size()
 	var button := ScreenBuilder.add_button(parent, "%s (%d notes)" % [label, count])
-	button.pressed.connect(_on_country_pressed.bind(key))
+	button.pressed.connect(_on_country_pressed.bind(country))
 
-func _on_country_pressed(country_key: StringName) -> void:
-	AppState.select_country(country_key)
-	AppState.go_to_scene(CURRENCY_INFO_SCENE)
+func _on_country_pressed(country: String) -> void:
+	AppState.set_selected_country(country)
+	get_tree().change_scene_to_file(CURRENCY_INFO_SCENE)
 
 func _on_menu_pressed() -> void:
-	AppState.go_to_scene(MAIN_MENU_SCENE)
-
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)

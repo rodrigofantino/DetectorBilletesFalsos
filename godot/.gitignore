@@ -2,4 +2,8 @@
 *.tmp
 *.import
 export/
-
+android/build/.gradle/
+android/build/build/
+android/build/assets/
+android/build/local.properties
+android/.build_version

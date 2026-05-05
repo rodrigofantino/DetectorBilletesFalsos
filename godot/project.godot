@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.5")
 [autoload]
 
 AppState="*res://scripts/core/app_state.gd"
+AppAds="*res://scripts/core/ad_service.gd"
 
 [display]
 
@@ -26,7 +27,15 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation="portrait"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/startio_banner/plugin.cfg")
+
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
 textures/default_texture_filter=0
+
+[startio]
+
+app_id="203891181"
