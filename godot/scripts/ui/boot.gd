@@ -3,7 +3,7 @@ extends Control
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	if OS.has_feature("Android"):
+	if OS.has_feature("android") or OS.has_feature("Android"):
 		var window := get_window()
 		if window != null:
 			window.mode = Window.MODE_FULLSCREEN
@@ -12,6 +12,7 @@ func _ready() -> void:
 	background.set_anchors_preset(Control.PRESET_FULL_RECT)
 	background.color = Color("07111f")
 	add_child(background)
+	ScreenBuilder.add_bottom_ad_reserve(self)
 
 	var layout := CenterContainer.new()
 	layout.set_anchors_preset(Control.PRESET_FULL_RECT)

@@ -1,4 +1,4 @@
-﻿{
+{
     "CurrencyInfo":  [
                          {
                              "country":  "Argentina",
@@ -72,7 +72,7 @@
                              "denomination":  "20000",
                              "image_path":  "res://assets/bills_official/ar_20000_front.jpg",
                              "summary_text":  "Billete de $20000 de la familia Heroinas y Heroes de la Patria. Muestra a Juan Bautista Alberdi, con marca de agua de Alberdi y sus iniciales, hilo de seguridad azul aventanillado, tinta de variabilidad optica magenta-verde y complementacion frente-dorso.",
-                             "watermark_text":  "Al trasluz se ve el retrato de Alberdi acompaÃ±ado por las iniciales JBA.",
+                             "watermark_text":  "Al trasluz se ve el retrato de Alberdi acompañado por las iniciales JBA.",
                              "security_features":  [
                                                        "Marca de agua con el retrato de Juan Bautista Alberdi y sus iniciales.",
                                                        "Hilo de seguridad azul aventanillado con efecto dinamico al mover el billete.",
@@ -87,7 +87,7 @@
                                                    "en":  "Billete de $20000 de la familia Heroinas y Heroes de la Patria. Muestra a Juan Bautista Alberdi, con marca de agua de Alberdi y sus iniciales, hilo de seguridad azul aventanillado, tinta de variabilidad optica magenta-verde y complementacion frente-dorso."
                                                },
                              "watermark_texts":  {
-                                                     "en":  "Al trasluz se ve el retrato de Alberdi acompaÃ±ado por las iniciales JBA."
+                                                     "en":  "Al trasluz se ve el retrato de Alberdi acompañado por las iniciales JBA."
                                                  },
                              "security_features_texts":  {
                                                              "en":  [

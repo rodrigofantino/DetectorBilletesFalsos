@@ -7,6 +7,7 @@ var _summary_label: Label
 var _watermark_label: Label
 var _source_label: Label
 var _source_button: Button
+var _features_title: Label
 var _feature_box: VBoxContainer
 var _artwork_holder: Control
 var _status_label: Label
@@ -15,6 +16,8 @@ var _preview: PanelContainer
 var _root: VBoxContainer
 var _preview_box: VBoxContainer
 var _artwork_max_size: Vector2 = Vector2.ZERO
+var _body_font_size := 28
+var _nav_buttons: Array[Button] = []
 
 
 func _ready() -> void:
@@ -50,6 +53,7 @@ func _build_ui() -> void:
 	_root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_root.add_theme_constant_override("separation", 14)
 	scroll.add_child(_root)
+	ScreenBuilder.enable_touch_scroll(scroll, _root)
 
 	var bar := HBoxContainer.new()
 	bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -61,16 +65,19 @@ func _build_ui() -> void:
 	back.pressed.connect(func() -> void:
 		get_tree().change_scene_to_file("res://scenes/CurrencyInfo.tscn")
 	)
+	_nav_buttons.append(back)
 	bar.add_child(back)
 
 	var prev := Button.new()
 	prev.text = AppState.t("previous")
 	prev.pressed.connect(_select_previous)
+	_nav_buttons.append(prev)
 	bar.add_child(prev)
 
 	var next := Button.new()
 	next.text = AppState.t("next")
 	next.pressed.connect(_select_next)
+	_nav_buttons.append(next)
 	bar.add_child(next)
 
 	_title_label = Label.new()
@@ -124,11 +131,11 @@ func _build_ui() -> void:
 	_source_button.pressed.connect(_open_source)
 	_preview_box.add_child(_source_button)
 
-	var features_title := Label.new()
-	features_title.text = AppState.t("security_features")
-	features_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	features_title.add_theme_font_size_override("font_size", 22)
-	_preview_box.add_child(features_title)
+	_features_title = Label.new()
+	_features_title.text = AppState.t("security_features")
+	_features_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_features_title.add_theme_font_size_override("font_size", 22)
+	_preview_box.add_child(_features_title)
 
 	_feature_box = VBoxContainer.new()
 	_feature_box.add_theme_constant_override("separation", 8)
@@ -147,35 +154,58 @@ func _apply_layout() -> void:
 
 	var viewport_size := get_viewport_rect().size
 	var compact := viewport_size.x < 720.0 or viewport_size.y < 960.0
-	var margin_size := 14 if compact else 24
-	var title_size := 24 if compact else 32
-	var denomination_size := 32 if compact else 40
-	var preview_height := 520 if compact else 760
-	var artwork_height := 360 if compact else 560
-	var separation := 10 if compact else 14
-	var preview_separation := 8 if compact else 10
+	var margin_size := 18 if compact else 34
+	var bottom_margin := margin_size + ScreenBuilder.get_bottom_ad_reserve_height(self)
+	var title_size := 34 if compact else 50
+	var denomination_size := 42 if compact else 60
+	var currency_size := 28 if compact else 38
+	_body_font_size = 26 if compact else 34
+	var button_font_size := 26 if compact else 34
+	var button_height := 88 if compact else 112
+	var feature_title_size := 30 if compact else 40
+	var status_size := 25 if compact else 32
+	var preview_height := 620 if compact else 900
+	var artwork_height := 380 if compact else 610
+	var separation := 14 if compact else 22
+	var preview_separation := 14 if compact else 18
 	var align := HORIZONTAL_ALIGNMENT_LEFT if compact else HORIZONTAL_ALIGNMENT_CENTER
 	_artwork_max_size = Vector2(viewport_size.x - float(margin_size * 2), float(artwork_height))
 
 	_margin.add_theme_constant_override("margin_left", margin_size)
 	_margin.add_theme_constant_override("margin_top", margin_size)
 	_margin.add_theme_constant_override("margin_right", margin_size)
-	_margin.add_theme_constant_override("margin_bottom", margin_size)
+	_margin.add_theme_constant_override("margin_bottom", bottom_margin)
 	_root.add_theme_constant_override("separation", separation)
 	_preview.custom_minimum_size = Vector2(0, preview_height)
 	_preview_box.add_theme_constant_override("separation", preview_separation)
 	_artwork_holder.custom_minimum_size = Vector2(0, artwork_height)
 	_title_label.add_theme_font_size_override("font_size", title_size)
 	_denomination_label.add_theme_font_size_override("font_size", denomination_size)
+	_currency_label.add_theme_font_size_override("font_size", currency_size)
+	_summary_label.add_theme_font_size_override("font_size", _body_font_size)
+	_watermark_label.add_theme_font_size_override("font_size", _body_font_size)
+	_source_label.add_theme_font_size_override("font_size", _body_font_size)
+	_features_title.add_theme_font_size_override("font_size", feature_title_size)
 	_summary_label.horizontal_alignment = align
 	_watermark_label.horizontal_alignment = align
 	_source_label.horizontal_alignment = align
 	_source_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_source_button.custom_minimum_size = Vector2(0, button_height)
+	_source_button.add_theme_font_size_override("font_size", button_font_size)
 	_status_label.horizontal_alignment = align
+	_status_label.add_theme_font_size_override("font_size", status_size)
+
+	for button in _nav_buttons:
+		button.custom_minimum_size = Vector2(0, button_height)
+		button.add_theme_font_size_override("font_size", button_font_size)
+
+	if not has_node("BottomAdFallback"):
+		ScreenBuilder.add_bottom_ad_reserve(self)
 
 	for child in _feature_box.get_children():
 		if child is Label:
 			(child as Label).horizontal_alignment = align
+			(child as Label).add_theme_font_size_override("font_size", _body_font_size)
 
 
 func _refresh() -> void:
@@ -209,6 +239,7 @@ func _refresh() -> void:
 		var bullet := Label.new()
 		bullet.text = "- %s" % feature
 		bullet.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		bullet.add_theme_font_size_override("font_size", _body_font_size)
 		_feature_box.add_child(bullet)
 
 	var texture := _load_note_texture(note)
@@ -256,10 +287,10 @@ func _build_fallback_artwork(note: Dictionary) -> Control:
 
 	var margin := MarginContainer.new()
 	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
-	margin.add_theme_constant_override("margin_left", 12)
-	margin.add_theme_constant_override("margin_top", 12)
-	margin.add_theme_constant_override("margin_right", 12)
-	margin.add_theme_constant_override("margin_bottom", 12)
+	margin.add_theme_constant_override("margin_left", 18)
+	margin.add_theme_constant_override("margin_top", 18)
+	margin.add_theme_constant_override("margin_right", 18)
+	margin.add_theme_constant_override("margin_bottom", 18)
 	root.add_child(margin)
 
 	var col := VBoxContainer.new()
@@ -270,18 +301,19 @@ func _build_fallback_artwork(note: Dictionary) -> Control:
 	var country := Label.new()
 	country.text = AppState.get_country_label(str(note.get("country", "")))
 	country.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	country.add_theme_font_size_override("font_size", 22)
+	country.add_theme_font_size_override("font_size", 34)
 	col.add_child(country)
 
 	var denom := Label.new()
 	denom.text = AppState.get_note_badge(note)
 	denom.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	denom.add_theme_font_size_override("font_size", 30)
+	denom.add_theme_font_size_override("font_size", 48)
 	col.add_child(denom)
 
 	var hint := Label.new()
 	hint.text = AppState.t("thumbnail_preview")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	hint.add_theme_font_size_override("font_size", 28)
 	hint.modulate = Color(1, 1, 1, 0.8)
 	col.add_child(hint)
 
@@ -305,7 +337,7 @@ func _open_source() -> void:
 
 	var source_url := AppState.get_note_source_url(note)
 	if not source_url.is_empty():
-		OS.shell_open(source_url)
+		ScreenBuilder.show_source_popup(self, source_url)
 
 
 func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:

@@ -1,0 +1,16 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{gd,godot,json,txt,tscn,tres,cfg,md,import,gdshader,gdap,ps1,xml,java,properties,gradle,kts}]
+charset = utf-8
+
+[*.{png,jpg,jpeg,webp,ogg,wav,aar,apk,keystore}]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset

@@ -8,10 +8,11 @@ const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
 var _title_label: Label
 var _subtitle_label: Label
-var _note_label: Label
+var _ad_banner_spacer: Control
 var _language_label: Label
 var _icon: TextureRect
 var _language_select: OptionButton
+var _language_row: HBoxContainer
 var _action_buttons: Array[Button] = []
 var _layout_root: VBoxContainer
 var _button_rows: Array[HBoxContainer] = []
@@ -22,11 +23,6 @@ func _ready() -> void:
 	_build_ui()
 	resized.connect(_apply_responsive_layout)
 	_apply_responsive_layout()
-	AppAds.show_main_menu_banner()
-
-
-func _exit_tree() -> void:
-	AppAds.hide_banner()
 
 
 func _build_ui() -> void:
@@ -62,20 +58,21 @@ func _build_ui() -> void:
 	_subtitle_label.modulate = Color(0.86, 0.91, 1.0)
 	text_box.add_child(_subtitle_label)
 
-	var language_row := HBoxContainer.new()
-	language_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	language_row.add_theme_constant_override("separation", 12)
-	text_box.add_child(language_row)
+	_language_row = HBoxContainer.new()
+	_language_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_language_row.add_theme_constant_override("separation", 12)
+	text_box.add_child(_language_row)
 
 	_language_label = Label.new()
 	_language_label.custom_minimum_size = Vector2(120, 0)
-	language_row.add_child(_language_label)
+	_language_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_language_row.add_child(_language_label)
 
 	_language_select = OptionButton.new()
 	_language_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_populate_language_options(_language_select)
 	_language_select.item_selected.connect(_on_language_selected.bind(_language_select))
-	language_row.add_child(_language_select)
+	_language_row.add_child(_language_select)
 
 	_layout_root = VBoxContainer.new()
 	_layout_root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -92,21 +89,18 @@ func _build_ui() -> void:
 	_build_button_row(
 		AppState.t("select_country_title"),
 		Callable(self, "_open_countries"),
-		AppState.t("menu_help"),
-		Callable(self, "_show_help")
-	)
-	_build_button_row(
 		AppState.t("menu_about"),
-		Callable(self, "_show_about"),
+		Callable(self, "_show_about")
+	)
+	_build_single_button_row(
 		AppState.t("menu_exit"),
 		Callable(self, "_exit_app")
 	)
 
-	_note_label = Label.new()
-	_note_label.text = AppState.t("menu_baseline")
-	_note_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_note_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(_note_label)
+	_ad_banner_spacer = Control.new()
+	_ad_banner_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_child(_ad_banner_spacer)
+	ScreenBuilder.add_bottom_ad_reserve(self, true)
 
 
 func _build_button_row(left_text: String, left_callback: Callable, right_text: String, right_callback: Callable) -> void:
@@ -119,6 +113,17 @@ func _build_button_row(left_text: String, left_callback: Callable, right_text: S
 
 	_add_menu_button(row, left_text, left_callback)
 	_add_menu_button(row, right_text, right_callback)
+
+
+func _build_single_button_row(text: String, callback: Callable) -> void:
+	var row := HBoxContainer.new()
+	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", 16)
+	_layout_root.add_child(row)
+	_button_rows.append(row)
+
+	_add_menu_button(row, text, callback)
 
 
 func _add_menu_button(parent: Container, text: String, callback: Callable) -> void:
@@ -141,34 +146,47 @@ func _apply_responsive_layout() -> void:
 	if viewport_size.x <= 0.0 or viewport_size.y <= 0.0:
 		return
 
-	var ui_scale: float = clamp(min(viewport_size.x / BASE_VIEWPORT.x, viewport_size.y / BASE_VIEWPORT.y), 0.8, 1.6)
+	var fit_scale: float = min(viewport_size.x / BASE_VIEWPORT.x, viewport_size.y / BASE_VIEWPORT.y)
+	var large_screen_scale: float = min(viewport_size.x, viewport_size.y) / BASE_VIEWPORT.x
+	var ui_scale: float = clamp(max(fit_scale, large_screen_scale), 0.8, 2.2)
 	var margin: int = int(round(24.0 * ui_scale))
 	var icon_size: int = int(round(112.0 * ui_scale))
 	var title_size: int = int(round(40.0 * ui_scale))
 	var subtitle_size: int = int(round(18.0 * ui_scale))
-	var label_size: int = int(round(16.0 * ui_scale))
+	var label_size: int = int(round(34.0 * ui_scale))
+	var language_height: int = int(round(118.0 * ui_scale))
+	var language_label_width: int = int(round(190.0 * ui_scale))
 	var button_height: int = int(round(108.0 * ui_scale))
-	var note_size: int = int(round(16.0 * ui_scale))
+	var button_size: int = int(round(24.0 * ui_scale))
+	var ad_height: int = ScreenBuilder.get_bottom_ad_reserve_height(self)
 
 	_icon.custom_minimum_size = Vector2(icon_size, icon_size)
 	_title_label.add_theme_font_size_override("font_size", title_size)
 	_subtitle_label.add_theme_font_size_override("font_size", subtitle_size)
 	_language_label.text = "%s:" % AppState.t("language_label")
+	_language_label.custom_minimum_size = Vector2(language_label_width, language_height)
 	_language_label.add_theme_font_size_override("font_size", label_size)
-	_note_label.add_theme_font_size_override("font_size", note_size)
-	_note_label.custom_minimum_size = Vector2(0, note_size * 2)
+	_language_select.custom_minimum_size = Vector2(0, language_height)
+	_language_select.add_theme_font_size_override("font_size", label_size)
+	_language_select.add_theme_constant_override("v_separation", int(round(18.0 * ui_scale)))
+	var language_popup := _language_select.get_popup()
+	if language_popup != null:
+		language_popup.add_theme_font_size_override("font_size", label_size)
+		language_popup.add_theme_constant_override("v_separation", int(round(20.0 * ui_scale)))
+	if _language_row != null:
+		_language_row.add_theme_constant_override("separation", int(round(18.0 * ui_scale)))
+	_ad_banner_spacer.custom_minimum_size = Vector2(0, ad_height)
 
 	var margin_container := _find_margin_container()
 	if margin_container != null:
 		margin_container.add_theme_constant_override("margin_left", margin)
 		margin_container.add_theme_constant_override("margin_top", margin)
 		margin_container.add_theme_constant_override("margin_right", margin)
-		var reserved_ad_space: int = int(round(float(AppAds.get_reserved_banner_height()) * ui_scale))
-		margin_container.add_theme_constant_override("margin_bottom", margin + reserved_ad_space)
+		margin_container.add_theme_constant_override("margin_bottom", margin)
 
 	for button in _action_buttons:
 		button.custom_minimum_size = Vector2(0, button_height)
-		button.add_theme_font_size_override("font_size", int(round(24.0 * ui_scale)))
+		button.add_theme_font_size_override("font_size", button_size)
 
 	_layout_root.add_theme_constant_override("separation", int(round(14.0 * ui_scale)))
 	for row in _button_rows:
@@ -234,13 +252,6 @@ func _open_countries() -> void:
 	get_tree().change_scene_to_file(COUNTRY_SCENE)
 
 
-func _show_help() -> void:
-	_show_dialog(
-		AppState.t("help_title"),
-		AppState.t("help_body")
-	)
-
-
 func _show_about() -> void:
 	_show_dialog(
 		AppState.t("about_title"),
@@ -253,9 +264,14 @@ func _show_dialog(title_text: String, body_text: String) -> void:
 	dialog.title = title_text
 	dialog.dialog_text = body_text
 	dialog.ok_button_text = AppState.t("close")
-	dialog.min_size = Vector2(540, 260)
+	var viewport_size := get_viewport_rect().size
+	var dialog_scale: float = clamp(min(viewport_size.x / BASE_VIEWPORT.x, viewport_size.y / BASE_VIEWPORT.y), 0.9, 2.0)
+	dialog.min_size = Vector2(620, 340) * dialog_scale
 	add_child(dialog)
 	dialog.popup_centered()
+	dialog.get_ok_button().custom_minimum_size = Vector2(0, 72 * dialog_scale)
+	dialog.get_ok_button().add_theme_font_size_override("font_size", int(round(24.0 * dialog_scale)))
+	dialog.get_label().add_theme_font_size_override("font_size", int(round(22.0 * dialog_scale)))
 
 
 func _exit_app() -> void:

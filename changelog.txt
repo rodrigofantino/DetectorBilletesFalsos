@@ -21,3 +21,17 @@ V.1.601_Added Start.io banner ads on the main menu
 V.1.602_Removed Start.io Android export collection hooks
 V.1.603_Updated Start.io Android SDK to 4.10.1
 V.1.604_Updated Start.io Android SDK to 5.3.0
+V.1.605_Improved main menu scaling and ad banner placement
+V.1.606_Improved tablet controls and bottom banner reserve
+V.1.607_Improved country and currency info readability on tablets
+V.1.608_Fixed Start.io banner loading fallback behavior
+V.1.609_Enabled Start.io Android banner plugin for test verification
+V.1.610_Improved touch scrolling and official source popup behavior
+V.1.611_Improved language selector readability on tablets
+V.1.612_Disabled grey ad fallback while testing Start.io banners
+V.1.613_Packaged Start.io native plugin for Android test banners
+V.1.614_Fixed UTF-8 localization text handling across languages
+V.1.615_Switched banner ads from Start.io to AdMob
+V.1.616_Enabled AdMob test banners for Android validation
+V.1.617_Fixed Android runtime detection for AdMob banners
+V.1.618_Enabled production AdMob banner unit
