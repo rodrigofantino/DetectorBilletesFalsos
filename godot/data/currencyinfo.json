@@ -4,7 +4,7 @@
                              "country":  "Argentina",
                              "currency":  "ars",
                              "denomination":  "2000",
-                             "image_path":  "res://assets/bills_official/ar_2000_front.jpg",
+                             "image_path":  "res://assets/bills_official/ar_2000_front.png",
                              "summary_text":  "Billete de $2000 de la familia Heroinas y Heroes de la Patria. Tiene hilo de seguridad verde, marca de agua localizada, tinta de variabilidad optica, relieve al tacto y fibras visibles bajo UV.",
                              "watermark_text":  "Al trasluz se perciben las figuras y las iniciales de los homenajeados.",
                              "security_features":  [
@@ -70,7 +70,7 @@
                              "country":  "Argentina",
                              "currency":  "ars",
                              "denomination":  "20000",
-                             "image_path":  "res://assets/bills_official/ar_20000_front.jpg",
+                             "image_path":  "res://assets/bills_official/ar_20000_front.png",
                              "summary_text":  "Billete de $20000 de la familia Heroinas y Heroes de la Patria. Muestra a Juan Bautista Alberdi, con marca de agua de Alberdi y sus iniciales, hilo de seguridad azul aventanillado, tinta de variabilidad optica magenta-verde y complementacion frente-dorso.",
                              "watermark_text":  "Al trasluz se ve el retrato de Alberdi acompañado por las iniciales JBA.",
                              "security_features":  [
@@ -646,7 +646,7 @@
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
+                             "currency":  "pei",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/pe_100_front.jpg",
                              "summary_text":  "Billete de S/ 100 del Banco Central de Reserva del Peru. Integra marca de agua, hilo de seguridad, tinta que cambia de color, imagen latente, microimpresiones e impresion fluorescente.",
@@ -1064,7 +1064,7 @@
                              "country":  "New Zealand",
                              "currency":  "nzd",
                              "denomination":  "100",
-                             "image_path":  "res://assets/bills_official/nz_100_front.jpg",
+                             "image_path":  "res://assets/bills_official/nz_100_front.png",
                              "summary_text":  "New Zealand\u0027s $100 note features Lord Rutherford, the yellowhead bird, a holographic window, and strong tactile and see-through elements.",
                              "watermark_text":  "The holographic window reveals the note\u0027s key elements when it is tilted.",
                              "security_features":  [
@@ -1510,10 +1510,10 @@
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
+                             "currency":  "pei",
                              "denomination":  "1000",
-                             "image_path":  "res://assets/bills_official/pe_1000_front.jpg",
-                             "summary_text":  "Peru\u0027s 1000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements.",
+                             "image_path":  "res://assets/bills_official/pe_1000_front.png",
+                             "summary_text":  "Historical 1000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
                                                        "Watermark portrait.",
@@ -1523,7 +1523,7 @@
                                                        "Microprint and see-through register."
                                                    ],
                              "summary_texts":  {
-                                                   "en":  "Peru\u0027s 1000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements."
+                                                   "en":  "Historical 1000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection."
                                                },
                              "watermark_texts":  {
                                                      "en":  "Hold the note against the light to see the watermark portrait."
@@ -1538,14 +1538,14 @@
                                                                     ]
                                                          },
                              "source":  "Banco Central de Reserva del Peru",
-                             "source_url":  "https://www.bcrp.gob.pe/billetes-y-monedas/familia-de-billetes/billete-de-s-1000.html"
+                             "source_url":  "https://commons.wikimedia.org/wiki/File:1000_Intis_1988(Front).jpg"
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
-                             "denomination":  "2000",
-                             "image_path":  "res://assets/bills_official/pe_2000_front.jpg",
-                             "summary_text":  "Peru\u0027s 2000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements.",
+                             "currency":  "pei",
+                             "denomination":  "50000",
+                             "image_path":  "res://assets/bills_official/pe_50000_front.png",
+                             "summary_text":  "Historical 50000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
                                                        "Watermark portrait.",
@@ -1555,7 +1555,7 @@
                                                        "Microprint and see-through register."
                                                    ],
                              "summary_texts":  {
-                                                   "en":  "Peru\u0027s 2000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements."
+                                                   "en":  "Historical 50000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection."
                                                },
                              "watermark_texts":  {
                                                      "en":  "Hold the note against the light to see the watermark portrait."
@@ -1570,14 +1570,14 @@
                                                                     ]
                                                          },
                              "source":  "Banco Central de Reserva del Peru",
-                             "source_url":  "https://www.bcrp.gob.pe/billetes-y-monedas/familia-de-billetes/billete-de-s-2000.html"
+                             "source_url":  "https://commons.wikimedia.org/wiki/File:50000_Intis_1988(Front).jpg"
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
+                             "currency":  "pei",
                              "denomination":  "5000",
-                             "image_path":  "res://assets/bills_official/pe_5000_front.jpg",
-                             "summary_text":  "Peru\u0027s 5000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements.",
+                             "image_path":  "res://assets/bills_official/pe_5000_front.png",
+                             "summary_text":  "Historical 5000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
                                                        "Watermark portrait.",
@@ -1587,7 +1587,7 @@
                                                        "Microprint and see-through register."
                                                    ],
                              "summary_texts":  {
-                                                   "en":  "Peru\u0027s 5000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements."
+                                                   "en":  "Historical 5000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection."
                                                },
                              "watermark_texts":  {
                                                      "en":  "Hold the note against the light to see the watermark portrait."
@@ -1602,14 +1602,14 @@
                                                                     ]
                                                          },
                              "source":  "Banco Central de Reserva del Peru",
-                             "source_url":  "https://www.bcrp.gob.pe/billetes-y-monedas/familia-de-billetes/billete-de-s-5000.html"
+                             "source_url":  "https://commons.wikimedia.org/wiki/File:5000_Intis_1988(Front).jpg"
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
+                             "currency":  "pei",
                              "denomination":  "10000",
-                             "image_path":  "res://assets/bills_official/pe_10000_front.jpg",
-                             "summary_text":  "Peru\u0027s 10000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements.",
+                             "image_path":  "res://assets/bills_official/pe_10000_front.png",
+                             "summary_text":  "Historical 10000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
                                                        "Watermark portrait.",
@@ -1619,7 +1619,7 @@
                                                        "Microprint and see-through register."
                                                    ],
                              "summary_texts":  {
-                                                   "en":  "Peru\u0027s 10000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements."
+                                                   "en":  "Historical 10000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection."
                                                },
                              "watermark_texts":  {
                                                      "en":  "Hold the note against the light to see the watermark portrait."
@@ -1634,14 +1634,14 @@
                                                                     ]
                                                          },
                              "source":  "Banco Central de Reserva del Peru",
-                             "source_url":  "https://www.bcrp.gob.pe/billetes-y-monedas/familia-de-billetes/billete-de-s-10000.html"
+                             "source_url":  "https://commons.wikimedia.org/wiki/File:10000_Intis_1988(Front).jpg"
                          },
                          {
                              "country":  "Peru",
-                             "currency":  "pen",
-                             "denomination":  "20000",
-                             "image_path":  "res://assets/bills_official/pe_20000_front.jpg",
-                             "summary_text":  "Peru\u0027s 20000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements.",
+                             "currency":  "pei",
+                             "denomination":  "100000",
+                             "image_path":  "res://assets/bills_official/pe_100000_front.png",
+                             "summary_text":  "Historical 100000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
                                                        "Watermark portrait.",
@@ -1651,7 +1651,7 @@
                                                        "Microprint and see-through register."
                                                    ],
                              "summary_texts":  {
-                                                   "en":  "Peru\u0027s 20000 sol note includes the usual BCRP security package with watermark, security thread, microprint, and color-changing elements."
+                                                   "en":  "Historical 100000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection."
                                                },
                              "watermark_texts":  {
                                                      "en":  "Hold the note against the light to see the watermark portrait."
@@ -1666,7 +1666,7 @@
                                                                     ]
                                                          },
                              "source":  "Banco Central de Reserva del Peru",
-                             "source_url":  "https://www.bcrp.gob.pe/billetes-y-monedas/familia-de-billetes/billete-de-s-20000.html"
+                             "source_url":  "https://commons.wikimedia.org/wiki/File:100000_Intis_1989(Front).jpg"
                          },
                          {
                              "country":  "Colombia",

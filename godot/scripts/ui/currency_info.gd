@@ -129,7 +129,7 @@ func _build_ui() -> void:
 			inner.add_child(source_label)
 
 			var source_url := AppState.get_note_source_url(note)
-			if not source_url.is_empty():
+			if ScreenBuilder.is_valid_web_url(source_url):
 				var source_button := Button.new()
 				source_button.text = AppState.t("open_official_source")
 				source_button.custom_minimum_size = Vector2(0, button_height)
@@ -169,8 +169,8 @@ func _open_note(index: int) -> void:
 
 
 func _open_source(url: String) -> void:
-	if not url.is_empty():
-		ScreenBuilder.show_source_popup(self, url)
+	if ScreenBuilder.is_valid_web_url(url):
+		ScreenBuilder.open_source_url(url)
 
 
 func _build_thumbnail(note: Dictionary, ui_scale: float) -> Control:
@@ -248,10 +248,17 @@ func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:
 
 func _load_note_texture(note: Dictionary) -> Texture2D:
 	var texture_path := AppState.get_note_texture_path(note)
-	if texture_path.is_empty() or not ResourceLoader.exists(texture_path):
+	if texture_path.is_empty():
 		return null
 
-	var resource := ResourceLoader.load(texture_path)
-	if resource is Texture2D:
-		return resource as Texture2D
+	if ResourceLoader.exists(texture_path):
+		var resource := ResourceLoader.load(texture_path)
+		if resource is Texture2D:
+			return resource as Texture2D
+
+	var image := Image.new()
+	var error := image.load(texture_path)
+	if error == OK:
+		return ImageTexture.create_from_image(image)
+
 	return null

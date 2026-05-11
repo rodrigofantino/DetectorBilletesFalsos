@@ -3,6 +3,8 @@ extends Node
 
 const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 const BOTTOM_AD_HEIGHT_RATIO := 0.1
+const MIN_DIALOG_SIZE_RATIO := Vector2(0.9, 0.64)
+const MIN_DIALOG_BUTTON_HEIGHT := 118.0
 
 static func _ui_scale(control: Control) -> float:
 	if control == null:
@@ -34,6 +36,69 @@ static func readable_ui_scale(control: Control) -> float:
 	var fit_scale: float = min(size.x / BASE_VIEWPORT.x, size.y / BASE_VIEWPORT.y)
 	var large_screen_scale: float = min(size.x, size.y) / BASE_VIEWPORT.x
 	return clamp(max(fit_scale, large_screen_scale), 1.0, 2.2)
+
+static func dialog_ui_scale(control: Control) -> float:
+	return clamp(readable_ui_scale(control), 1.15, 2.4)
+
+static func configure_large_dialog(dialog: AcceptDialog, parent: Control, title_text: String, close_text: String = "Close") -> float:
+	var scale := dialog_ui_scale(parent)
+	var viewport_size := parent.get_viewport_rect().size if parent != null else BASE_VIEWPORT
+	var min_size := Vector2(
+		max(760.0 * scale, viewport_size.x * MIN_DIALOG_SIZE_RATIO.x),
+		max(520.0 * scale, viewport_size.y * MIN_DIALOG_SIZE_RATIO.y)
+	)
+	dialog.title = title_text
+	dialog.ok_button_text = close_text
+	dialog.min_size = min_size
+	dialog.borderless = true
+	dialog.unresizable = true
+	dialog.exclusive = true
+	dialog.close_requested.connect(dialog.queue_free)
+	dialog.confirmed.connect(dialog.queue_free)
+
+	var ok_button := dialog.get_ok_button()
+	ok_button.custom_minimum_size = Vector2(0, MIN_DIALOG_BUTTON_HEIGHT * scale)
+	ok_button.add_theme_font_size_override("font_size", int(round(34.0 * scale)))
+	return scale
+
+static func is_valid_web_url(url: String) -> bool:
+	var clean_url := url.strip_edges()
+	var separator_index := clean_url.find("://")
+	if separator_index <= 0:
+		return false
+
+	var scheme := clean_url.substr(0, separator_index).to_lower()
+	if scheme != "https" and scheme != "http":
+		return false
+
+	var host_start := separator_index + 3
+	if host_start >= clean_url.length():
+		return false
+
+	var host_end := clean_url.find("/", host_start)
+	var host := clean_url.substr(host_start) if host_end == -1 else clean_url.substr(host_start, host_end - host_start)
+	return not host.strip_edges().is_empty()
+
+static func add_dialog_header(parent: Control, title_text: String, close_callback: Callable, scale: float) -> void:
+	var header := HBoxContainer.new()
+	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_theme_constant_override("separation", int(round(18.0 * scale)))
+	parent.add_child(header)
+
+	var title := Label.new()
+	title.text = title_text
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	title.add_theme_font_size_override("font_size", int(round(38.0 * scale)))
+	header.add_child(title)
+
+	var close_button := Button.new()
+	close_button.text = "X"
+	close_button.custom_minimum_size = Vector2(104.0 * scale, 104.0 * scale)
+	close_button.add_theme_font_size_override("font_size", int(round(42.0 * scale)))
+	close_button.pressed.connect(close_callback)
+	header.add_child(close_button)
 
 static func setup_root(root: Control, background: Color = Color(0.06, 0.07, 0.11, 1.0)) -> VBoxContainer:
 	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -150,45 +215,14 @@ static func _relay_touch_scroll(event: InputEvent, scroll: ScrollContainer) -> v
 		scroll.scroll_vertical = max(0, scroll.scroll_vertical + int(round(pan.delta.y * 48.0)))
 		scroll.accept_event()
 
-static func show_source_popup(parent: Control, url: String) -> void:
-	if parent == null or url.strip_edges().is_empty():
+static func open_source_url(url: String) -> void:
+	url = url.strip_edges()
+	if url.is_empty() or not is_valid_web_url(url):
 		return
 
-	var dialog := AcceptDialog.new()
-	dialog.title = "Official source"
-	dialog.ok_button_text = "Close"
-	dialog.min_size = Vector2(720, 420)
-	parent.add_child(dialog)
-
-	var content := VBoxContainer.new()
-	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", 18)
-	dialog.add_child(content)
-
-	var message := Label.new()
-	message.text = "Embedded web preview is not available in this build. Use the official URL below."
-	message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	message.add_theme_font_size_override("font_size", 24)
-	content.add_child(message)
-
-	var url_label := Label.new()
-	url_label.text = url
-	url_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	url_label.selectable = true
-	url_label.add_theme_font_size_override("font_size", 22)
-	content.add_child(url_label)
-
-	var open_button := Button.new()
-	open_button.text = "Open in browser"
-	open_button.custom_minimum_size = Vector2(0, 84)
-	open_button.add_theme_font_size_override("font_size", 26)
-	open_button.pressed.connect(func() -> void:
-		OS.shell_open(url)
-	)
-	content.add_child(open_button)
-
-	dialog.popup_centered()
+	var error := OS.shell_open(url)
+	if error != OK:
+		push_warning("Could not open official source URL: %s" % url)
 
 static func add_title(parent: Control, text: String) -> Label:
 	var label := Label.new()

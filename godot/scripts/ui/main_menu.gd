@@ -261,17 +261,26 @@ func _show_about() -> void:
 
 func _show_dialog(title_text: String, body_text: String) -> void:
 	var dialog := AcceptDialog.new()
-	dialog.title = title_text
-	dialog.dialog_text = body_text
-	dialog.ok_button_text = AppState.t("close")
-	var viewport_size := get_viewport_rect().size
-	var dialog_scale: float = clamp(min(viewport_size.x / BASE_VIEWPORT.x, viewport_size.y / BASE_VIEWPORT.y), 0.9, 2.0)
-	dialog.min_size = Vector2(620, 340) * dialog_scale
 	add_child(dialog)
+	var dialog_scale := ScreenBuilder.configure_large_dialog(dialog, self, title_text, AppState.t("close"))
+
+	var content := VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", int(round(24.0 * dialog_scale)))
+	dialog.add_child(content)
+
+	ScreenBuilder.add_dialog_header(content, title_text, dialog.queue_free, dialog_scale)
+
+	var body := Label.new()
+	body.text = body_text
+	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	body.add_theme_font_size_override("font_size", int(round(32.0 * dialog_scale)))
+	content.add_child(body)
+
 	dialog.popup_centered()
-	dialog.get_ok_button().custom_minimum_size = Vector2(0, 72 * dialog_scale)
-	dialog.get_ok_button().add_theme_font_size_override("font_size", int(round(24.0 * dialog_scale)))
-	dialog.get_label().add_theme_font_size_override("font_size", int(round(22.0 * dialog_scale)))
 
 
 func _exit_app() -> void:

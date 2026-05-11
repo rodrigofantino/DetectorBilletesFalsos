@@ -231,7 +231,7 @@ func _refresh() -> void:
 	var source := AppState.get_note_source(note)
 	_source_label.text = "" if source.is_empty() else AppState.t("source_prefix") % source
 	var source_url := AppState.get_note_source_url(note)
-	_source_button.visible = not source_url.is_empty()
+	_source_button.visible = ScreenBuilder.is_valid_web_url(source_url)
 
 	_clear_features()
 	var features := AppState.get_note_features(note)
@@ -336,8 +336,8 @@ func _open_source() -> void:
 		return
 
 	var source_url := AppState.get_note_source_url(note)
-	if not source_url.is_empty():
-		ScreenBuilder.show_source_popup(self, source_url)
+	if ScreenBuilder.is_valid_web_url(source_url):
+		ScreenBuilder.open_source_url(source_url)
 
 
 func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:
@@ -353,12 +353,19 @@ func _cap_texture_size(texture: Texture2D, max_size: Vector2) -> Vector2:
 
 
 func _load_texture(texture_path: String) -> Texture2D:
-	if texture_path.is_empty() or not ResourceLoader.exists(texture_path):
+	if texture_path.is_empty():
 		return null
 
-	var resource := ResourceLoader.load(texture_path)
-	if resource is Texture2D:
-		return resource as Texture2D
+	if ResourceLoader.exists(texture_path):
+		var resource := ResourceLoader.load(texture_path)
+		if resource is Texture2D:
+			return resource as Texture2D
+
+	var image := Image.new()
+	var error := image.load(texture_path)
+	if error == OK:
+		return ImageTexture.create_from_image(image)
+
 	return null
 
 

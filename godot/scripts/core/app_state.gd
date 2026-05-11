@@ -2,14 +2,14 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.619"
+const APP_VERSION := "V.1.620"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Bumped Android build version for release packaging.",
-	"es": "Se actualizo la version de compilacion de Android para el paquete de lanzamiento.",
-	"pt": "Versao de build Android atualizada para o pacote de lancamento.",
-	"zh": "Android build version updated for release packaging."
+	"en": "Refreshed banknote artwork and improved external source opening.",
+	"es": "Se actualizaron imagenes de billetes y se mejoro la apertura de fuentes externas.",
+	"pt": "Imagens de notas atualizadas e abertura de fontes externas melhorada.",
+	"zh": "Banknote artwork refreshed and external source opening improved."
 }
 
 const UI_TEXTS := {
@@ -287,7 +287,8 @@ const CURRENCY_LABELS := {
 		"cny": "yuan",
 		"gbp": "pound sterling",
 		"mxn": "Mexican peso",
-		"pen": "sol"
+		"pen": "sol",
+		"pei": "inti"
 	},
 	"es": {
 		"ars": "peso argentino",
@@ -309,7 +310,8 @@ const CURRENCY_LABELS := {
 		"cny": "yuan",
 		"gbp": "libra esterlina",
 		"mxn": "peso mexicano",
-		"pen": "sol"
+		"pen": "sol",
+		"pei": "inti"
 	},
 	"pt": {
 		"ars": "peso argentino",
@@ -331,7 +333,8 @@ const CURRENCY_LABELS := {
 		"cny": "yuan",
 		"gbp": "libra esterlina",
 		"mxn": "peso mexicano",
-		"pen": "sol"
+		"pen": "sol",
+		"pei": "inti"
 	},
 	"zh": {
 		"ars": "阿根廷比索",
@@ -353,7 +356,8 @@ const CURRENCY_LABELS := {
 		"cny": "人民币",
 		"gbp": "英镑",
 		"mxn": "墨西哥比索",
-		"pen": "索尔"
+		"pen": "索尔",
+		"pei": "inti"
 	}
 }
 
@@ -363,7 +367,7 @@ const COUNTRY_IMAGE_PATHS := {
 	"Chile": "res://assets/bills_official/cl_10000_front.jpg",
 	"Canada": "res://assets/bills_official/ca_20_front.jpg",
 	"Australia": "res://assets/bills_official/au_50_front.jpg",
-	"New Zealand": "res://assets/bills_official/nz_100_front.jpg",
+	"New Zealand": "res://assets/bills_official/nz_100_front.png",
 	"Japan": "res://assets/bills_official/jp_10000_front.png",
 	"India": "res://assets/bills_official/in_500_front.png",
 	"South Africa": "res://assets/bills_official/za_200_front.png",
@@ -376,7 +380,7 @@ const COUNTRY_IMAGE_PATHS := {
 	"Colombia": "res://assets/bills_official/co_100000_front.jpg",
 	"China": "res://assets/bills_official/cn_100_front.jpg",
 	"Mexico": "res://assets/bills_official/mx_500_front.png",
-	"Peru": "res://assets/bills_official/pe_20000_front.jpg",
+	"Peru": "res://assets/bills_official/pe_100000_front.png",
 	"United Kingdom": "res://assets/bills_official/gb_20_front.jpg"
 }
 
