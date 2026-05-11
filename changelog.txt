@@ -35,3 +35,4 @@ V.1.615_Switched banner ads from Start.io to AdMob
 V.1.616_Enabled AdMob test banners for Android validation
 V.1.617_Fixed Android runtime detection for AdMob banners
 V.1.618_Enabled production AdMob banner unit
+V.1.619_Bumped Android build version for release packaging

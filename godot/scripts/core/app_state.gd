@@ -2,14 +2,14 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.616"
+const APP_VERSION := "V.1.619"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Enabled AdMob test banners for Android validation.",
-	"es": "Se activaron banners de prueba de AdMob para validar Android.",
-	"pt": "Banners de teste do AdMob ativados para validar no Android.",
-	"zh": "已启用 AdMob 测试横幅以验证 Android。"
+	"en": "Bumped Android build version for release packaging.",
+	"es": "Se actualizo la version de compilacion de Android para el paquete de lanzamiento.",
+	"pt": "Versao de build Android atualizada para o pacote de lancamento.",
+	"zh": "Android build version updated for release packaging."
 }
 
 const UI_TEXTS := {
