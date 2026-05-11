@@ -201,30 +201,30 @@
                              "currency":  "usd",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/us_50_front.jpg",
-                             "summary_text":  "Billete de US$50. Presenta hilo de seguridad que brilla bajo UV, marca de agua de Grant, tinta de cambio de color, fibras de seguridad y microimpresion.",
-                             "watermark_text":  "Contra la luz aparece la imagen de Ulysses S. Grant.",
+                             "summary_text":  "The US$50 note includes a security thread that glows under UV light, a Grant watermark, color-shifting ink, security fibers, and microprinting.",
+                             "watermark_text":  "Hold the note to the light to see the image of Ulysses S. Grant.",
                              "security_features":  [
-                                                       "Hilo de seguridad vertical que brilla en amarillo bajo UV.",
-                                                       "Marca de agua con el retrato de Ulysses S. Grant.",
-                                                       "Numero 50 con tinta de cambio de color.",
-                                                       "Fibras de seguridad rojas y azules en el papel.",
-                                                       "Microimpresion y relieve perceptible al tacto."
+                                                       "Vertical security thread that glows yellow under UV light.",
+                                                       "Watermark portrait of Ulysses S. Grant.",
+                                                       "Color-shifting 50 numeral.",
+                                                       "Red and blue security fibers embedded in the paper.",
+                                                       "Microprinting and raised printing that can be felt."
                                                    ],
                              "source":  "Federal Reserve",
                              "source_url":  "https://www.federalreserve.gov/boarddocs/press/other/2004/20040426/",
                              "summary_texts":  {
-                                                   "en":  "Billete de US$50. Presenta hilo de seguridad que brilla bajo UV, marca de agua de Grant, tinta de cambio de color, fibras de seguridad y microimpresion."
+                                                   "en":  "The US$50 note includes a security thread that glows under UV light, a Grant watermark, color-shifting ink, security fibers, and microprinting."
                                                },
                              "watermark_texts":  {
-                                                     "en":  "Contra la luz aparece la imagen de Ulysses S. Grant."
+                                                     "en":  "Hold the note to the light to see the image of Ulysses S. Grant."
                                                  },
                              "security_features_texts":  {
                                                              "en":  [
-                                                                        "Hilo de seguridad vertical que brilla en amarillo bajo UV.",
-                                                                        "Marca de agua con el retrato de Ulysses S. Grant.",
-                                                                        "Numero 50 con tinta de cambio de color.",
-                                                                        "Fibras de seguridad rojas y azules en el papel.",
-                                                                        "Microimpresion y relieve perceptible al tacto."
+                                                                        "Vertical security thread that glows yellow under UV light.",
+                                                                        "Watermark portrait of Ulysses S. Grant.",
+                                                                        "Color-shifting 50 numeral.",
+                                                                        "Red and blue security fibers embedded in the paper.",
+                                                                        "Microprinting and raised printing that can be felt."
                                                                     ]
                                                          }
                          },
@@ -233,30 +233,30 @@
                              "currency":  "usd",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/us_100_front.jpg",
-                             "summary_text":  "Billete de US$100. Es la denominacion mas alta emitida por la Reserva Federal y combina cinta 3D, marca de agua, tinta de cambio de color, hilo de seguridad y microimpresion.",
-                             "watermark_text":  "Contra la luz aparece Benjamin Franklin en el espacio en blanco.",
+                             "summary_text":  "The US$100 note is the highest denomination currently issued by the Federal Reserve and combines a 3-D security ribbon, watermark, color-shifting ink, security thread, and microprinting.",
+                             "watermark_text":  "Hold the note to the light to see Benjamin Franklin in the blank space.",
                              "security_features":  [
-                                                       "Cinta de seguridad 3D con campanas e iconos cambiantes.",
-                                                       "Marca de agua con Benjamin Franklin.",
-                                                       "Numero 100 con tinta de cambio de color.",
-                                                       "Hilo de seguridad visible al trasluz.",
-                                                       "Microimpresion y relieve perceptible."
+                                                       "3-D security ribbon with bells and changing icons.",
+                                                       "Benjamin Franklin watermark.",
+                                                       "Color-shifting 100 numeral.",
+                                                       "Security thread visible when held to light.",
+                                                       "Microprinting and raised printing."
                                                    ],
                              "source":  "Federal Reserve",
                              "source_url":  "https://www.federalreserve.gov/newsevents/pressreleases/other20131008a.htm",
                              "summary_texts":  {
-                                                   "en":  "Billete de US$100. Es la denominacion mas alta emitida por la Reserva Federal y combina cinta 3D, marca de agua, tinta de cambio de color, hilo de seguridad y microimpresion."
+                                                   "en":  "The US$100 note is the highest denomination currently issued by the Federal Reserve and combines a 3-D security ribbon, watermark, color-shifting ink, security thread, and microprinting."
                                                },
                              "watermark_texts":  {
-                                                     "en":  "Contra la luz aparece Benjamin Franklin en el espacio en blanco."
+                                                     "en":  "Hold the note to the light to see Benjamin Franklin in the blank space."
                                                  },
                              "security_features_texts":  {
                                                              "en":  [
-                                                                        "Cinta de seguridad 3D con campanas e iconos cambiantes.",
-                                                                        "Marca de agua con Benjamin Franklin.",
-                                                                        "Numero 100 con tinta de cambio de color.",
-                                                                        "Hilo de seguridad visible al trasluz.",
-                                                                        "Microimpresion y relieve perceptible."
+                                                                        "3-D security ribbon with bells and changing icons.",
+                                                                        "Benjamin Franklin watermark.",
+                                                                        "Color-shifting 100 numeral.",
+                                                                        "Security thread visible when held to light.",
+                                                                        "Microprinting and raised printing."
                                                                     ]
                                                          }
                          },

@@ -37,3 +37,4 @@ V.1.617_Fixed Android runtime detection for AdMob banners
 V.1.618_Enabled production AdMob banner unit
 V.1.619_Bumped Android build version for release packaging
 V.1.620_Refreshed banknote artwork and improved external source opening
+V.1.621_Updated launcher icons and refreshed United States note text
