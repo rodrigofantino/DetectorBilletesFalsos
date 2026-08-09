@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.621"
+const APP_VERSION := "V.1.647"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
@@ -44,7 +44,13 @@ const UI_TEXTS := {
 		"menu_watermark": "Watermark viewer",
 		"menu_currency": "Currency info",
 		"menu_about": "About",
+		"menu_remove_ads": "Remove ads",
+		"menu_rate_app": "Rate this app",
 		"menu_exit": "Exit",
+		"ads_removed": "Ads are already removed for this Google Play account.",
+		"purchase_unavailable": "Purchases are unavailable until Google Play connects.",
+		"purchase_failed": "Google Play could not start the purchase.",
+		"purchase_pending": "The purchase is pending. Ads will be removed when payment is confirmed.",
 		"language_label": "Language",
 		"follow_phone_language": "Follow phone language",
 		"menu_subtitle": "UV light, watermark checking, and currency info in one app.",
@@ -84,7 +90,13 @@ const UI_TEXTS := {
 		"menu_watermark": "Visor de marca de agua",
 		"menu_currency": "Información de moneda",
 		"menu_about": "Acerca de",
+		"menu_remove_ads": "Quitar anuncios",
+		"menu_rate_app": "Calificar la aplicación",
 		"menu_exit": "Salir",
+		"ads_removed": "Los anuncios ya están desactivados para esta cuenta de Google Play.",
+		"purchase_unavailable": "Las compras no están disponibles hasta conectar Google Play.",
+		"purchase_failed": "Google Play no pudo iniciar la compra.",
+		"purchase_pending": "La compra está pendiente. Los anuncios desaparecerán cuando se confirme el pago.",
 		"language_label": "Idioma",
 		"follow_phone_language": "Seguir idioma del teléfono",
 		"menu_subtitle": "Luz UV, marca de agua e información de moneda en una sola app.",
@@ -124,7 +136,13 @@ const UI_TEXTS := {
 		"menu_watermark": "Visualizador de marca-d'água",
 		"menu_currency": "Informações da moeda",
 		"menu_about": "Sobre",
+		"menu_remove_ads": "Remover anúncios",
+		"menu_rate_app": "Avaliar o aplicativo",
 		"menu_exit": "Sair",
+		"ads_removed": "Os anúncios já estão removidos para esta conta do Google Play.",
+		"purchase_unavailable": "As compras não estão disponíveis até o Google Play se conectar.",
+		"purchase_failed": "O Google Play não conseguiu iniciar a compra.",
+		"purchase_pending": "A compra está pendente. Os anúncios serão removidos quando o pagamento for confirmado.",
 		"language_label": "Idioma",
 		"follow_phone_language": "Usar idioma do telefone",
 		"menu_subtitle": "Luz UV, checagem de marca-d'água e informação de cédulas em um app.",
@@ -164,7 +182,13 @@ const UI_TEXTS := {
 		"menu_watermark": "水印查看器",
 		"menu_currency": "货币信息",
 		"menu_about": "关于",
+		"menu_remove_ads": "移除广告",
+		"menu_rate_app": "评价应用",
 		"menu_exit": "退出",
+		"ads_removed": "此 Google Play 帐户已移除广告。",
+		"purchase_unavailable": "Google Play 连接前无法购买。",
+		"purchase_failed": "Google Play 无法开始购买。",
+		"purchase_pending": "购买正在处理中，付款确认后广告将被移除。",
 		"language_label": "语言",
 		"follow_phone_language": "跟随手机语言",
 		"menu_subtitle": "在一个应用里提供 UV 光、看水印和货币信息。",

@@ -17,24 +17,29 @@ V.315_Improved note viewer scaling and upgraded Hong Kong banknote art
 V.317_Fixed Godot UI parsing and refreshed currency data
 V.318_Pinned Godot Android packaging identity and launcher settings
 V.319_Refreshed official banknote images and improved viewer scaling
-V.1.601_Added Start.io banner ads on the main menu
-V.1.602_Removed Start.io Android export collection hooks
-V.1.603_Updated Start.io Android SDK to 4.10.1
-V.1.604_Updated Start.io Android SDK to 5.3.0
+V.1.601_Added legacy banner ads on the main menu
+V.1.602_Removed legacy Android export collection hooks
+V.1.603_Updated legacy Android advertising SDK
+V.1.604_Updated legacy Android advertising SDK
 V.1.605_Improved main menu scaling and ad banner placement
 V.1.606_Improved tablet controls and bottom banner reserve
 V.1.607_Improved country and currency info readability on tablets
-V.1.608_Fixed Start.io banner loading fallback behavior
-V.1.609_Enabled Start.io Android banner plugin for test verification
+V.1.608_Fixed legacy banner loading fallback behavior
+V.1.609_Enabled legacy Android banner plugin for test verification
 V.1.610_Improved touch scrolling and official source popup behavior
 V.1.611_Improved language selector readability on tablets
-V.1.612_Disabled grey ad fallback while testing Start.io banners
-V.1.613_Packaged Start.io native plugin for Android test banners
+V.1.612_Disabled grey ad fallback while testing legacy banners
+V.1.613_Packaged legacy native plugin for Android test banners
 V.1.614_Fixed UTF-8 localization text handling across languages
-V.1.615_Switched banner ads from Start.io to AdMob
+V.1.615_Switched banner ads to AdMob
 V.1.616_Enabled AdMob test banners for Android validation
 V.1.617_Fixed Android runtime detection for AdMob banners
 V.1.618_Enabled production AdMob banner unit
 V.1.619_Bumped Android build version for release packaging
 V.1.620_Refreshed banknote artwork and improved external source opening
 V.1.621_Updated launcher icons and refreshed United States note text
+V.1.642_Updated Android target API to 36 for Google Play compliance
+V.1.643_Added Google Play remove-ads purchase flow
+V.1.644_Declared Google Play Billing permission in Android export
+V.1.646_Added Google Play in-app review prompt and Play Store rating button
+V.1.647_Fixed Play Review export dependency and deferred review until Google Play is ready

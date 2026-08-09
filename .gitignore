@@ -15,6 +15,17 @@ docs/
 *.log
 *.tmp
 exports/
+godot/addons/GodotGooglePlayBilling/godot-google-play-billing/
+godot/addons/GodotGooglePlayBilling/.github/
+godot/addons/GodotGooglePlayBilling/docs/
+godot/addons/GodotGooglePlayBilling/billing_plugin_thumbnail.webp
+godot/addons/GodotGooglePlayBilling/build.gradle.kts
+godot/addons/GodotGooglePlayBilling/gradle.properties
+godot/addons/GodotGooglePlayBilling/gradlew
+godot/addons/GodotGooglePlayBilling/gradlew.bat
+godot/addons/GodotGooglePlayBilling/settings.gradle.kts
+godot/addons/GodotGooglePlayBilling/zensical.toml
+godot/addons/GodotGooglePlayBilling/gradle/
 # Android Studio
 .idea/
 *.iml

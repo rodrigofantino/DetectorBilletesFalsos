@@ -17,10 +17,11 @@ This document records the current implementation state of the legacy Android app
 - Currency information browser by country.
 - Bill-specific information screen for selected notes.
 - Legacy ad hooks exist only in the Android tree and are not reused by the Godot port.
-- Start.io banner support exists only for the Godot main menu using Android SDK 5.3.0; UV, watermark, and note-inspection screens stay ad-free.
+- AdMob banner support exists only for the Godot main menu; UV, watermark, and note-inspection screens stay ad-free.
 
 4. Current implementation risks
-- StartApp is referenced by the legacy Android tree and by the Godot Start.io banner export plugin pinned to Android SDK 5.3.0.
+- The legacy ad integration was removed; the Godot port uses AdMob only.
+- Play Store ratings use the native Google Play In-App Review flow, with local frequency limits and no incentives for positive reviews.
 - Currency JSON exists in more than one place and one path has a casing mismatch.
 - Old Android permissions and old SDK assumptions may not survive the port unchanged.
 - Signing keys are missing from the repo and must stay local.

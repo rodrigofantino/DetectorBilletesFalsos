@@ -56,11 +56,6 @@
         </activity>
              <activity android:name="InfoShowpa100" >
         </activity>
-    <activity android:name="com.startapp.android.publish.AppWallActivity"
- android:theme="@android:style/Theme.Translucent"
- android:taskAffinity="com.appsimple.DetectorBilleteFalso.AppWall"
-	android:configChanges="orientation|keyboardHidden"/>
-    
     <activity android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />

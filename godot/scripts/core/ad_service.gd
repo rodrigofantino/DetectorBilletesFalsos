@@ -16,8 +16,12 @@ var _banner_loaded := false
 var _show_requested := false
 
 
+func _ready() -> void:
+	call_deferred("_connect_purchase_signals")
+
+
 func should_reserve_banner_space() -> bool:
-	return _is_android()
+	return _is_android() and not _ads_removed()
 
 
 func get_reserved_banner_height() -> int:
@@ -35,6 +39,8 @@ func is_banner_loaded() -> bool:
 
 
 func show_banner() -> void:
+	if _ads_removed():
+		return
 	_show_requested = true
 	if not _is_android():
 		return
@@ -61,6 +67,22 @@ func hide_banner() -> void:
 	if _ad_view != null:
 		_ad_view.hide()
 	banner_hidden.emit()
+
+
+func _connect_purchase_signals() -> void:
+	var purchases := get_node_or_null("/root/AppPurchases")
+	if purchases != null:
+		purchases.entitlement_changed.connect(_on_entitlement_changed)
+
+
+func _on_entitlement_changed(ads_removed: bool) -> void:
+	if ads_removed:
+		hide_banner()
+
+
+func _ads_removed() -> bool:
+	var purchases := get_node_or_null("/root/AppPurchases")
+	return purchases != null and purchases.is_ads_removed()
 
 
 func _initialize_admob_once() -> void:

@@ -6,7 +6,9 @@ Detector de Billetes Falsos
 - Language: GDScript, typed where practical
 - Export target: Android
 - Legacy validation tool: Android Studio only if we need to inspect or run the old Java project
-- Ads are limited to a Start.io banner on the main menu using Android SDK 5.3.0. UV, watermark, and note-inspection screens remain ad-free.
+- Ads are limited to an AdMob banner on the main menu. UV, watermark, and note-inspection screens remain ad-free.
+- The remove-ads option uses Google Play Billing product `remove_ads` as a non-consumable one-time purchase.
+- Google Play In-App Review may be requested after three meaningful tool uses, with a 90-day local cooldown and a separate Play Store listing button.
 
 2. Architecture target
 - One root scene with menu navigation.
@@ -24,7 +26,7 @@ Detector de Billetes Falsos
 - `NoteInfoActivity.java` -> `CurrencyInfo.tscn`.
 - `InfoShowpa100.java` -> `BillViewer.tscn` or a reusable note subscene.
 - `Information.java` and `PesosArgentinos.java` -> merged into the currency browser flow.
-- Ads-related manifest routes -> legacy only; the Godot port uses Start.io SDK 5.3.0 through the Android export path.
+- Ads-related manifest routes -> legacy only; the Godot port uses AdMob through the Android export path.
 
 4. Proposed Godot scene map
 - `Boot.tscn`: short boot/branding transition.
@@ -63,7 +65,9 @@ Step 3: port the UV screen.
 Step 4: port the watermark color cycle.
 Step 5: port currency browsing and detail screens.
 Step 6: add Android export testing and device verification.
-Step 7: keep ads limited to a Start.io main-menu banner and verify Android packaging/privacy disclosures before release.
+Step 7: keep ads limited to an AdMob main-menu banner and verify Android packaging/privacy disclosures before release.
+Step 7a: add Google Play Billing for the non-consumable `remove_ads` product and restore its entitlement on app start.
+Step 7b: integrate Google Play In-App Review without promising or conditioning a positive rating.
 Step 8: import and reuse the legacy logo, note images, and button sound for a closer visual match.
 Step 9: add a native Android plugin only if hardware-level brightness control is still needed after device testing.
 Step 10: refresh currency content from official bank sources only.
@@ -87,7 +91,7 @@ Step 26: localize the visible country labels and currency labels for each newly 
 9. Known legacy issues to verify
 - `currencyInfo.json` casing mismatch in the old Java code.
 - Duplicate JSON file in `res/raw` versus `assets`.
-- StartApp manifest reference without source SDK in the repo.
+- Legacy ad manifest references must not be present in the active export path.
 - Old Eclipse/Android dependency assumptions in `project.properties`.
 
 10. Acceptance criteria
@@ -102,7 +106,7 @@ Step 26: localize the visible country labels and currency labels for each newly 
 - China exposes the current note set instead of a single denomination, and each Chinese note points to an official PBC page.
 - The note viewer stays usable on narrow phone screens without clipping the thumbnail or pushing detail text off-screen.
 - The app picks the phone language when supported, otherwise it falls back to English.
-- Android exports can show a Start.io banner on the main menu only, without overlaying UV, watermark, or note-inspection screens.
+- Android exports can show an AdMob banner on the main menu only, without overlaying UV, watermark, or note-inspection screens.
 - The user can manually override the language from the main menu and the choice persists across launches.
 - Note text localization is now represented in `currencyinfo.json` with locale-aware dictionaries, while the flat fields remain as compatibility fallback.
 - The translation backlog is documented in a stable order so note content can be localized without scene rewiring.

@@ -1,0 +1,85 @@
+extends Node
+
+const STATE_PATH := "user://review_state.cfg"
+const PLAY_STORE_URL := "https://play.google.com/store/apps/details?id=com.appsimple.DetectorBilleteFalso2"
+const REQUIRED_USES := 3
+const MIN_DAYS_BEFORE_REQUEST := 3
+const PROMPT_COOLDOWN_DAYS := 90
+
+var _usage_count := 0
+var _first_launch_unix := 0
+var _last_prompt_unix := 0
+var _request_pending := false
+
+
+func _ready() -> void:
+	_load_state()
+	var purchases := get_node_or_null("/root/AppPurchases")
+	if purchases != null and purchases.has_signal("billing_ready"):
+		purchases.billing_ready.connect(_on_billing_ready)
+
+
+func record_successful_use() -> void:
+	_usage_count += 1
+	_save_state()
+	_maybe_request_review()
+
+
+func open_play_store_listing() -> void:
+	OS.shell_open(PLAY_STORE_URL)
+
+
+func _maybe_request_review() -> void:
+	if _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
+		return
+	var now := int(Time.get_unix_time_from_system())
+	if _usage_count < REQUIRED_USES:
+		return
+	if now - _first_launch_unix < MIN_DAYS_BEFORE_REQUEST * 86400:
+		return
+	if _last_prompt_unix > 0 and now - _last_prompt_unix < PROMPT_COOLDOWN_DAYS * 86400:
+		return
+	var billing := get_node_or_null("/root/AppPurchases")
+	if billing == null or not billing.has_method("request_in_app_review"):
+		return
+	if billing.has_method("can_request_in_app_review") and not billing.can_request_in_app_review():
+		return
+	_request_pending = true
+	_last_prompt_unix = now
+	_save_state()
+	if billing.has_signal("review_flow_completed"):
+		billing.review_flow_completed.connect(_on_review_finished, CONNECT_ONE_SHOT)
+	if billing.has_signal("review_flow_error"):
+		billing.review_flow_error.connect(_on_review_error, CONNECT_ONE_SHOT)
+	billing.request_in_app_review()
+
+
+func _on_billing_ready() -> void:
+	_maybe_request_review()
+
+
+func _on_review_finished() -> void:
+	_request_pending = false
+
+
+func _on_review_error(_message: String) -> void:
+	_request_pending = false
+
+
+func _load_state() -> void:
+	var config := ConfigFile.new()
+	if config.load(STATE_PATH) != OK:
+		_first_launch_unix = int(Time.get_unix_time_from_system())
+		_save_state()
+		return
+	_usage_count = int(config.get_value("review", "usage_count", 0))
+	_first_launch_unix = int(config.get_value("review", "first_launch_unix", Time.get_unix_time_from_system()))
+	_last_prompt_unix = int(config.get_value("review", "last_prompt_unix", 0))
+
+
+func _save_state() -> void:
+	var config := ConfigFile.new()
+	config.set_value("review", "usage_count", _usage_count)
+	config.set_value("review", "first_launch_unix", _first_launch_unix)
+	config.set_value("review", "last_prompt_unix", _last_prompt_unix)
+	config.save(STATE_PATH)

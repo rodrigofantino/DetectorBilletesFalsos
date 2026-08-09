@@ -90,7 +90,17 @@ func _build_ui() -> void:
 		AppState.t("select_country_title"),
 		Callable(self, "_open_countries"),
 		AppState.t("menu_about"),
-		Callable(self, "_show_about")
+		Callable(self, "_show_about"),
+		false
+	)
+	_build_single_button_row(
+		AppState.t("menu_remove_ads"),
+		Callable(self, "_purchase_remove_ads"),
+		false
+	)
+	_build_single_button_row(
+		AppState.t("menu_rate_app"),
+		Callable(self, "_open_play_store")
 	)
 	_build_single_button_row(
 		AppState.t("menu_exit"),
@@ -101,9 +111,13 @@ func _build_ui() -> void:
 	_ad_banner_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_child(_ad_banner_spacer)
 	ScreenBuilder.add_bottom_ad_reserve(self, true)
+	var purchases := get_node_or_null("/root/AppPurchases")
+	if purchases != null:
+		purchases.entitlement_changed.connect(_on_entitlement_changed)
+		purchases.purchase_message.connect(_on_purchase_message)
 
 
-func _build_button_row(left_text: String, left_callback: Callable, right_text: String, right_callback: Callable) -> void:
+func _build_button_row(left_text: String, left_callback: Callable, right_text: String, right_callback: Callable, right_play_sound: bool = true) -> void:
 	var row := HBoxContainer.new()
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -112,10 +126,10 @@ func _build_button_row(left_text: String, left_callback: Callable, right_text: S
 	_button_rows.append(row)
 
 	_add_menu_button(row, left_text, left_callback)
-	_add_menu_button(row, right_text, right_callback)
+	_add_menu_button(row, right_text, right_callback, right_play_sound)
 
 
-func _build_single_button_row(text: String, callback: Callable) -> void:
+func _build_single_button_row(text: String, callback: Callable, play_sound: bool = true) -> void:
 	var row := HBoxContainer.new()
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
@@ -123,16 +137,17 @@ func _build_single_button_row(text: String, callback: Callable) -> void:
 	_layout_root.add_child(row)
 	_button_rows.append(row)
 
-	_add_menu_button(row, text, callback)
+	_add_menu_button(row, text, callback, play_sound)
 
 
-func _add_menu_button(parent: Container, text: String, callback: Callable) -> void:
+func _add_menu_button(parent: Container, text: String, callback: Callable, play_sound: bool = true) -> void:
 	var button := Button.new()
 	button.text = text
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	button.pressed.connect(callback)
-	button.pressed.connect(_play_click)
+	if play_sound:
+		button.pressed.connect(_play_click)
 	parent.add_child(button)
 	_action_buttons.append(button)
 
@@ -241,15 +256,30 @@ func _on_language_selected(index: int, _select: OptionButton) -> void:
 
 
 func _open_uv() -> void:
+	_record_review_use()
 	get_tree().change_scene_to_file(UV_SCENE)
 
 
 func _open_watermark() -> void:
+	_record_review_use()
 	get_tree().change_scene_to_file(WATERMARK_SCENE)
 
 
 func _open_countries() -> void:
+	_record_review_use()
 	get_tree().change_scene_to_file(COUNTRY_SCENE)
+
+
+func _open_play_store() -> void:
+	var review := get_node_or_null("/root/AppReview")
+	if review != null:
+		review.open_play_store_listing()
+
+
+func _record_review_use() -> void:
+	var review := get_node_or_null("/root/AppReview")
+	if review != null:
+		review.record_successful_use()
 
 
 func _show_about() -> void:
@@ -257,6 +287,20 @@ func _show_about() -> void:
 		AppState.t("about_title"),
 		AppState.get_about_text()
 	)
+
+
+func _purchase_remove_ads() -> void:
+	var purchases := get_node_or_null("/root/AppPurchases")
+	if purchases != null:
+		purchases.purchase_remove_ads()
+
+
+func _on_entitlement_changed(_ads_removed: bool) -> void:
+	_apply_responsive_layout()
+
+
+func _on_purchase_message(message_key: String) -> void:
+	_show_dialog(AppState.t("menu_remove_ads"), AppState.t(message_key))
 
 
 func _show_dialog(title_text: String, body_text: String) -> void:
