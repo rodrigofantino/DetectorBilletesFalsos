@@ -1,8 +1,7 @@
 extends Node
 
 const STATE_PATH := "user://review_state.cfg"
-const PLAY_STORE_URL := "https://play.google.com/store/apps/details?id=com.appsimple.DetectorBilleteFalso2"
-const REQUIRED_USES := 3
+const REQUIRED_USES := 5
 const MIN_DAYS_BEFORE_REQUEST := 3
 const PROMPT_COOLDOWN_DAYS := 90
 
@@ -23,10 +22,6 @@ func record_successful_use() -> void:
 	_usage_count += 1
 	_save_state()
 	_maybe_request_review()
-
-
-func open_play_store_listing() -> void:
-	OS.shell_open(PLAY_STORE_URL)
 
 
 func _maybe_request_review() -> void:

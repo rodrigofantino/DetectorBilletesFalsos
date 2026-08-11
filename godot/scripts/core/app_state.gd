@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.647"
+const APP_VERSION := "V.1.649"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
@@ -45,7 +45,6 @@ const UI_TEXTS := {
 		"menu_currency": "Currency info",
 		"menu_about": "About",
 		"menu_remove_ads": "Remove ads",
-		"menu_rate_app": "Rate this app",
 		"menu_exit": "Exit",
 		"ads_removed": "Ads are already removed for this Google Play account.",
 		"purchase_unavailable": "Purchases are unavailable until Google Play connects.",
@@ -91,7 +90,6 @@ const UI_TEXTS := {
 		"menu_currency": "Información de moneda",
 		"menu_about": "Acerca de",
 		"menu_remove_ads": "Quitar anuncios",
-		"menu_rate_app": "Calificar la aplicación",
 		"menu_exit": "Salir",
 		"ads_removed": "Los anuncios ya están desactivados para esta cuenta de Google Play.",
 		"purchase_unavailable": "Las compras no están disponibles hasta conectar Google Play.",
@@ -137,7 +135,6 @@ const UI_TEXTS := {
 		"menu_currency": "Informações da moeda",
 		"menu_about": "Sobre",
 		"menu_remove_ads": "Remover anúncios",
-		"menu_rate_app": "Avaliar o aplicativo",
 		"menu_exit": "Sair",
 		"ads_removed": "Os anúncios já estão removidos para esta conta do Google Play.",
 		"purchase_unavailable": "As compras não estão disponíveis até o Google Play se conectar.",
@@ -183,7 +180,6 @@ const UI_TEXTS := {
 		"menu_currency": "货币信息",
 		"menu_about": "关于",
 		"menu_remove_ads": "移除广告",
-		"menu_rate_app": "评价应用",
 		"menu_exit": "退出",
 		"ads_removed": "此 Google Play 帐户已移除广告。",
 		"purchase_unavailable": "Google Play 连接前无法购买。",

@@ -99,10 +99,6 @@ func _build_ui() -> void:
 		false
 	)
 	_build_single_button_row(
-		AppState.t("menu_rate_app"),
-		Callable(self, "_open_play_store")
-	)
-	_build_single_button_row(
 		AppState.t("menu_exit"),
 		Callable(self, "_exit_app")
 	)
@@ -268,12 +264,6 @@ func _open_watermark() -> void:
 func _open_countries() -> void:
 	_record_review_use()
 	get_tree().change_scene_to_file(COUNTRY_SCENE)
-
-
-func _open_play_store() -> void:
-	var review := get_node_or_null("/root/AppReview")
-	if review != null:
-		review.open_play_store_listing()
 
 
 func _record_review_use() -> void:
