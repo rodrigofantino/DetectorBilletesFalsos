@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad - Detector de Billetes Falsos</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --accent: #1d4ed8;
+      --border: #dbe3ef;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    }
+    h1, h2 { margin-top: 0; color: #0f172a; }
+    h1 { font-size: 1.7rem; margin-bottom: 8px; }
+    h2 { font-size: 1.15rem; margin-bottom: 8px; }
+    p, li { color: var(--muted); }
+    .meta { color: var(--muted); margin: 0 0 4px; }
+    ul { margin-top: 6px; padding-left: 20px; }
+    a { color: var(--accent); }
+    @media (max-width: 600px) {
+      .container { padding: 12px; }
+      .card { padding: 14px; border-radius: 10px; }
+      h1 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Política de Privacidad - Detector de Billetes Falsos</h1>
+      <p class="meta"><strong>Última actualización:</strong> 7 de mayo de 2026</p>
+      <p class="meta"><strong>Desarrollador:</strong> Rodrigo González Fantino</p>
+      <p>Esta Política de Privacidad explica cómo funciona la app móvil <strong>Detector de Billetes Falsos</strong>, qué información puede procesarse al usarla y cómo se gestiona esa información.</p>
+    </section>
+
+    <section class="card">
+      <h2>1. Introducción</h2>
+      <p>Detector de Billetes Falsos es una herramienta informativa para visualizar marcas y medidas de seguridad de billetes. La aplicación no requiere crear una cuenta para su uso básico.</p>
+    </section>
+
+    <section class="card">
+      <h2>2. Datos que recopila la aplicación</h2>
+      <p>Según la revisión del código de esta versión, la app no implementa formularios de registro, inicio de sesión ni una base de datos propia de usuarios.</p>
+      <p>Sin embargo, la aplicación integra servicios publicitarios de terceros (Google Mobile Ads / AdMob) que pueden recopilar información técnica y/o identificadores del dispositivo conforme a sus propias políticas.</p>
+    </section>
+
+    <section class="card">
+      <h2>3. Permisos utilizados</h2>
+      <ul>
+        <li><strong>INTERNET</strong>: para cargar anuncios y abrir enlaces externos (por ejemplo, Google Play).</li>
+        <li><strong>ACCESS_NETWORK_STATE</strong> y <strong>ACCESS_WIFI_STATE</strong>: para conocer estado de conexión, útil para servicios de anuncios.</li>
+        <li><strong>WAKE_LOCK</strong>: para mantener la pantalla activa durante ciertos modos de uso.</li>
+        <li><strong>READ_PHONE_STATE</strong>: declarado en el manifiesto de esta versión (el uso específico debe revisarse en consola y SDKs de terceros).</li>
+        <li><strong>SYSTEM_ALERT_WINDOW</strong> y <strong>GET_TASKS</strong>: declarados en el manifiesto heredado.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>4. Uso de la cámara</h2>
+      <p>En esta versión revisada no se encontró declaración de permiso de cámara ni código de captura de cámara dentro de la app.</p>
+    </section>
+
+    <section class="card">
+      <h2>5. Procesamiento de imágenes</h2>
+      <p>La app muestra recursos visuales e información de billetes incluidos localmente en el proyecto. No se encontraron evidencias en el código revisado de subida de imágenes del usuario a servidores propios del desarrollador.</p>
+    </section>
+
+    <section class="card">
+      <h2>6. Conexión a internet</h2>
+      <p>La app usa conexión a internet principalmente para:</p>
+      <ul>
+        <li>carga de anuncios mediante SDKs de Google Ads;</li>
+        <li>abrir enlaces externos de Google Play mediante intents del sistema.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>7. Publicidad y servicios de terceros</h2>
+      <p>Esta versión integra componentes de <strong>Google Mobile Ads (AdMob)</strong> y referencias heredadas a <strong>StartApp</strong>. Estos servicios pueden procesar datos de acuerdo con sus propias políticas de privacidad.</p>
+      <p>Se recomienda revisar y mantener actualizadas las divulgaciones de “Seguridad de los datos” en Google Play Console según los SDKs efectivamente incluidos en el build publicado.</p>
+    </section>
+
+    <section class="card">
+      <h2>8. Analytics / métricas / reportes de fallos</h2>
+      <p>En la revisión del código no se detectaron integraciones explícitas con Firebase Analytics, Crashlytics ni SDKs dedicados de analítica. Si en una compilación publicada se agregan estos servicios, esta política deberá actualizarse.</p>
+    </section>
+
+    <section class="card">
+      <h2>9. Compartición de datos con terceros</h2>
+      <p>La app no muestra mecanismos propios para vender datos personales. No obstante, al utilizar SDKs de anuncios, parte de la información técnica necesaria para la prestación publicitaria puede ser tratada por proveedores externos (por ejemplo, Google Ads y/o otros SDKs integrados en el build).</p>
+    </section>
+
+    <section class="card">
+      <h2>10. Conservación de datos</h2>
+      <p>La aplicación, por sí misma, no implementa cuentas de usuario ni panel de almacenamiento remoto propio para datos personales. La retención de datos que pudieran tratar terceros se rige por las políticas de esos proveedores.</p>
+    </section>
+
+    <section class="card">
+      <h2>11. Seguridad</h2>
+      <p>Se aplican medidas razonables para reducir riesgos, pero ningún sistema es completamente infalible. Para mayor información sobre seguridad de datos tratada por terceros, consulte las políticas de los proveedores de publicidad/servicios utilizados.</p>
+    </section>
+
+    <section class="card">
+      <h2>12. Privacidad de menores</h2>
+      <p>La app no está diseñada específicamente para recopilar datos personales de menores. Si un tutor considera que se procesó información de un menor de forma indebida, puede contactar al desarrollador para solicitar revisión.</p>
+    </section>
+
+    <section class="card">
+      <h2>13. Cambios en esta política</h2>
+      <p>Esta política puede actualizarse para reflejar cambios técnicos, legales o de publicación en tiendas. Se recomienda revisarla periódicamente.</p>
+    </section>
+
+    <section class="card">
+      <h2>14. Contacto</h2>
+      <p>Si tenés consultas sobre esta política o sobre la app, podés escribir a: <strong>rodrigofantino@gmail.com</strong>.</p>
+    </section>
+  </main>
+</body>
+</html>
