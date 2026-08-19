@@ -1,10 +1,22 @@
 {
+    "schema_version":  2,
     "CurrencyInfo":  [
                          {
                              "country":  "Argentina",
                              "currency":  "ars",
                              "denomination":  "2000",
                              "image_path":  "res://assets/bills_official/ar_2000_front.png",
+                             "note_id":  "ars_2000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ar_2000_front.png",
+                                                 "denomination_tokens":  ["2000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de $2000 de la familia Heroinas y Heroes de la Patria. Tiene hilo de seguridad verde, marca de agua localizada, tinta de variabilidad optica, relieve al tacto y fibras visibles bajo UV.",
                              "watermark_text":  "Al trasluz se perciben las figuras y las iniciales de los homenajeados.",
                              "security_features":  [
@@ -37,6 +49,17 @@
                              "currency":  "ars",
                              "denomination":  "10000",
                              "image_path":  "res://assets/bills_official/ar_10000_front.jpg",
+                             "note_id":  "ars_10000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ar_10000_front.jpg",
+                                                 "denomination_tokens":  ["10000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de $10000 de la familia Heroinas y Heroes de la Patria. Presenta marca de agua con Belgrano y Maria Remedios del Valle, hilo de seguridad rojo aventanillado, tinta de variabilidad optica, imagen latente RA y complementacion frente-dorso.",
                              "watermark_text":  "Al trasluz se ven los retratos de Belgrano y Maria Remedios del Valle junto con sus iniciales.",
                              "security_features":  [
@@ -71,6 +94,17 @@
                              "currency":  "ars",
                              "denomination":  "20000",
                              "image_path":  "res://assets/bills_official/ar_20000_front.png",
+                             "note_id":  "ars_20000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ar_20000_front.png",
+                                                 "denomination_tokens":  ["20000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de $20000 de la familia Heroinas y Heroes de la Patria. Muestra a Juan Bautista Alberdi, con marca de agua de Alberdi y sus iniciales, hilo de seguridad azul aventanillado, tinta de variabilidad optica magenta-verde y complementacion frente-dorso.",
                              "watermark_text":  "Al trasluz se ve el retrato de Alberdi acompañado por las iniciales JBA.",
                              "security_features":  [
@@ -105,6 +139,17 @@
                              "currency":  "brl",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/br_50_front.jpg",
+                             "note_id":  "brl_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Cedula de R$50 da segunda familia do real. Incluye faixa holografica, marca-dagua con el animal y el valor, numero escondido, alto relieve y elementos fluorescentes bajo UV.",
                              "watermark_text":  "Contra la luz se ven el animal de la nota y el numero 50.",
                              "security_features":  [
@@ -137,6 +182,17 @@
                              "currency":  "brl",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/br_100_front.jpg",
+                             "note_id":  "brl_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Cedula de R$100 da segunda familia do real. Mantiene marca-dagua, faixa holografica, numero escondido, alto relieve y elementos fluorescentes para verificacion cotidiana.",
                              "watermark_text":  "Contra la luz se ven la garoupa y el valor 100.",
                              "security_features":  [
@@ -169,6 +225,17 @@
                              "currency":  "brl",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/br_200_front.jpg",
+                             "note_id":  "brl_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_200_front.jpg",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Cedula de R$200 da segunda familia do real. Conserva marca-dagua, numero que muda de color, numero escondido, alto relieve y verificacion visual de la serie mas reciente.",
                              "watermark_text":  "Contra la luz se ve el lobo-guara y el valor 200.",
                              "security_features":  [
@@ -201,6 +268,17 @@
                              "currency":  "usd",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/us_50_front.jpg",
+                             "note_id":  "usd_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The US$50 note includes a security thread that glows under UV light, a Grant watermark, color-shifting ink, security fibers, and microprinting.",
                              "watermark_text":  "Hold the note to the light to see the image of Ulysses S. Grant.",
                              "security_features":  [
@@ -233,6 +311,17 @@
                              "currency":  "usd",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/us_100_front.jpg",
+                             "note_id":  "usd_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The US$100 note is the highest denomination currently issued by the Federal Reserve and combines a 3-D security ribbon, watermark, color-shifting ink, security thread, and microprinting.",
                              "watermark_text":  "Hold the note to the light to see Benjamin Franklin in the blank space.",
                              "security_features":  [
@@ -265,6 +354,17 @@
                              "currency":  "eur",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/eu_100_front.jpg",
+                             "note_id":  "eur_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 100 euros de la serie Europa. Usa ventana con retrato en el holograma, marca de agua de Europa, numero esmeralda, impresion en relieve y otros controles visuales de la serie actual.",
                              "watermark_text":  "Con la nota a contraluz se ve el retrato de Europa en la marca de agua.",
                              "security_features":  [
@@ -297,6 +397,17 @@
                              "currency":  "eur",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/eu_200_front.jpg",
+                             "note_id":  "eur_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_200_front.jpg",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 200 euros de la serie Europa. Comparte ventana con retrato, marca de agua, numero esmeralda y relieve tactil. Las notas actuales de 100 y 200 completan la serie Europa.",
                              "watermark_text":  "Con la nota a contraluz se ve el retrato de Europa en la marca de agua.",
                              "security_features":  [
@@ -329,6 +440,17 @@
                              "currency":  "cop",
                              "denomination":  "50000",
                              "image_path":  "res://assets/bills_official/co_50000_front.png",
+                             "note_id":  "cop_50000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_50000_front.png",
+                                                 "denomination_tokens":  ["50000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 50000 pesos de la nueva familia colombiana. Esta dedicado a Gabriel Garcia Marquez y al paisaje de la Ciudad Perdida, con cinta de seguridad, marca de agua, imagenes coincidentes y efecto de cambio de color.",
                              "watermark_text":  "Al trasluz se aprecian elementos del diseno y la marca de agua de la familia nueva.",
                              "security_features":  [
@@ -361,6 +483,17 @@
                              "currency":  "cop",
                              "denomination":  "100000",
                              "image_path":  "res://assets/bills_official/co_100000_front.jpg",
+                             "note_id":  "cop_100000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_100000_front.jpg",
+                                                 "denomination_tokens":  ["100000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 100000 pesos de la nueva familia colombiana. Muestra a Carlos Lleras Restrepo y el Valle de Cocora; la seguridad se verifica con cinta, marca de agua, imagenes coincidentes y cambio de color.",
                              "watermark_text":  "Al trasluz se ven el retrato de Carlos Lleras Restrepo y la marca de agua del diseno.",
                              "security_features":  [
@@ -393,6 +526,17 @@
                              "currency":  "cny",
                              "denomination":  "1",
                              "image_path":  "res://assets/bills_official/cn_1_front.png",
+                             "note_id":  "cny_1",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_1_front.png",
+                                                 "denomination_tokens":  ["1"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 1 yuan de la quinta serie del renminbi, version 2019. La actualizacion agrega marca de agua blanca, ajusta la marca de agua floral y conserva la impresion en relieve como referencia principal.",
                              "watermark_text":  "Al trasluz se aprecian la marca de agua floral y la marca blanca con el numero 1.",
                              "security_features":  [
@@ -425,6 +569,17 @@
                              "currency":  "cny",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/cn_5_front.jpg",
+                             "note_id":  "cny_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 5 yuan de la quinta serie del renminbi, edicion 2020. La actualizacion usa numero de color cambiante, registros de coincidencia y una marca de agua reubicada para mejorar la lectura rapida del valor.",
                              "watermark_text":  "El diseno oficial mantiene la marca de agua floral y la marca blanca con el valor 5.",
                              "security_features":  [
@@ -457,6 +612,17 @@
                              "currency":  "cny",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/cn_10_front.png",
+                             "note_id":  "cny_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_10_front.png",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 10 yuan de la quinta serie del renminbi, version 2019. Incorpora numero de color cambiante, seguridad de ventana abierta, marca de agua floral y registro de coincidencia en la parte inferior.",
                              "watermark_text":  "Al trasluz se distinguen la marca de agua floral y la marca blanca con el valor 10.",
                              "security_features":  [
@@ -489,6 +655,17 @@
                              "currency":  "cny",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/cn_20_front.png",
+                             "note_id":  "cny_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_20_front.png",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 20 yuan de la quinta serie del renminbi, version 2019. Suma numero de color cambiante, seguridad de ventana abierta, marca de agua floral y registro de coincidencia.",
                              "watermark_text":  "El billete muestra marca de agua floral y marca blanca con el valor 20.",
                              "security_features":  [
@@ -521,6 +698,17 @@
                              "currency":  "cny",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/cn_50_front.png",
+                             "note_id":  "cny_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_50_front.png",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 50 yuan de la quinta serie del renminbi, version 2019. Conserva la marca de agua de Mao y agrega numero de color cambiante, seguridad de ventana abierta y registro de coincidencia.",
                              "watermark_text":  "La marca de agua principal muestra el retrato de Mao en el lado izquierdo.",
                              "security_features":  [
@@ -553,6 +741,17 @@
                              "currency":  "cny",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/cn_100_front.jpg",
+                             "note_id":  "cny_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cn_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 100 yuan de la quinta serie del renminbi. Conserva los principales elementos de seguridad: tinta opticamente variable, marca de agua, relieve, numero de serie y detalle tactil en los caracteres impresos.",
                              "watermark_text":  "Al trasluz se observa la marca de agua con mejor contraste.",
                              "security_features":  [
@@ -585,6 +784,17 @@
                              "currency":  "mxn",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/mx_100_front.png",
+                             "note_id":  "mxn_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/mx_100_front.png",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 100 pesos de la familia G de Banco de Mexico. Presenta relieve tactil, hilo dinamico, marca de agua, fondos lineales y fluorescencia para verificacion rapida.",
                              "watermark_text":  "Al trasluz se ve la marca de agua del billete y el registro del diseno.",
                              "security_features":  [
@@ -617,6 +827,17 @@
                              "currency":  "mxn",
                              "denomination":  "500",
                              "image_path":  "res://assets/bills_official/mx_500_front.png",
+                             "note_id":  "mxn_500",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/mx_500_front.png",
+                                                 "denomination_tokens":  ["500"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de 500 pesos de la familia G de Banco de Mexico. Combina relieve tactil, hilo dinamico, marca de agua, fondos lineales y un esquema de seguridad pensado para identificacion rapida.",
                              "watermark_text":  "Al trasluz se observa la marca de agua y el hilo de seguridad.",
                              "security_features":  [
@@ -649,6 +870,17 @@
                              "currency":  "pei",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/pe_100_front.jpg",
+                             "note_id":  "pei_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de S/ 100 del Banco Central de Reserva del Peru. Integra marca de agua, hilo de seguridad, tinta que cambia de color, imagen latente, microimpresiones e impresion fluorescente.",
                              "watermark_text":  "Al trasluz se ven el personaje principal, la denominacion y la silueta del diseno.",
                              "security_features":  [
@@ -681,6 +913,17 @@
                              "currency":  "pen",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/pe_200_front.jpg",
+                             "note_id":  "pen_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_200_front.jpg",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete de S/ 200 del Banco Central de Reserva del Peru. Mantiene los elementos modernos de la nueva familia: marca de agua, hilo de seguridad, tinta que cambia de color, registro perfecto y fluorescencia.",
                              "watermark_text":  "Al trasluz se distinguen el retrato, la denominacion y la silueta del motivo central.",
                              "security_features":  [
@@ -713,6 +956,17 @@
                              "currency":  "clp",
                              "denomination":  "1000",
                              "image_path":  "res://assets/bills_official/cl_1000_front.jpg",
+                             "note_id":  "clp_1000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cl_1000_front.jpg",
+                                                 "denomination_tokens":  ["1000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete chileno de 1000 pesos de la familia actual. Es de polimero, incorpora ventana transparente, copihue, Antu, motivo coincidente, microtextos y verificacion UV.",
                              "watermark_text":  "Al trasluz se verifica la ventana transparente y el motivo coincidente de la familia actual.",
                              "security_features":  [
@@ -745,6 +999,17 @@
                              "currency":  "clp",
                              "denomination":  "2000",
                              "image_path":  "res://assets/bills_official/cl_2000_front.jpg",
+                             "note_id":  "clp_2000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cl_2000_front.jpg",
+                                                 "denomination_tokens":  ["2000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete chileno de 2000 pesos de la familia actual. Usa sustrato de polimero, ventana transparente, elementos de color variable, relieves y verificacion con luz UV.",
                              "watermark_text":  "Al trasluz se aprecia la ventana transparente y los elementos de seguridad de la familia actual.",
                              "security_features":  [
@@ -777,6 +1042,17 @@
                              "currency":  "clp",
                              "denomination":  "5000",
                              "image_path":  "res://assets/bills_official/cl_5000_front.jpg",
+                             "note_id":  "clp_5000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cl_5000_front.jpg",
+                                                 "denomination_tokens":  ["5000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete chileno de 5000 pesos de la familia actual. Combina polimero, ventana transparente, flora local, motivo coincidente y numero UV.",
                              "watermark_text":  "Al trasluz se ve la ventana transparente y la lectura del motivo coincidente.",
                              "security_features":  [
@@ -809,6 +1085,17 @@
                              "currency":  "clp",
                              "denomination":  "10000",
                              "image_path":  "res://assets/bills_official/cl_10000_front.jpg",
+                             "note_id":  "clp_10000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cl_10000_front.jpg",
+                                                 "denomination_tokens":  ["10000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete chileno de 10000 pesos de la familia actual. Es de papel algodon, con marca de agua, franja 3D, relieve, microtextos y verificacion UV.",
                              "watermark_text":  "Al trasluz se distingue la marca de agua del personaje y la denominacion.",
                              "security_features":  [
@@ -841,6 +1128,17 @@
                              "currency":  "clp",
                              "denomination":  "20000",
                              "image_path":  "res://assets/bills_official/cl_20000_front.jpg",
+                             "note_id":  "clp_20000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/cl_20000_front.jpg",
+                                                 "denomination_tokens":  ["20000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete chileno de 20000 pesos de la familia actual. Usa papel algodon, marca de agua, franja 3D, relieves, microtextos y numero UV.",
                              "watermark_text":  "Al trasluz se ve la marca de agua y la lectura del valor.",
                              "security_features":  [
@@ -873,6 +1171,17 @@
                              "currency":  "gbp",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/gb_5_front.jpg",
+                             "note_id":  "gbp_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/gb_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete britanico de 5 libras. Es de polymero, con ventana transparente, retrato en la ventana, foil metalico, holograma, relieve y respuesta UV.",
                              "watermark_text":  "La ventana transparente muestra el retrato y la denominacion contra la luz.",
                              "security_features":  [
@@ -905,6 +1214,17 @@
                              "currency":  "gbp",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/gb_10_front.jpg",
+                             "note_id":  "gbp_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/gb_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete britanico de 10 libras. Tiene ventana transparente, holograma, foil metalico, relieve tactil y fluorescencia UV.",
                              "watermark_text":  "La ventana transparente permite ver el retrato y la denominacion al trasluz.",
                              "security_features":  [
@@ -937,6 +1257,17 @@
                              "currency":  "gbp",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/gb_20_front.jpg",
+                             "note_id":  "gbp_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/gb_20_front.jpg",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete britanico de 20 libras. Usa ventana transparente, holograma, segundo ventanal, foil metalico, relieve y control UV.",
                              "watermark_text":  "La ventana transparente y el retrato son visibles al trasluz.",
                              "security_features":  [
@@ -969,6 +1300,17 @@
                              "currency":  "gbp",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/gb_50_front.jpg",
+                             "note_id":  "gbp_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/gb_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Billete britanico de 50 libras. Tiene ventana transparente, holograma, segundo ventanal, foil metalico, relieve y respuesta UV.",
                              "watermark_text":  "La ventana transparente muestra el retrato y el valor de la nota al trasluz.",
                              "security_features":  [
@@ -1001,6 +1343,17 @@
                              "currency":  "cad",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/ca_20_front.jpg",
+                             "note_id":  "cad_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ca_20_front.jpg",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Canada\u0027s $20 polymer note features Queen Elizabeth II, the Canadian National Vimy Memorial, a large transparent window, a metallic portrait, and raised tactile elements.",
                              "watermark_text":  "Look through the transparent window for the matching portrait, value, and metallic elements.",
                              "security_features":  [
@@ -1033,6 +1386,17 @@
                              "currency":  "aud",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/au_50_front.jpg",
+                             "note_id":  "aud_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/au_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Australia\u0027s $50 polymer banknote features David Unaipon and Edith Cowan, a clear window, native wattle and bird motifs, and raised print.",
                              "watermark_text":  "Australia uses a clear polymer window rather than a traditional paper watermark.",
                              "security_features":  [
@@ -1065,6 +1429,17 @@
                              "currency":  "nzd",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/nz_100_front.png",
+                             "note_id":  "nzd_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/nz_100_front.png",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "New Zealand\u0027s $100 note features Lord Rutherford, the yellowhead bird, a holographic window, and strong tactile and see-through elements.",
                              "watermark_text":  "The holographic window reveals the note\u0027s key elements when it is tilted.",
                              "security_features":  [
@@ -1097,6 +1472,17 @@
                              "currency":  "jpy",
                              "denomination":  "10000",
                              "image_path":  "res://assets/bills_official/jp_10000_front.png",
+                             "note_id":  "jpy_10000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/jp_10000_front.png",
+                                                 "denomination_tokens":  ["10000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Japan\u0027s 10,000 yen note features Eiichi Shibusawa, Tokyo Station, a high-definition watermark, a 3D hologram, and other modern security features.",
                              "watermark_text":  "Hold it up to the light to see the portrait watermark and bar pattern.",
                              "security_features":  [
@@ -1129,6 +1515,17 @@
                              "currency":  "inr",
                              "denomination":  "500",
                              "image_path":  "res://assets/bills_official/in_500_front.png",
+                             "note_id":  "inr_500",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/in_500_front.png",
+                                                 "denomination_tokens":  ["500"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "India\u0027s 500-rupee note from the Mahatma Gandhi New Series features a Gandhi portrait, security thread, watermark, see-through register, and color-changing numeral.",
                              "watermark_text":  "A portrait watermark of Mahatma Gandhi appears when the note is held to the light.",
                              "security_features":  [
@@ -1161,6 +1558,17 @@
                              "currency":  "zar",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/za_200_front.png",
+                             "note_id":  "zar_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/za_200_front.png",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "South Africa\u0027s upgraded R200 note features the Big Five theme, a watermark, a windowed security thread, colour-changing ink, and an iridescent band.",
                              "watermark_text":  "The watermark and denomination numeral appear when the note is held against the light.",
                              "security_features":  [
@@ -1193,6 +1601,17 @@
                              "currency":  "chf",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/ch_200_front.jpg",
+                             "note_id":  "chf_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ch_200_front.jpg",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Switzerland\u0027s 200-franc note from the ninth series features scientific expertise, a globe-and-hand motif, and modern see-through and tactile security.",
                              "watermark_text":  "Hold it up to the light to see the note\u0027s hidden design elements and denomination details.",
                              "security_features":  [
@@ -1225,6 +1644,17 @@
                              "currency":  "krw",
                              "denomination":  "50000",
                              "image_path":  "res://assets/bills_official/kr_50000_front.jpg",
+                             "note_id":  "krw_50000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/kr_50000_front.jpg",
+                                                 "denomination_tokens":  ["50000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "South Korea\u0027s 50,000-won note features Shin Saimdang, a holographic strip, a moving security thread, color-shifting ink, and strong watermarking.",
                              "watermark_text":  "A portrait watermark of Shin Saimdang appears when the note is held to the light.",
                              "security_features":  [
@@ -1257,6 +1687,17 @@
                              "currency":  "hkd",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/hk_10_front.jpg",
+                             "note_id":  "hkd_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/hk_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Hong Kong\u0027s $10 paper note features a bauhinia watermark, concealed denomination, a windowed thread, fluorescent fibres, and a reflective band.",
                              "watermark_text":  "When held to the light, the number 10 and bauhinia flower become visible.",
                              "security_features":  [
@@ -1289,6 +1730,17 @@
                              "currency":  "php",
                              "denomination":  "1000",
                              "image_path":  "res://assets/bills_official/ph_1000_front.jpg",
+                             "note_id":  "php_1000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ph_1000_front.jpg",
+                                                 "denomination_tokens":  ["1000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The Philippines\u0027 1000-piso polymer note features the Philippine eagle, the Visayan leopard cat, a clear window, and multiple polymer-era security features.",
                              "watermark_text":  "The polymer note uses clear windows and see-through elements instead of a traditional paper watermark.",
                              "security_features":  [
@@ -1321,6 +1773,17 @@
                              "currency":  "eur",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/eu_5_front.jpg",
+                             "note_id":  "eur_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The 5 euro note from the Europa series uses a portrait-window hologram, watermark, emerald-number color shifting, and raised print for tactile verification.",
                              "watermark_text":  "Hold the note up to the light to see the Europa watermark.",
                              "security_features":  [
@@ -1353,6 +1816,17 @@
                              "currency":  "eur",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/eu_10_front.jpg",
+                             "note_id":  "eur_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The 10 euro note from the Europa series uses a portrait-window hologram, watermark, emerald-number color shifting, and raised print for tactile verification.",
                              "watermark_text":  "Hold the note up to the light to see the Europa watermark.",
                              "security_features":  [
@@ -1385,6 +1859,17 @@
                              "currency":  "eur",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/eu_20_front.jpg",
+                             "note_id":  "eur_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_20_front.jpg",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The 20 euro note from the Europa series uses a portrait-window hologram, watermark, emerald-number color shifting, and raised print for tactile verification.",
                              "watermark_text":  "Hold the note up to the light to see the Europa watermark.",
                              "security_features":  [
@@ -1417,6 +1902,17 @@
                              "currency":  "eur",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/eu_50_front.jpg",
+                             "note_id":  "eur_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/eu_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The 50 euro note from the Europa series uses a portrait-window hologram, watermark, emerald-number color shifting, and raised print for tactile verification.",
                              "watermark_text":  "Hold the note up to the light to see the Europa watermark.",
                              "security_features":  [
@@ -1449,6 +1945,17 @@
                              "currency":  "mxn",
                              "denomination":  "200",
                              "image_path":  "res://assets/bills_official/mx_200_front.png",
+                             "note_id":  "mxn_200",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/mx_200_front.png",
+                                                 "denomination_tokens":  ["200"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Mexico\u0027s 200 peso note from the family G series combines a historical portrait, watermark, security thread, and color-shifting elements.",
                              "watermark_text":  "A portrait watermark becomes visible when the note is held to the light.",
                              "security_features":  [
@@ -1481,6 +1988,17 @@
                              "currency":  "mxn",
                              "denomination":  "1000",
                              "image_path":  "res://assets/bills_official/mx_1000_front.png",
+                             "note_id":  "mxn_1000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/mx_1000_front.png",
+                                                 "denomination_tokens":  ["1000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Mexico\u0027s 1000 peso note from the family G series combines a historical portrait, watermark, security thread, and color-shifting elements.",
                              "watermark_text":  "A portrait watermark becomes visible when the note is held to the light.",
                              "security_features":  [
@@ -1513,6 +2031,17 @@
                              "currency":  "pei",
                              "denomination":  "1000",
                              "image_path":  "res://assets/bills_official/pe_1000_front.png",
+                             "note_id":  "pei_1000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_1000_front.png",
+                                                 "denomination_tokens":  ["1000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Historical 1000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
@@ -1545,6 +2074,17 @@
                              "currency":  "pei",
                              "denomination":  "50000",
                              "image_path":  "res://assets/bills_official/pe_50000_front.png",
+                             "note_id":  "pei_50000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_50000_front.png",
+                                                 "denomination_tokens":  ["50000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Historical 50000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
@@ -1577,6 +2117,17 @@
                              "currency":  "pei",
                              "denomination":  "5000",
                              "image_path":  "res://assets/bills_official/pe_5000_front.png",
+                             "note_id":  "pei_5000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_5000_front.png",
+                                                 "denomination_tokens":  ["5000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Historical 5000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
@@ -1609,6 +2160,17 @@
                              "currency":  "pei",
                              "denomination":  "10000",
                              "image_path":  "res://assets/bills_official/pe_10000_front.png",
+                             "note_id":  "pei_10000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_10000_front.png",
+                                                 "denomination_tokens":  ["10000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Historical 10000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
@@ -1641,6 +2203,17 @@
                              "currency":  "pei",
                              "denomination":  "100000",
                              "image_path":  "res://assets/bills_official/pe_100000_front.png",
+                             "note_id":  "pei_100000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/pe_100000_front.png",
+                                                 "denomination_tokens":  ["100000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Historical 100000 intis note from Peru. It is withdrawn from circulation, but the front artwork is useful for visual reference and legacy-note inspection.",
                              "watermark_text":  "Hold the note against the light to see the watermark portrait.",
                              "security_features":  [
@@ -1673,6 +2246,17 @@
                              "currency":  "cop",
                              "denomination":  "1000",
                              "image_path":  "res://assets/bills_official/co_1000_front.png",
+                             "note_id":  "cop_1000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_1000_front.png",
+                                                 "denomination_tokens":  ["1000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Colombia\u0027s 1000 peso note from the current family includes strong color-change, watermark, security thread, and tactile print features.",
                              "watermark_text":  "A watermark and matching portrait appear when the note is held to the light.",
                              "security_features":  [
@@ -1705,6 +2289,17 @@
                              "currency":  "cop",
                              "denomination":  "2000",
                              "image_path":  "res://assets/bills_official/co_2000_front.png",
+                             "note_id":  "cop_2000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_2000_front.png",
+                                                 "denomination_tokens":  ["2000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Colombia\u0027s 2000 peso note from the current family includes strong color-change, watermark, security thread, and tactile print features.",
                              "watermark_text":  "A watermark and matching portrait appear when the note is held to the light.",
                              "security_features":  [
@@ -1737,6 +2332,17 @@
                              "currency":  "cop",
                              "denomination":  "5000",
                              "image_path":  "res://assets/bills_official/co_5000_front.png",
+                             "note_id":  "cop_5000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_5000_front.png",
+                                                 "denomination_tokens":  ["5000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Colombia\u0027s 5000 peso note from the current family includes strong color-change, watermark, security thread, and tactile print features.",
                              "watermark_text":  "A watermark and matching portrait appear when the note is held to the light.",
                              "security_features":  [
@@ -1769,6 +2375,17 @@
                              "currency":  "cop",
                              "denomination":  "10000",
                              "image_path":  "res://assets/bills_official/co_10000_front.png",
+                             "note_id":  "cop_10000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_10000_front.png",
+                                                 "denomination_tokens":  ["10000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Colombia\u0027s 10000 peso note from the current family includes strong color-change, watermark, security thread, and tactile print features.",
                              "watermark_text":  "A watermark and matching portrait appear when the note is held to the light.",
                              "security_features":  [
@@ -1801,6 +2418,17 @@
                              "currency":  "cop",
                              "denomination":  "20000",
                              "image_path":  "res://assets/bills_official/co_20000_front.png",
+                             "note_id":  "cop_20000",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/co_20000_front.png",
+                                                 "denomination_tokens":  ["20000"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Colombia\u0027s 20000 peso note from the current family includes strong color-change, watermark, security thread, and tactile print features.",
                              "watermark_text":  "A watermark and matching portrait appear when the note is held to the light.",
                              "security_features":  [
@@ -1833,6 +2461,17 @@
                              "currency":  "cad",
                              "denomination":  "50",
                              "image_path":  "res://assets/bills_official/ca_50_front.jpg",
+                             "note_id":  "cad_50",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ca_50_front.jpg",
+                                                 "denomination_tokens":  ["50"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Canada\u0027s $50 polymer note features William Lyon Mackenzie King, the CCGS Amundsen, a transparent window, metallic portrait elements, and raised tactile details.",
                              "watermark_text":  "Hold the note up to the light to see the clear window and portrait details.",
                              "security_features":  [
@@ -1865,6 +2504,17 @@
                              "currency":  "cad",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/ca_100_front.jpg",
+                             "note_id":  "cad_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ca_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Canada\u0027s $100 polymer note features Sir Robert Borden, medical research imagery, a transparent window, metallic portrait elements, and raised tactile details.",
                              "watermark_text":  "Hold the note up to the light to see the clear window and portrait details.",
                              "security_features":  [
@@ -1897,6 +2547,17 @@
                              "currency":  "cad",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/ca_5_front.jpg",
+                             "note_id":  "cad_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ca_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Canada's $5 polymer note features Sir Wilfrid Laurier, a clear window, metallic portrait elements, raised tactile details, and the Frontiers security set.",
                              "watermark_text":  "Hold the note to the light to see the clear window and portrait details.",
                              "security_features":  [
@@ -1929,6 +2590,17 @@
                              "currency":  "cad",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/ca_10_front.jpg",
+                             "note_id":  "cad_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ca_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Canada's $10 polymer note features Sir John A. Macdonald, a clear window, metallic portrait elements, raised tactile details, and the Canadian train theme.",
                              "watermark_text":  "Hold the note to the light to see the clear window and portrait details.",
                              "security_features":  [
@@ -1961,6 +2633,17 @@
                              "currency":  "brl",
                              "denomination":  "1",
                              "image_path":  "res://assets/bills_official/br_1_front.jpg",
+                             "note_id":  "brl_1",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_1_front.jpg",
+                                                 "denomination_tokens":  ["1"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Brazil's R$1 note from the Real family shows the Republic effigy and a hummingbird, with watermark, raised print, and security fibers.",
                              "watermark_text":  "Hold the note to the light to see the watermark figure and denomination.",
                              "security_features":  [
@@ -1991,6 +2674,17 @@
                              "currency":  "brl",
                              "denomination":  "2",
                              "image_path":  "res://assets/bills_official/br_2_front.jpg",
+                             "note_id":  "brl_2",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_2_front.jpg",
+                                                 "denomination_tokens":  ["2"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Brazil's R$2 note from the Real family shows the Republic effigy and a turtle, with watermark, raised print, and security fibers.",
                              "watermark_text":  "Hold the note to the light to see the watermark figure and denomination.",
                              "security_features":  [
@@ -2021,6 +2715,17 @@
                              "currency":  "brl",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/br_5_front.jpg",
+                             "note_id":  "brl_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Brazil's R$5 note from the Real family shows the Republic effigy and a heron, with watermark, raised print, and security fibers.",
                              "watermark_text":  "Hold the note to the light to see the watermark figure and denomination.",
                              "security_features":  [
@@ -2051,6 +2756,17 @@
                              "currency":  "brl",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/br_10_front.jpg",
+                             "note_id":  "brl_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Brazil's R$10 note from the Real family shows the Republic effigy and a macaw, with watermark, raised print, and security fibers.",
                              "watermark_text":  "Hold the note to the light to see the watermark figure and denomination.",
                              "security_features":  [
@@ -2081,6 +2797,17 @@
                              "currency":  "brl",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/br_20_front.jpg",
+                             "note_id":  "brl_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/br_20_front.jpg",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Brazil's R$20 note from the Real family shows the Republic effigy and a golden lion tamarin, with watermark, raised print, and security fibers.",
                              "watermark_text":  "Hold the note to the light to see the watermark figure and denomination.",
                              "security_features":  [
@@ -2111,6 +2838,17 @@
                              "currency":  "usd",
                              "denomination":  "1",
                              "image_path":  "res://assets/bills_official/us_1_front.jpg",
+                             "note_id":  "usd_1",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_1_front.jpg",
+                                                 "denomination_tokens":  ["1"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The current US $1 Federal Reserve note shows George Washington on the front and the Great Seal on the back, with raised printing and security fibers.",
                              "watermark_text":  "The $1 note does not use a modern watermark; check the portrait, seals, and serial numbers instead.",
                              "security_features":  [
@@ -2141,6 +2879,17 @@
                              "currency":  "usd",
                              "denomination":  "2",
                              "image_path":  "res://assets/bills_official/us_2_front.jpg",
+                             "note_id":  "usd_2",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_2_front.jpg",
+                                                 "denomination_tokens":  ["2"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The current US $2 Federal Reserve note shows Thomas Jefferson and the Declaration of Independence vignette, with raised printing and security fibers.",
                              "watermark_text":  "The $2 note does not use a modern watermark; check the portrait, seals, and serial numbers instead.",
                              "security_features":  [
@@ -2171,6 +2920,17 @@
                              "currency":  "usd",
                              "denomination":  "5",
                              "image_path":  "res://assets/bills_official/us_5_front.jpg",
+                             "note_id":  "usd_5",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_5_front.jpg",
+                                                 "denomination_tokens":  ["5"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The current US $5 Federal Reserve note shows Abraham Lincoln on the front and the Lincoln Memorial on the back, with a watermark, a security thread, microprinting, and raised printing.",
                              "watermark_text":  "Hold the note to the light to see the faint Lincoln watermark.",
                              "security_features":  [
@@ -2203,6 +2963,17 @@
                              "currency":  "usd",
                              "denomination":  "10",
                              "image_path":  "res://assets/bills_official/us_10_front.jpg",
+                             "note_id":  "usd_10",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_10_front.jpg",
+                                                 "denomination_tokens":  ["10"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The current US $10 Federal Reserve note shows Alexander Hamilton on the front and the U.S. Treasury on the back, with a watermark, a security thread, microprinting, and raised printing.",
                              "watermark_text":  "Hold the note to the light to see the faint Hamilton watermark.",
                              "security_features":  [
@@ -2235,6 +3006,17 @@
                              "currency":  "usd",
                              "denomination":  "20",
                              "image_path":  "res://assets/bills_official/us_20_front.jpg",
+                             "note_id":  "usd_20",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/us_20_front.jpg",
+                                                 "denomination_tokens":  ["20"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "The current US $20 Federal Reserve note shows Andrew Jackson on the front and the White House on the back, with a watermark, a security thread, color-shifting ink, microprinting, and raised printing.",
                              "watermark_text":  "Hold the note to the light to see the faint Jackson watermark.",
                              "security_features":  [
@@ -2267,6 +3049,17 @@
                              "currency":  "chf",
                              "denomination":  "100",
                              "image_path":  "res://assets/bills_official/ch_100_front.jpg",
+                             "note_id":  "chf_100",
+                             "series":  "",
+                             "recognition":  {
+                                                 "front_reference":  "res://assets/bills_official/ch_100_front.jpg",
+                                                 "denomination_tokens":  ["100"],
+                                                 "text_tokens":  []
+                                             },
+                             "review":  {
+                                            "status":  "draft",
+                                            "steps":  []
+                                        },
                              "summary_text":  "Switzerland\u0027s 100-franc note from the ninth series features a clean security design with a large transparent window, tactile marks, color-shifting details, and UV-reactive elements.",
                              "watermark_text":  "Hold the note to the light to reveal the hidden security elements in the transparent window area.",
                              "security_features":  [
