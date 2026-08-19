@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.649"
+const APP_VERSION := "V.1.650"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
@@ -56,7 +56,34 @@ const UI_TEXTS := {
 		"about_title": "About",
 		"about_version_label": "Version: %s",
 		"about_update_label": "Last update: %s",
-		"about_body": "This port focuses on the three core tools: UV detector, watermark viewer, and currency info browser."
+		"about_body": "This app provides an assisted review of banknote security references.",
+		"menu_guided_review": "Review a banknote",
+		"guided_review_subtitle": "Identify its security references and review them step by step.",
+		"review_setup_title": "Start assisted review",
+		"review_setup_intro": "Choose the banknote manually or use the camera when identification is available.",
+		"review_disclaimer": "This assisted review does not determine authenticity.",
+		"identify_camera": "Identify with camera",
+		"camera_unavailable": "Camera identification is not available yet. Choose the banknote manually.",
+		"choose_country": "Country",
+		"choose_banknote": "Banknote",
+		"start_review": "Start review",
+		"review_title": "Security review",
+		"generic_guide_notice": "This model does not yet have a structured guide. We will compare its registered common references.",
+		"step_progress": "Step %d of %d",
+		"step_compare_title": "Compare this reference",
+		"step_compare_instruction": "Inspect the banknote and compare this registered security reference.",
+		"observed": "I observe it",
+		"mismatch": "It does not match",
+		"unable": "I cannot check it",
+		"review_result_title": "Review completed",
+		"result_observed": "Signals observed: %d",
+		"result_mismatch": "Do not match: %d",
+		"result_unable": "Not checked: %d",
+		"review_result_advice": "If you still have doubts, do not recirculate the banknote and consult its issuer or a financial institution.",
+		"review_another": "Review another banknote",
+		"return_home": "Return to home",
+		"add_favorite": "Add to favorites",
+		"remove_favorite": "Remove from favorites"
 	},
 	"es": {
 		"app_title": "Detector de Billetes Falsos",
@@ -101,7 +128,34 @@ const UI_TEXTS := {
 		"about_title": "Acerca de",
 		"about_version_label": "Versión: %s",
 		"about_update_label": "Última actualización: %s",
-		"about_body": "Este port se centra en las tres herramientas principales: detector UV, visor de marca de agua y navegador de información de billetes."
+		"about_body": "Esta app ofrece una revisión asistida de referencias de seguridad de billetes.",
+		"menu_guided_review": "Revisar un billete",
+		"guided_review_subtitle": "Identificá sus medidas de seguridad y revisalas paso a paso.",
+		"review_setup_title": "Iniciar revisión asistida",
+		"review_setup_intro": "Elegí el billete manualmente o usá la cámara cuando la identificación esté disponible.",
+		"review_disclaimer": "Esta revisión asistida no determina autenticidad.",
+		"identify_camera": "Identificar con la cámara",
+		"camera_unavailable": "La identificación por cámara todavía no está disponible. Elegí el billete manualmente.",
+		"choose_country": "País",
+		"choose_banknote": "Billete",
+		"start_review": "Iniciar revisión",
+		"review_title": "Revisión de seguridad",
+		"generic_guide_notice": "Este modelo todavía no tiene una guía estructurada. Compararemos sus referencias comunes registradas.",
+		"step_progress": "Paso %d de %d",
+		"step_compare_title": "Compará esta referencia",
+		"step_compare_instruction": "Inspeccioná el billete y compará esta referencia de seguridad registrada.",
+		"observed": "Lo observo",
+		"mismatch": "No coincide",
+		"unable": "No pude comprobarlo",
+		"review_result_title": "Revisión completada",
+		"result_observed": "Señales observadas: %d",
+		"result_mismatch": "No coinciden: %d",
+		"result_unable": "Sin comprobar: %d",
+		"review_result_advice": "Si todavía tenés dudas, no vuelvas a circular el billete y consultá al emisor o a una entidad financiera.",
+		"review_another": "Revisar otro billete",
+		"return_home": "Volver al inicio",
+		"add_favorite": "Agregar a favoritos",
+		"remove_favorite": "Quitar de favoritos"
 	},
 	"pt": {
 		"app_title": "Detector de Cédulas Falsas",
@@ -146,7 +200,34 @@ const UI_TEXTS := {
 		"about_title": "Sobre",
 		"about_version_label": "Versão: %s",
 		"about_update_label": "Última atualização: %s",
-		"about_body": "Este port foca nas três ferramentas principais: detector UV, visualizador de marca-d'água e navegador de informações de cédulas."
+		"about_body": "Este aplicativo oferece uma revisão assistida de referências de segurança de cédulas.",
+		"menu_guided_review": "Revisar uma cédula",
+		"guided_review_subtitle": "Identifique as medidas de segurança e revise-as passo a passo.",
+		"review_setup_title": "Iniciar revisão assistida",
+		"review_setup_intro": "Escolha a cédula manualmente ou use a câmera quando a identificação estiver disponível.",
+		"review_disclaimer": "Esta revisão assistida não determina a autenticidade.",
+		"identify_camera": "Identificar com a câmera",
+		"camera_unavailable": "A identificação por câmera ainda não está disponível. Escolha a cédula manualmente.",
+		"choose_country": "País",
+		"choose_banknote": "Cédula",
+		"start_review": "Iniciar revisão",
+		"review_title": "Revisão de segurança",
+		"generic_guide_notice": "Este modelo ainda não tem um guia estruturado. Compararemos as referências comuns registradas.",
+		"step_progress": "Etapa %d de %d",
+		"step_compare_title": "Compare esta referência",
+		"step_compare_instruction": "Inspecione a cédula e compare esta referência de segurança registrada.",
+		"observed": "Eu observo",
+		"mismatch": "Não coincide",
+		"unable": "Não pude verificar",
+		"review_result_title": "Revisão concluída",
+		"result_observed": "Sinais observados: %d",
+		"result_mismatch": "Não coincidem: %d",
+		"result_unable": "Não verificados: %d",
+		"review_result_advice": "Se ainda tiver dúvidas, não recoloque a cédula em circulação e consulte o emissor ou uma instituição financeira.",
+		"review_another": "Revisar outra cédula",
+		"return_home": "Voltar ao início",
+		"add_favorite": "Adicionar aos favoritos",
+		"remove_favorite": "Remover dos favoritos"
 	},
 	"zh": {
 		"app_title": "假钞检测器",
@@ -191,7 +272,34 @@ const UI_TEXTS := {
 		"about_title": "关于",
 		"about_version_label": "版本：%s",
 		"about_update_label": "最近更新：%s",
-		"about_body": "这个移植版专注于三个核心功能：UV 检测器、水印查看器和纸币信息浏览。"
+		"about_body": "本应用提供纸币安全特征参考的辅助检查。",
+		"menu_guided_review": "检查纸币",
+		"guided_review_subtitle": "识别安全特征并逐步进行检查。",
+		"review_setup_title": "开始辅助检查",
+		"review_setup_intro": "请手动选择纸币，或在相机识别可用时使用相机。",
+		"review_disclaimer": "此辅助检查不能判定纸币真伪。",
+		"identify_camera": "使用相机识别",
+		"camera_unavailable": "相机识别暂不可用，请手动选择纸币。",
+		"choose_country": "国家或地区",
+		"choose_banknote": "纸币",
+		"start_review": "开始检查",
+		"review_title": "安全特征检查",
+		"generic_guide_notice": "此型号尚无结构化指南，将对比已登记的常见参考特征。",
+		"step_progress": "第 %d 步，共 %d 步",
+		"step_compare_title": "对比此参考特征",
+		"step_compare_instruction": "检查纸币并对比此已登记的安全参考特征。",
+		"observed": "已观察到",
+		"mismatch": "不相符",
+		"unable": "无法检查",
+		"review_result_title": "检查完成",
+		"result_observed": "已观察到的特征：%d",
+		"result_mismatch": "不相符：%d",
+		"result_unable": "未检查：%d",
+		"review_result_advice": "如果仍有疑问，请勿再次流通该纸币，并咨询发行机构或金融机构。",
+		"review_another": "检查另一张纸币",
+		"return_home": "返回首页",
+		"add_favorite": "添加到收藏",
+		"remove_favorite": "从收藏中移除"
 	}
 }
 
@@ -586,6 +694,88 @@ func get_selected_note() -> Dictionary:
 	if notes.is_empty():
 		return {}
 	return notes[clampi(selected_note_index, 0, notes.size() - 1)]
+
+
+func get_note_id(note: Dictionary) -> String:
+	var stored_id := str(note.get("note_id", note.get("id", ""))).strip_edges()
+	if not stored_id.is_empty():
+		return stored_id
+	var currency := str(note.get("currency", "")).to_lower().strip_edges()
+	var denomination := str(note.get("denomination", "")).to_lower().strip_edges()
+	return "%s_%s" % [currency, denomination.replace(" ", "_").replace(".", "")]
+
+
+func find_note_by_id(note_id: String) -> Dictionary:
+	for note in currency_entries:
+		if get_note_id(note) == note_id:
+			return note
+	return {}
+
+
+func select_note_by_id(note_id: String) -> bool:
+	var note := find_note_by_id(note_id)
+	if note.is_empty():
+		return false
+	set_selected_country(str(note.get("country", "")))
+	var notes := get_selected_notes()
+	for index in notes.size():
+		if get_note_id(notes[index]) == note_id:
+			selected_note_index = index
+			return true
+	return false
+
+
+func has_specific_review_steps(note: Dictionary) -> bool:
+	var review: Variant = note.get("review", {})
+	if not review is Dictionary:
+		return false
+	var steps: Variant = (review as Dictionary).get("steps", [])
+	return str((review as Dictionary).get("status", "draft")) == "ready" and steps is Array and not steps.is_empty()
+
+
+func get_note_review_steps(note: Dictionary) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if has_specific_review_steps(note):
+		var review := note.get("review", {}) as Dictionary
+		for raw_step in review.get("steps", []):
+			if raw_step is Dictionary:
+				var step := raw_step as Dictionary
+				result.append({
+					"step_id": str(step.get("step_id", "step_%d" % result.size())),
+					"method": str(step.get("method", "visual")),
+					"title": _get_localized_map_text(step.get("title_texts", {}), t("step_compare_title")),
+					"instruction": _get_localized_map_text(step.get("instruction_texts", {}), t("step_compare_instruction")),
+					"expected": _get_localized_map_text(step.get("expected_texts", {}), ""),
+				})
+		return result
+
+	var features := get_note_features(note)
+	for index in features.size():
+		result.append({
+			"step_id": "reference_%d" % index,
+			"method": "visual",
+			"title": t("step_compare_title"),
+			"instruction": t("step_compare_instruction"),
+			"expected": features[index],
+		})
+	if result.is_empty():
+		result.append({
+			"step_id": "general_reference",
+			"method": "visual",
+			"title": t("step_compare_title"),
+			"instruction": t("step_compare_instruction"),
+			"expected": get_note_summary(note),
+		})
+	return result
+
+
+func _get_localized_map_text(value: Variant, fallback: String) -> String:
+	if value is Dictionary:
+		var localized: Variant = _get_localized_variant(value as Dictionary)
+		var text := str(localized).strip_edges()
+		if not text.is_empty():
+			return text
+	return fallback
 
 
 func set_selected_note_index(index: int) -> void:

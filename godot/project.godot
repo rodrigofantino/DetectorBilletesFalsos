@@ -25,6 +25,9 @@ AppState="*res://scripts/core/app_state.gd"
 AppPurchases="*res://scripts/core/purchase_service.gd"
 AppAds="*res://scripts/core/ad_service.gd"
 AppReview="*res://scripts/core/review_service.gd"
+GuidedReviewSession="*res://scripts/core/guided_review_session.gd"
+ReviewHistoryStore="*res://scripts/core/review_history_store.gd"
+BillRecognitionService="*res://scripts/core/bill_recognition_service.gd"
 
 [display]
 

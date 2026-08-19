@@ -7,6 +7,9 @@ signal banner_failed(error: String)
 
 const ADMOB_BANNER_UNIT_ID := "ca-app-pub-4703386652643425/9145624203"
 const BANNER_RESERVED_HEIGHT := 96
+const PLACEMENT_NONE := "none"
+const PLACEMENT_MAIN_MENU := "main_menu"
+const PLACEMENT_REVIEW_RESULT := "review_result"
 
 var _ad_view: AdView
 var _ad_listener: AdListener
@@ -14,6 +17,7 @@ var _initialized := false
 var _initializing := false
 var _banner_loaded := false
 var _show_requested := false
+var _placement := PLACEMENT_NONE
 
 
 func _ready() -> void:
@@ -21,7 +25,7 @@ func _ready() -> void:
 
 
 func should_reserve_banner_space() -> bool:
-	return _is_android() and not _ads_removed()
+	return _placement != PLACEMENT_NONE and _is_android() and not _ads_removed()
 
 
 func get_reserved_banner_height() -> int:
@@ -39,7 +43,18 @@ func is_banner_loaded() -> bool:
 
 
 func show_banner() -> void:
+	set_banner_placement(PLACEMENT_MAIN_MENU)
+
+
+func set_banner_placement(placement: String) -> void:
+	if not [PLACEMENT_NONE, PLACEMENT_MAIN_MENU, PLACEMENT_REVIEW_RESULT].has(placement):
+		placement = PLACEMENT_NONE
+	_placement = placement
+	if _placement == PLACEMENT_NONE:
+		hide_banner()
+		return
 	if _ads_removed():
+		hide_banner()
 		return
 	_show_requested = true
 	if not _is_android():
@@ -59,10 +74,15 @@ func show_banner() -> void:
 
 
 func show_main_menu_banner() -> void:
-	show_banner()
+	set_banner_placement(PLACEMENT_MAIN_MENU)
+
+
+func show_review_result_banner() -> void:
+	set_banner_placement(PLACEMENT_REVIEW_RESULT)
 
 
 func hide_banner() -> void:
+	_placement = PLACEMENT_NONE
 	_show_requested = false
 	if _ad_view != null:
 		_ad_view.hide()

@@ -6,7 +6,7 @@ Detector de Billetes Falsos
 - Language: GDScript, typed where practical
 - Export target: Android
 - Legacy validation tool: Android Studio only if we need to inspect or run the old Java project
-- Ads are limited to an AdMob banner on the main menu. UV, watermark, and note-inspection screens remain ad-free.
+- Ads are limited to an AdMob banner on the main menu and completed guided-review result. Setup, camera, checklist, UV, watermark, and note-inspection screens remain ad-free.
 - The remove-ads option uses Google Play Billing product `remove_ads` as a non-consumable one-time purchase.
 - Google Play In-App Review may be requested after three meaningful tool uses, with a 90-day local cooldown and a separate Play Store listing button.
 
@@ -50,7 +50,7 @@ Detector de Billetes Falsos
 - Keep the watermark viewer responsive and lightweight.
 - Keep the currency info screens readable on small devices.
 - Never upscale a banknote texture beyond its native resolution; cap preview rendering to avoid pixelation on small official assets.
-- Keep ads isolated to the main menu and do not block core UV, watermark, or currency browsing behavior on ad availability.
+- Keep ads isolated to approved menu/result placements and do not block any review, UV, watermark, or currency behavior on ad availability.
 
 7. Android-specific concerns
 - Brightness control and screen wake behavior must be re-implemented using Godot-friendly Android hooks or a lightweight plugin.
@@ -65,7 +65,7 @@ Step 3: port the UV screen.
 Step 4: port the watermark color cycle.
 Step 5: port currency browsing and detail screens.
 Step 6: add Android export testing and device verification.
-Step 7: keep ads limited to an AdMob main-menu banner and verify Android packaging/privacy disclosures before release.
+Step 7: keep banners limited to the main menu and completed guided-review result, and verify Android packaging/privacy disclosures before release.
 Step 7a: add Google Play Billing for the non-consumable `remove_ads` product and restore its entitlement on app start.
 Step 7b: integrate Google Play In-App Review without promising or conditioning a positive rating.
 Step 8: import and reuse the legacy logo, note images, and button sound for a closer visual match.
@@ -106,7 +106,7 @@ Step 26: localize the visible country labels and currency labels for each newly 
 - China exposes the current note set instead of a single denomination, and each Chinese note points to an official PBC page.
 - The note viewer stays usable on narrow phone screens without clipping the thumbnail or pushing detail text off-screen.
 - The app picks the phone language when supported, otherwise it falls back to English.
-- Android exports can show an AdMob banner on the main menu only, without overlaying UV, watermark, or note-inspection screens.
+- Android exports can show an AdMob banner on the main menu and completed guided-review result without overlaying setup, camera, checklist, UV, watermark, or note-inspection screens.
 - The user can manually override the language from the main menu and the choice persists across launches.
 - Note text localization is now represented in `currencyinfo.json` with locale-aware dictionaries, while the flat fields remain as compatibility fallback.
 - The translation backlog is documented in a stable order so note content can be localized without scene rewiring.

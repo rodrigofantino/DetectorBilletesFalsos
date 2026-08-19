@@ -145,8 +145,8 @@ static func get_bottom_ad_reserve_height(control: Control) -> int:
 		return 0
 	return int(round(size.y * BOTTOM_AD_HEIGHT_RATIO))
 
-static func add_bottom_ad_reserve(root: Control, hide_when_banner_loaded: bool = true) -> TextureRect:
-	AppAds.show_banner()
+static func add_bottom_ad_reserve(root: Control, hide_when_banner_loaded: bool = true, placement: String = "none") -> TextureRect:
+	AppAds.set_banner_placement(placement)
 	var banner := TextureRect.new()
 	banner.name = "BottomAdFallback"
 	banner.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)

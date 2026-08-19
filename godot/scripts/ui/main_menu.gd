@@ -4,6 +4,7 @@ const UV_SCENE := "res://scenes/UvDetector.tscn"
 const WATERMARK_SCENE := "res://scenes/WatermarkViewer.tscn"
 const COUNTRY_SCENE := "res://scenes/CountrySelect.tscn"
 const BILL_SCENE := "res://scenes/BillViewer.tscn"
+const REVIEW_SETUP_SCENE := "res://scenes/ReviewSetup.tscn"
 const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
 var _title_label: Label
@@ -80,6 +81,10 @@ func _build_ui() -> void:
 	_layout_root.add_theme_constant_override("separation", 14)
 	content.add_child(_layout_root)
 
+	_build_single_button_row(
+		AppState.t("menu_guided_review"),
+		Callable(self, "_open_guided_review")
+	)
 	_build_button_row(
 		AppState.t("menu_uv"),
 		Callable(self, "_open_uv"),
@@ -106,7 +111,7 @@ func _build_ui() -> void:
 	_ad_banner_spacer = Control.new()
 	_ad_banner_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_child(_ad_banner_spacer)
-	ScreenBuilder.add_bottom_ad_reserve(self, true)
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_MAIN_MENU)
 	var purchases := get_node_or_null("/root/AppPurchases")
 	if purchases != null:
 		purchases.entitlement_changed.connect(_on_entitlement_changed)
@@ -264,6 +269,11 @@ func _open_watermark() -> void:
 func _open_countries() -> void:
 	_record_review_use()
 	get_tree().change_scene_to_file(COUNTRY_SCENE)
+
+
+func _open_guided_review() -> void:
+	AppAds.hide_banner()
+	get_tree().change_scene_to_file(REVIEW_SETUP_SCENE)
 
 
 func _record_review_use() -> void:

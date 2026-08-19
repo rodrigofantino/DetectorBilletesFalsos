@@ -4,7 +4,7 @@ Detector de Billetes Falsos
 Note: this is an app, not a game. The GDD name is kept only to match the repository convention.
 
 1. Product goal
-Help users inspect bills with simulated UV lighting, highlight security marks, and review currency security information in a simple mobile app.
+Help users perform an assisted, step-by-step review of banknote security references without claiming to determine authenticity.
 
 2. Target user
 - People checking bills in daily use.
@@ -21,7 +21,7 @@ Help users inspect bills with simulated UV lighting, highlight security marks, a
 - UV detector: a strong blue/violet light mode that simulates UV inspection.
 - Watermark viewer: rotating colors to help visualize marks and paper differences.
 - Currency info browser: country selection plus bill security details.
-- Minimal monetization: AdMob banner ads may appear only on the main menu. UV, watermark, and note-inspection screens stay ad-free.
+- Minimal monetization: AdMob banners may appear only on the main menu and the completed guided-review result. Capture, checklist, UV, watermark, and note-inspection screens stay ad-free.
 - After meaningful use, the app can show Google Play's native review card; users can also open the Play Store listing from the main menu.
 
 5. Content scope
@@ -39,7 +39,7 @@ Phase 1: rebuild the menu and navigation.
 Phase 2: rebuild the UV screen.
 Phase 3: rebuild the watermark screen.
 Phase 4: rebuild the currency info flow.
-Phase 5: keep monetization limited to the main-menu banner and avoid interstitials in tool screens.
+Phase 5: keep monetization limited to banners on the main menu and completed guided-review result; avoid ads during inspection and never use interstitials.
 Phase 6: polish UI and publish an Android build.
 
 8. Open questions

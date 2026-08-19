@@ -45,3 +45,4 @@ V.1.646_Added Google Play in-app review prompt and Play Store rating button
 V.1.647_Fixed Play Review export dependency and deferred review until Google Play is ready
 V.1.648_Requested native in-app review after five meaningful uses
 V.1.649_Aligned Android target API 36 and release version
+V.1.650_Added the assisted banknote review foundation and safe banner placements
