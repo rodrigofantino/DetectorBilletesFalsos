@@ -1,0 +1,6 @@
+{
+  "api_key": "replace-with-firebase-android-api-key",
+  "application_id": "replace-with-firebase-android-app-id",
+  "project_id": "replace-with-firebase-project-id",
+  "gcm_sender_id": "replace-with-firebase-sender-id"
+}

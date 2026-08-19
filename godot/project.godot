@@ -28,6 +28,7 @@ AppReview="*res://scripts/core/review_service.gd"
 GuidedReviewSession="*res://scripts/core/guided_review_session.gd"
 ReviewHistoryStore="*res://scripts/core/review_history_store.gd"
 BillRecognitionService="*res://scripts/core/bill_recognition_service.gd"
+AnalyticsService="*res://scripts/core/analytics_service.gd"
 
 [display]
 
@@ -35,11 +36,11 @@ window/size/viewport_width=1080
 window/size/viewport_height=1920
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/handheld/orientation="portrait"
+window/handheld/orientation=1
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/BillRecognitionPlugin/plugin.cfg", "res://addons/FirebaseAnalyticsBridge/plugin.cfg")
 
 [rendering]
 

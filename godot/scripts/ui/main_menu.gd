@@ -5,6 +5,7 @@ const WATERMARK_SCENE := "res://scenes/WatermarkViewer.tscn"
 const COUNTRY_SCENE := "res://scenes/CountrySelect.tscn"
 const BILL_SCENE := "res://scenes/BillViewer.tscn"
 const REVIEW_SETUP_SCENE := "res://scenes/ReviewSetup.tscn"
+const REVIEW_LIBRARY_SCENE := "res://scenes/ReviewLibrary.tscn"
 const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
 var _title_label: Label
@@ -24,6 +25,7 @@ func _ready() -> void:
 	_build_ui()
 	resized.connect(_apply_responsive_layout)
 	_apply_responsive_layout()
+	call_deferred("_maybe_request_analytics_consent")
 
 
 func _build_ui() -> void:
@@ -85,6 +87,10 @@ func _build_ui() -> void:
 		AppState.t("menu_guided_review"),
 		Callable(self, "_open_guided_review")
 	)
+	_build_single_button_row(
+		AppState.t("menu_library"),
+		Callable(self, "_open_review_library")
+	)
 	_build_button_row(
 		AppState.t("menu_uv"),
 		Callable(self, "_open_uv"),
@@ -103,6 +109,12 @@ func _build_ui() -> void:
 		Callable(self, "_purchase_remove_ads"),
 		false
 	)
+	if AnalyticsService.is_available():
+		_build_single_button_row(
+			AppState.t("analytics_disable") if AnalyticsService.is_collection_enabled() else AppState.t("analytics_enable"),
+			Callable(self, "_toggle_analytics"),
+			false
+		)
 	_build_single_button_row(
 		AppState.t("menu_exit"),
 		Callable(self, "_exit_app")
@@ -276,6 +288,11 @@ func _open_guided_review() -> void:
 	get_tree().change_scene_to_file(REVIEW_SETUP_SCENE)
 
 
+func _open_review_library() -> void:
+	AppAds.hide_banner()
+	get_tree().change_scene_to_file(REVIEW_LIBRARY_SCENE)
+
+
 func _record_review_use() -> void:
 	var review := get_node_or_null("/root/AppReview")
 	if review != null:
@@ -287,6 +304,29 @@ func _show_about() -> void:
 		AppState.t("about_title"),
 		AppState.get_about_text()
 	)
+
+
+func _maybe_request_analytics_consent() -> void:
+	if not AnalyticsService.should_request_consent():
+		return
+	var dialog := ConfirmationDialog.new()
+	dialog.title = AppState.t("analytics_consent_title")
+	dialog.dialog_text = AppState.t("analytics_consent_body")
+	dialog.ok_button_text = AppState.t("analytics_allow")
+	dialog.cancel_button_text = AppState.t("analytics_decline")
+	dialog.confirmed.connect(AnalyticsService.set_consent.bind(true))
+	dialog.canceled.connect(AnalyticsService.set_consent.bind(false))
+	dialog.close_requested.connect(AnalyticsService.set_consent.bind(false))
+	dialog.close_requested.connect(dialog.queue_free)
+	dialog.confirmed.connect(dialog.queue_free)
+	dialog.canceled.connect(dialog.queue_free)
+	add_child(dialog)
+	dialog.popup_centered_ratio(0.88)
+
+
+func _toggle_analytics() -> void:
+	AnalyticsService.set_consent(not AnalyticsService.is_collection_enabled())
+	get_tree().reload_current_scene()
 
 
 func _purchase_remove_ads() -> void:

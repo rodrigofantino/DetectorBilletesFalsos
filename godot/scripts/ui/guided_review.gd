@@ -56,8 +56,12 @@ func _refresh_step() -> void:
 
 
 func _answer(value: String) -> void:
+	var step := GuidedReviewSession.get_current_step()
 	if not GuidedReviewSession.answer_current(value):
 		return
+	AnalyticsService.track("guide_step_answered", {
+		"method": str(step.get("method", "visual")),
+	})
 	if GuidedReviewSession.is_complete():
 		get_tree().change_scene_to_file(RESULT_SCENE)
 	else:

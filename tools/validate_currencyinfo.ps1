@@ -207,11 +207,17 @@ foreach ($entry in $entries) {
 		} else {
 			Test-ResourcePath ([string]$recognition.front_reference) "$expectedId front_reference" $godotRoot
 		}
-		$denominationTokens = if (Has-Property $recognition "denomination_tokens") { @($recognition.denomination_tokens) } else { @() }
+		$denominationTokens = @()
+		if (Has-Property $recognition "denomination_tokens") {
+			$denominationTokens = @($recognition.denomination_tokens | Where-Object { $null -ne $_ })
+		}
 		if ($denominationTokens -notcontains ([string]$entry.denomination)) {
 			Add-ValidationError "$expectedId denomination_tokens must contain '$($entry.denomination)'."
 		}
-		$textTokens = if (Has-Property $recognition "text_tokens") { @($recognition.text_tokens) } else { @() }
+		$textTokens = @()
+		if (Has-Property $recognition "text_tokens") {
+			$textTokens = @($recognition.text_tokens | Where-Object { $null -ne $_ })
+		}
 		if ($Mode -eq "release" -and $textTokens.Count -eq 0) {
 			Add-ValidationError "$expectedId requires curated OCR text_tokens in release mode."
 		}
@@ -226,7 +232,10 @@ foreach ($entry in $entries) {
 	if (@("draft", "ready") -notcontains $reviewStatus) {
 		Add-ValidationError "$expectedId review status must be 'draft' or 'ready'."
 	}
-	$steps = if (Has-Property $review "steps") { @($review.steps) } else { @() }
+	$steps = @()
+	if (Has-Property $review "steps") {
+		$steps = @($review.steps | Where-Object { $null -ne $_ })
+	}
 	if ($Mode -ne "release") {
 		continue
 	}

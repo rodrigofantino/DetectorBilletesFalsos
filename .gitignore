@@ -50,3 +50,17 @@ run_codex_full_permisions.bat
 # OS / editor clutter
 .DS_Store
 Thumbs.db
+.local-build/
+godot/firebase_options.json
+
+# Versioned Android plugin binaries required by Godot export
+!godot/addons/BillRecognitionPlugin/bin/
+!godot/addons/BillRecognitionPlugin/bin/debug/
+!godot/addons/BillRecognitionPlugin/bin/release/
+!godot/addons/BillRecognitionPlugin/bin/debug/BillRecognitionPlugin-debug.aar
+!godot/addons/BillRecognitionPlugin/bin/release/BillRecognitionPlugin-release.aar
+!godot/addons/FirebaseAnalyticsBridge/bin/
+!godot/addons/FirebaseAnalyticsBridge/bin/debug/
+!godot/addons/FirebaseAnalyticsBridge/bin/release/
+!godot/addons/FirebaseAnalyticsBridge/bin/debug/FirebaseAnalyticsBridge-debug.aar
+!godot/addons/FirebaseAnalyticsBridge/bin/release/FirebaseAnalyticsBridge-release.aar

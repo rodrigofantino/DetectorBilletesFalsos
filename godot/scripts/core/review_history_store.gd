@@ -57,6 +57,13 @@ func get_recents() -> Array[String]:
 	return _recents.duplicate()
 
 
+func get_favorites() -> Array[String]:
+	var result: Array[String] = []
+	for key in _favorites.keys():
+		result.append(str(key))
+	return result
+
+
 func clear_history() -> void:
 	_history.clear()
 	_recents.clear()

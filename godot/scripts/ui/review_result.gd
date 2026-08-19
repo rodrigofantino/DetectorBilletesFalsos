@@ -56,6 +56,9 @@ func _record_completion_once() -> void:
 		GuidedReviewSession.started_at_unix,
 		GuidedReviewSession.is_generic_guide
 	)
+	AnalyticsService.track("guide_completed", {
+		"guide_kind": "generic" if GuidedReviewSession.is_generic_guide else "specific",
+	})
 	GuidedReviewSession.history_recorded = true
 	var play_review := get_node_or_null("/root/AppReview")
 	if play_review != null:
@@ -63,7 +66,8 @@ func _record_completion_once() -> void:
 
 
 func _toggle_favorite() -> void:
-	ReviewHistoryStore.toggle_favorite(GuidedReviewSession.note_id)
+	var enabled := ReviewHistoryStore.toggle_favorite(GuidedReviewSession.note_id)
+	AnalyticsService.track("favorite_toggled", {"enabled": enabled})
 	_refresh_favorite_button()
 
 

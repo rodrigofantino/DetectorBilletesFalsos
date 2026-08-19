@@ -108,6 +108,8 @@ Step 26: localize the visible country labels and currency labels for each newly 
 - The app picks the phone language when supported, otherwise it falls back to English.
 - Android exports can show an AdMob banner on the main menu and completed guided-review result without overlaying setup, camera, checklist, UV, watermark, or note-inspection screens.
 - The user can manually override the language from the main menu and the choice persists across launches.
+- Before Android export, run `tools/prepare_android_build.ps1 -Write` after installing the Godot 4.6.3 build template so the Kotlin compiler matches the packaged Android plugins.
+- Copy `godot/firebase_options.example.json` to the ignored `godot/firebase_options.json` and fill it with the existing Firebase Android app values for package `com.appsimple.DetectorBilleteFalso2`; Analytics stays disabled when the file is absent.
 - Note text localization is now represented in `currencyinfo.json` with locale-aware dictionaries, while the flat fields remain as compatibility fallback.
 - The translation backlog is documented in a stable order so note content can be localized without scene rewiring.
 - The next catalog expansion targets about 10 additional countries prioritized by traffic and official source quality.
