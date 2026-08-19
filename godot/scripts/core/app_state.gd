@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.652"
+const APP_VERSION := "V.1.653"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {

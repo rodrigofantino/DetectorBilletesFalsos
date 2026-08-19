@@ -6,6 +6,7 @@ const GUIDED_REVIEW_SCENE := "res://scenes/GuidedReview.tscn"
 var _country_select: OptionButton
 var _note_select: OptionButton
 var _camera_status: Label
+var _camera_button: Button
 var _start_button: Button
 var _candidate_box: VBoxContainer
 var _selection_path := "manual"
@@ -29,13 +30,11 @@ func _build_ui() -> void:
 	var disclaimer := ScreenBuilder.add_body(content, AppState.t("review_disclaimer"))
 	disclaimer.modulate = Color(1.0, 0.82, 0.42)
 
-	var camera_button := ScreenBuilder.add_button(content, AppState.t("identify_camera"))
-	camera_button.disabled = not BillRecognitionService.is_available()
-	camera_button.pressed.connect(_identify_with_camera)
+	_camera_button = ScreenBuilder.add_button(content, AppState.t("identify_camera"))
+	_camera_button.pressed.connect(_identify_with_camera)
 	_camera_status = ScreenBuilder.add_body(content, "")
-	_camera_status.visible = camera_button.disabled
-	if camera_button.disabled:
-		_camera_status.text = AppState.t("camera_unavailable")
+	_refresh_camera_availability()
+	call_deferred("_refresh_camera_availability")
 	_candidate_box = VBoxContainer.new()
 	_candidate_box.add_theme_constant_override("separation", 10)
 	content.add_child(_candidate_box)
@@ -60,6 +59,13 @@ func _build_ui() -> void:
 	back.pressed.connect(_return_home)
 
 	_populate_countries()
+
+
+func _refresh_camera_availability() -> void:
+	var available := BillRecognitionService.is_available()
+	_camera_button.disabled = not available
+	_camera_status.visible = not available
+	_camera_status.text = "" if available else AppState.t("camera_unavailable")
 
 
 func _populate_countries() -> void:

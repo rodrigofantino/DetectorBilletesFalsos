@@ -29,25 +29,30 @@ var _plugin: Object
 
 
 func _ready() -> void:
+	call_deferred("_ensure_plugin")
+
+
+func _ensure_plugin() -> void:
+	if _plugin != null:
+		return
 	if not Engine.has_singleton("BillRecognitionPluginV2"):
 		return
 	_plugin = Engine.get_singleton("BillRecognitionPluginV2")
-	if _plugin != null and _plugin.has_signal("recognition_completed"):
+	if _plugin != null and _plugin.has_signal("recognition_completed") and not _plugin.is_connected("recognition_completed", Callable(self, "_on_native_recognition_completed")):
 		_plugin.connect("recognition_completed", Callable(self, "_on_native_recognition_completed"))
 
 
 func is_available() -> bool:
+	_ensure_plugin()
 	return _plugin != null
 
 
 func identify_front() -> void:
+	_ensure_plugin()
 	if not is_available():
 		recognition_finished.emit({"status": "unavailable", "candidates": []})
 		return
-	if _plugin != null and _plugin.has_method("identify_front"):
-		_plugin.identify_front(AppState.get_locale_code())
-	else:
-		recognition_finished.emit({"status": "unavailable", "candidates": []})
+	_plugin.identify_front(AppState.get_locale_code())
 
 
 func _on_native_recognition_completed(status: String, recognized_text: String) -> void:
