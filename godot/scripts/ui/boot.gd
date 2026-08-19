@@ -12,8 +12,6 @@ func _ready() -> void:
 	background.set_anchors_preset(Control.PRESET_FULL_RECT)
 	background.color = Color("07111f")
 	add_child(background)
-	ScreenBuilder.add_bottom_ad_reserve(self)
-
 	var layout := CenterContainer.new()
 	layout.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(layout)

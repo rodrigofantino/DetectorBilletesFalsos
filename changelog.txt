@@ -51,3 +51,4 @@ V.1.652_Added offline text-based camera suggestions and consent-gated usage anal
 V.1.653_Fixed native camera plugin discovery and invocation after Android startup
 V.1.654_Redesigned the interface around a clear Review banknote action
 V.1.655_Completed four-language banknote content and removed the Godot boot splash
+V.1.656_Fixed banner placement persistence and removed legacy screen reserves

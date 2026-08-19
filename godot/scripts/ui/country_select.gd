@@ -25,8 +25,6 @@ func _build_ui() -> void:
 	margin.add_theme_constant_override("margin_right", margin_size)
 	margin.add_theme_constant_override("margin_bottom", bottom_margin)
 	add_child(margin)
-	ScreenBuilder.add_bottom_ad_reserve(self)
-
 	var root := VBoxContainer.new()
 	root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	root.size_flags_vertical = Control.SIZE_EXPAND_FILL

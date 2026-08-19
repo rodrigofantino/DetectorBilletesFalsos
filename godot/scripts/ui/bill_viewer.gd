@@ -199,9 +199,6 @@ func _apply_layout() -> void:
 		button.custom_minimum_size = Vector2(0, button_height)
 		button.add_theme_font_size_override("font_size", button_font_size)
 
-	if not has_node("BottomAdFallback"):
-		ScreenBuilder.add_bottom_ad_reserve(self)
-
 	for child in _feature_box.get_children():
 		if child is Label:
 			(child as Label).horizontal_alignment = align

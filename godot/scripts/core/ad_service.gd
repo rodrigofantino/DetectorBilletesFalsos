@@ -157,8 +157,10 @@ func _create_banner() -> void:
 func _on_admob_initialized(_status: InitializationStatus) -> void:
 	_initializing = false
 	_initialized = true
-	if _show_requested:
-		show_banner()
+	if _show_requested and _placement != PLACEMENT_NONE:
+		# Keep the placement selected by the current screen. Calling show_banner()
+		# here would always switch a review-result banner back to main_menu.
+		set_banner_placement(_placement)
 
 
 func _on_ad_loaded() -> void:
