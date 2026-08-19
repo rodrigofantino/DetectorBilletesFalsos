@@ -45,6 +45,7 @@ func _build_ui() -> void:
 	_country_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_country_select.item_selected.connect(_on_country_selected)
 	content.add_child(_country_select)
+	ScreenBuilder.style_option_button(_country_select)
 
 	ScreenBuilder.add_subtitle(content, AppState.t("choose_banknote"))
 	_note_select = OptionButton.new()
@@ -52,10 +53,11 @@ func _build_ui() -> void:
 	_note_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_note_select.item_selected.connect(_on_note_selected)
 	content.add_child(_note_select)
+	ScreenBuilder.style_option_button(_note_select)
 
-	_start_button = ScreenBuilder.add_button(content, AppState.t("start_review"))
+	_start_button = ScreenBuilder.add_button(content, AppState.t("start_review"), "primary")
 	_start_button.pressed.connect(_start_review)
-	var back := ScreenBuilder.add_button(content, AppState.t("back"))
+	var back := ScreenBuilder.add_button(content, AppState.t("back"), "quiet")
 	back.pressed.connect(_return_home)
 
 	_populate_countries()

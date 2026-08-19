@@ -39,13 +39,12 @@ func _build_ui() -> void:
 	_favorite_button = ScreenBuilder.add_button(content, "")
 	_favorite_button.pressed.connect(_toggle_favorite)
 	_refresh_favorite_button()
-	var another := ScreenBuilder.add_button(content, AppState.t("review_another"))
+	var another := ScreenBuilder.add_button(content, AppState.t("review_another"), "primary")
 	another.pressed.connect(_review_another)
-	var home := ScreenBuilder.add_button(content, AppState.t("return_home"))
+	var home := ScreenBuilder.add_button(content, AppState.t("return_home"), "quiet")
 	home.pressed.connect(_return_home)
 
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_REVIEW_RESULT)
-	ScreenBuilder.add_spacer(content, ScreenBuilder.get_bottom_ad_reserve_height(self))
 
 
 func _record_completion_once() -> void:

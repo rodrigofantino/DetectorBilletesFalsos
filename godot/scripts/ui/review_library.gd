@@ -16,7 +16,7 @@ func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, Color(0.04, 0.07, 0.11, 1.0))
 	_content = ScreenBuilder.add_scroll_content(root)
 	ScreenBuilder.add_title(_content, AppState.t("library_title"))
-	var back := ScreenBuilder.add_button(_content, AppState.t("back"))
+	var back := ScreenBuilder.add_button(_content, AppState.t("back"), "quiet")
 	back.pressed.connect(func() -> void: get_tree().change_scene_to_file(MAIN_MENU_SCENE))
 
 	var favorites := ReviewHistoryStore.get_favorites()
@@ -31,7 +31,7 @@ func _build_ui() -> void:
 	if not recents.is_empty():
 		ScreenBuilder.add_subtitle(_content, AppState.t("library_recent"))
 		_add_note_buttons(recents)
-		var clear := ScreenBuilder.add_button(_content, AppState.t("clear_history"))
+		var clear := ScreenBuilder.add_button(_content, AppState.t("clear_history"), "warning")
 		clear.pressed.connect(_clear_history)
 
 

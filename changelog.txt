@@ -49,3 +49,4 @@ V.1.650_Added the assisted banknote review foundation and safe banner placements
 V.1.651_Added stable identifiers and validation for all 72 banknote references
 V.1.652_Added offline text-based camera suggestions and consent-gated usage analytics
 V.1.653_Fixed native camera plugin discovery and invocation after Android startup
+V.1.654_Redesigned the interface around a clear Review banknote action

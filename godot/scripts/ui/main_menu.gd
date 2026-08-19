@@ -10,14 +10,13 @@ const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
 var _title_label: Label
 var _subtitle_label: Label
-var _ad_banner_spacer: Control
 var _language_label: Label
 var _icon: TextureRect
 var _language_select: OptionButton
 var _language_row: HBoxContainer
 var _action_buttons: Array[Button] = []
 var _layout_root: VBoxContainer
-var _button_rows: Array[HBoxContainer] = []
+var _button_rows: Array[Container] = []
 
 
 func _ready() -> void:
@@ -29,13 +28,16 @@ func _ready() -> void:
 
 
 func _build_ui() -> void:
-	var content: VBoxContainer = ScreenBuilder.setup_root(self, Color(0.05, 0.08, 0.12, 1.0))
-	content.add_theme_constant_override("separation", 14)
+	var root: VBoxContainer = ScreenBuilder.setup_root(self, ScreenBuilder.COLOR_BACKGROUND)
+	_layout_root = ScreenBuilder.add_scroll_content(root, 900.0)
+	_layout_root.add_theme_constant_override("separation", 22)
+
+	var header_card := ScreenBuilder.add_card(_layout_root)
 
 	var header := HBoxContainer.new()
 	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_theme_constant_override("separation", 16)
-	content.add_child(header)
+	header_card.add_child(header)
 
 	_icon = TextureRect.new()
 	_icon.texture = load("res://assets/ui/ic_launcher.png")
@@ -58,7 +60,7 @@ func _build_ui() -> void:
 	_subtitle_label = Label.new()
 	_subtitle_label.text = AppState.t("menu_subtitle")
 	_subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_subtitle_label.modulate = Color(0.86, 0.91, 1.0)
+	_subtitle_label.add_theme_color_override("font_color", ScreenBuilder.COLOR_TEXT_MUTED)
 	text_box.add_child(_subtitle_label)
 
 	_language_row = HBoxContainer.new()
@@ -76,53 +78,81 @@ func _build_ui() -> void:
 	_populate_language_options(_language_select)
 	_language_select.item_selected.connect(_on_language_selected.bind(_language_select))
 	_language_row.add_child(_language_select)
+	ScreenBuilder.style_option_button(_language_select)
 
-	_layout_root = VBoxContainer.new()
-	_layout_root.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_layout_root.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_layout_root.add_theme_constant_override("separation", 14)
-	content.add_child(_layout_root)
-
-	_build_single_button_row(
+	var primary := _add_menu_button(
+		_layout_root,
 		AppState.t("menu_guided_review"),
-		Callable(self, "_open_guided_review")
+		Callable(self, "_open_guided_review"),
+		"primary"
 	)
-	_build_single_button_row(
-		AppState.t("menu_library"),
-		Callable(self, "_open_review_library")
-	)
-	_build_button_row(
+	primary.set_meta("menu_size", "primary")
+	var cta_hint := ScreenBuilder.add_body(_layout_root, AppState.t("menu_review_hint"))
+	cta_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	if not ReviewHistoryStore.get_recents().is_empty() or not ReviewHistoryStore.get_favorites().is_empty():
+		ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_continue"))
+		_add_menu_button(
+			_layout_root,
+			AppState.t("menu_library"),
+			Callable(self, "_open_review_library"),
+			"secondary"
+		)
+
+	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_quick_tools"))
+	var tools_grid := _add_action_grid(_layout_root)
+	_add_menu_button(
+		tools_grid,
 		AppState.t("menu_uv"),
 		Callable(self, "_open_uv"),
-		AppState.t("menu_watermark"),
-		Callable(self, "_open_watermark")
+		"secondary"
 	)
-	_build_button_row(
-		AppState.t("select_country_title"),
+	_add_menu_button(
+		tools_grid,
+		AppState.t("menu_watermark"),
+		Callable(self, "_open_watermark"),
+		"secondary"
+	)
+
+	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_explore"))
+	var explore_grid := _add_action_grid(_layout_root)
+	_add_menu_button(
+		explore_grid,
+		AppState.t("menu_currency"),
 		Callable(self, "_open_countries"),
+		"secondary"
+	)
+	_add_menu_button(
+		explore_grid,
 		AppState.t("menu_about"),
 		Callable(self, "_show_about"),
+		"secondary",
 		false
 	)
-	_build_single_button_row(
+
+	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_more"))
+	_add_menu_button(
+		_layout_root,
 		AppState.t("menu_remove_ads"),
 		Callable(self, "_purchase_remove_ads"),
+		"quiet",
 		false
 	)
 	if AnalyticsService.is_available():
-		_build_single_button_row(
+		_add_menu_button(
+			_layout_root,
 			AppState.t("analytics_disable") if AnalyticsService.is_collection_enabled() else AppState.t("analytics_enable"),
 			Callable(self, "_toggle_analytics"),
+			"quiet",
 			false
 		)
-	_build_single_button_row(
+	_add_menu_button(
+		_layout_root,
 		AppState.t("menu_exit"),
-		Callable(self, "_exit_app")
+		Callable(self, "_exit_app"),
+		"quiet"
 	)
 
-	_ad_banner_spacer = Control.new()
-	_ad_banner_spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.add_child(_ad_banner_spacer)
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_MAIN_MENU)
 	var purchases := get_node_or_null("/root/AppPurchases")
 	if purchases != null:
@@ -130,39 +160,30 @@ func _build_ui() -> void:
 		purchases.purchase_message.connect(_on_purchase_message)
 
 
-func _build_button_row(left_text: String, left_callback: Callable, right_text: String, right_callback: Callable, right_play_sound: bool = true) -> void:
-	var row := HBoxContainer.new()
-	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	row.add_theme_constant_override("separation", 16)
-	_layout_root.add_child(row)
-	_button_rows.append(row)
-
-	_add_menu_button(row, left_text, left_callback)
-	_add_menu_button(row, right_text, right_callback, right_play_sound)
-
-
-func _build_single_button_row(text: String, callback: Callable, play_sound: bool = true) -> void:
-	var row := HBoxContainer.new()
-	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	row.add_theme_constant_override("separation", 16)
-	_layout_root.add_child(row)
-	_button_rows.append(row)
-
-	_add_menu_button(row, text, callback, play_sound)
+func _add_action_grid(parent: Container) -> GridContainer:
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_theme_constant_override("h_separation", 14)
+	grid.add_theme_constant_override("v_separation", 14)
+	parent.add_child(grid)
+	_button_rows.append(grid)
+	return grid
 
 
-func _add_menu_button(parent: Container, text: String, callback: Callable, play_sound: bool = true) -> void:
+func _add_menu_button(parent: Container, text: String, callback: Callable, variant: String = "secondary", play_sound: bool = true) -> Button:
 	var button := Button.new()
 	button.text = text
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	button.pressed.connect(callback)
 	if play_sound:
 		button.pressed.connect(_play_click)
 	parent.add_child(button)
+	ScreenBuilder.style_button(button, variant)
+	button.set_meta("menu_size", "compact" if variant == "quiet" else "standard")
 	_action_buttons.append(button)
+	return button
 
 
 func _apply_responsive_layout() -> void:
@@ -174,19 +195,16 @@ func _apply_responsive_layout() -> void:
 	if viewport_size.x <= 0.0 or viewport_size.y <= 0.0:
 		return
 
-	var fit_scale: float = min(viewport_size.x / BASE_VIEWPORT.x, viewport_size.y / BASE_VIEWPORT.y)
-	var large_screen_scale: float = min(viewport_size.x, viewport_size.y) / BASE_VIEWPORT.x
-	var ui_scale: float = clamp(max(fit_scale, large_screen_scale), 0.8, 2.2)
-	var margin: int = int(round(24.0 * ui_scale))
-	var icon_size: int = int(round(112.0 * ui_scale))
-	var title_size: int = int(round(40.0 * ui_scale))
-	var subtitle_size: int = int(round(18.0 * ui_scale))
-	var label_size: int = int(round(34.0 * ui_scale))
-	var language_height: int = int(round(118.0 * ui_scale))
-	var language_label_width: int = int(round(190.0 * ui_scale))
-	var button_height: int = int(round(108.0 * ui_scale))
-	var button_size: int = int(round(24.0 * ui_scale))
-	var ad_height: int = ScreenBuilder.get_bottom_ad_reserve_height(self)
+	var ui_scale: float = ScreenBuilder.visual_ui_scale(self)
+	var margin: int = int(round(18.0 * ui_scale))
+	var icon_size: int = int(round(82.0 * ui_scale))
+	var title_size: int = int(round(34.0 * ui_scale))
+	var subtitle_size: int = int(round(17.0 * ui_scale))
+	var label_size: int = int(round(18.0 * ui_scale))
+	var language_height: int = int(round(96.0 * ui_scale))
+	var language_label_width: int = int(round(112.0 * ui_scale))
+	var button_height: int = int(round(96.0 * ui_scale))
+	var button_size: int = int(round(20.0 * ui_scale))
 
 	_icon.custom_minimum_size = Vector2(icon_size, icon_size)
 	_title_label.add_theme_font_size_override("font_size", title_size)
@@ -203,22 +221,27 @@ func _apply_responsive_layout() -> void:
 		language_popup.add_theme_constant_override("v_separation", int(round(20.0 * ui_scale)))
 	if _language_row != null:
 		_language_row.add_theme_constant_override("separation", int(round(18.0 * ui_scale)))
-	_ad_banner_spacer.custom_minimum_size = Vector2(0, ad_height)
-
 	var margin_container := _find_margin_container()
 	if margin_container != null:
-		margin_container.add_theme_constant_override("margin_left", margin)
-		margin_container.add_theme_constant_override("margin_top", margin)
-		margin_container.add_theme_constant_override("margin_right", margin)
-		margin_container.add_theme_constant_override("margin_bottom", margin)
+		ScreenBuilder.set_root_margin(self, margin_container, margin)
 
 	for button in _action_buttons:
-		button.custom_minimum_size = Vector2(0, button_height)
-		button.add_theme_font_size_override("font_size", button_size)
+		var size_kind := str(button.get_meta("menu_size", "standard"))
+		var height := button_height
+		var font_size := button_size
+		if size_kind == "primary":
+			height = int(round(122.0 * ui_scale))
+			font_size = int(round(24.0 * ui_scale))
+		elif size_kind == "compact":
+			height = int(round(96.0 * ui_scale))
+			font_size = int(round(17.0 * ui_scale))
+		button.custom_minimum_size = Vector2(0, height)
+		button.add_theme_font_size_override("font_size", font_size)
 
-	_layout_root.add_theme_constant_override("separation", int(round(14.0 * ui_scale)))
+	_layout_root.add_theme_constant_override("separation", int(round(18.0 * ui_scale)))
 	for row in _button_rows:
-		row.add_theme_constant_override("separation", int(round(16.0 * ui_scale)))
+		row.add_theme_constant_override("h_separation", int(round(14.0 * ui_scale)))
+		row.add_theme_constant_override("v_separation", int(round(14.0 * ui_scale)))
 
 
 func _find_margin_container() -> MarginContainer:
@@ -269,16 +292,19 @@ func _on_language_selected(index: int, _select: OptionButton) -> void:
 
 
 func _open_uv() -> void:
+	AppAds.hide_banner()
 	_record_review_use()
 	get_tree().change_scene_to_file(UV_SCENE)
 
 
 func _open_watermark() -> void:
+	AppAds.hide_banner()
 	_record_review_use()
 	get_tree().change_scene_to_file(WATERMARK_SCENE)
 
 
 func _open_countries() -> void:
+	AppAds.hide_banner()
 	_record_review_use()
 	get_tree().change_scene_to_file(COUNTRY_SCENE)
 

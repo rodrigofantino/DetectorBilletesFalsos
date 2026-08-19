@@ -30,7 +30,15 @@ func should_reserve_banner_space() -> bool:
 
 func get_reserved_banner_height() -> int:
 	if should_reserve_banner_space():
-		return BANNER_RESERVED_HEIGHT
+		var reserve_height := BANNER_RESERVED_HEIGHT
+		if _ad_view != null:
+			var native_height := _ad_view.get_height_in_pixels()
+			var window_size := DisplayServer.window_get_size()
+			var viewport_size := get_viewport().get_visible_rect().size
+			if native_height > 0 and window_size.y > 0 and viewport_size.y > 0.0:
+				var logical_height := int(ceil(native_height * viewport_size.y / float(window_size.y)))
+				reserve_height = max(reserve_height, logical_height)
+		return reserve_height
 	return 0
 
 

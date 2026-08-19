@@ -2,7 +2,7 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.653"
+const APP_VERSION := "V.1.654"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
@@ -14,7 +14,7 @@ const ABOUT_UPDATE_SUMMARY := {
 
 const UI_TEXTS := {
 	"en": {
-		"app_title": "Counterfeit Banknote Detector",
+		"app_title": "Banknote Security Guide",
 		"boot_subtitle": "Booting the app...",
 		"back": "Back",
 		"previous": "Previous",
@@ -52,12 +52,17 @@ const UI_TEXTS := {
 		"purchase_pending": "The purchase is pending. Ads will be removed when payment is confirmed.",
 		"language_label": "Language",
 		"follow_phone_language": "Follow phone language",
-		"menu_subtitle": "UV light, watermark checking, and currency info in one app.",
+		"menu_subtitle": "Check banknote security features step by step.",
 		"about_title": "About",
 		"about_version_label": "Version: %s",
 		"about_update_label": "Last update: %s",
 		"about_body": "This app provides an assisted review of banknote security references.",
-		"menu_guided_review": "Review a banknote",
+		"menu_guided_review": "Review banknote",
+		"menu_review_hint": "Use the camera to suggest a reference, then inspect each security feature.",
+		"menu_continue": "Continue",
+		"menu_quick_tools": "Quick tools",
+		"menu_explore": "Explore",
+		"menu_more": "Settings",
 		"guided_review_subtitle": "Identify its security references and review them step by step.",
 		"review_setup_title": "Start assisted review",
 		"review_setup_intro": "Choose the banknote manually or try the experimental on-device text suggestion.",
@@ -104,7 +109,7 @@ const UI_TEXTS := {
 		"clear_history": "Clear recent history"
 	},
 	"es": {
-		"app_title": "Detector de Billetes Falsos",
+		"app_title": "Guía de Seguridad de Billetes",
 		"boot_subtitle": "Iniciando la app...",
 		"back": "Atrás",
 		"previous": "Anterior",
@@ -142,12 +147,17 @@ const UI_TEXTS := {
 		"purchase_pending": "La compra está pendiente. Los anuncios desaparecerán cuando se confirme el pago.",
 		"language_label": "Idioma",
 		"follow_phone_language": "Seguir idioma del teléfono",
-		"menu_subtitle": "Luz UV, marca de agua e información de moneda en una sola app.",
+		"menu_subtitle": "Revisá las medidas de seguridad del billete paso a paso.",
 		"about_title": "Acerca de",
 		"about_version_label": "Versión: %s",
 		"about_update_label": "Última actualización: %s",
 		"about_body": "Esta app ofrece una revisión asistida de referencias de seguridad de billetes.",
-		"menu_guided_review": "Revisar un billete",
+		"menu_guided_review": "Revisar billete",
+		"menu_review_hint": "Usá la cámara para sugerir una referencia y revisá cada medida de seguridad.",
+		"menu_continue": "Continuar",
+		"menu_quick_tools": "Herramientas rápidas",
+		"menu_explore": "Explorar",
+		"menu_more": "Ajustes",
 		"guided_review_subtitle": "Identificá sus medidas de seguridad y revisalas paso a paso.",
 		"review_setup_title": "Iniciar revisión asistida",
 		"review_setup_intro": "Elegí el billete manualmente o probá la sugerencia experimental de texto procesada en el dispositivo.",
@@ -194,7 +204,7 @@ const UI_TEXTS := {
 		"clear_history": "Borrar historial reciente"
 	},
 	"pt": {
-		"app_title": "Detector de Cédulas Falsas",
+		"app_title": "Guia de Segurança de Cédulas",
 		"boot_subtitle": "Iniciando o app...",
 		"back": "Voltar",
 		"previous": "Anterior",
@@ -232,12 +242,17 @@ const UI_TEXTS := {
 		"purchase_pending": "A compra está pendente. Os anúncios serão removidos quando o pagamento for confirmado.",
 		"language_label": "Idioma",
 		"follow_phone_language": "Usar idioma do telefone",
-		"menu_subtitle": "Luz UV, checagem de marca-d'água e informação de cédulas em um app.",
+		"menu_subtitle": "Revise os recursos de segurança da cédula passo a passo.",
 		"about_title": "Sobre",
 		"about_version_label": "Versão: %s",
 		"about_update_label": "Última atualização: %s",
 		"about_body": "Este aplicativo oferece uma revisão assistida de referências de segurança de cédulas.",
-		"menu_guided_review": "Revisar uma cédula",
+		"menu_guided_review": "Revisar cédula",
+		"menu_review_hint": "Use a câmera para sugerir uma referência e revise cada recurso de segurança.",
+		"menu_continue": "Continuar",
+		"menu_quick_tools": "Ferramentas rápidas",
+		"menu_explore": "Explorar",
+		"menu_more": "Configurações",
 		"guided_review_subtitle": "Identifique as medidas de segurança e revise-as passo a passo.",
 		"review_setup_title": "Iniciar revisão assistida",
 		"review_setup_intro": "Escolha a cédula manualmente ou teste a sugestão experimental de texto processada no dispositivo.",
@@ -284,7 +299,7 @@ const UI_TEXTS := {
 		"clear_history": "Limpar histórico recente"
 	},
 	"zh": {
-		"app_title": "假钞检测器",
+		"app_title": "纸币安全指南",
 		"boot_subtitle": "正在启动应用...",
 		"back": "返回",
 		"previous": "上一张",
@@ -322,12 +337,17 @@ const UI_TEXTS := {
 		"purchase_pending": "购买正在处理中，付款确认后广告将被移除。",
 		"language_label": "语言",
 		"follow_phone_language": "跟随手机语言",
-		"menu_subtitle": "在一个应用里提供 UV 光、看水印和货币信息。",
+		"menu_subtitle": "逐步检查纸币的安全特征。",
 		"about_title": "关于",
 		"about_version_label": "版本：%s",
 		"about_update_label": "最近更新：%s",
 		"about_body": "本应用提供纸币安全特征参考的辅助检查。",
 		"menu_guided_review": "检查纸币",
+		"menu_review_hint": "使用相机建议参考纸币，然后逐项检查安全特征。",
+		"menu_continue": "继续",
+		"menu_quick_tools": "快捷工具",
+		"menu_explore": "浏览",
+		"menu_more": "设置",
 		"guided_review_subtitle": "识别安全特征并逐步进行检查。",
 		"review_setup_title": "开始辅助检查",
 		"review_setup_intro": "请手动选择纸币，或尝试仅在设备上处理的实验性文字建议。",

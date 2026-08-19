@@ -35,13 +35,13 @@ func _build_ui() -> void:
 	_expected = ScreenBuilder.add_body(content, "")
 	_expected.modulate = Color(0.78, 0.9, 1.0)
 
-	var observed := ScreenBuilder.add_button(content, AppState.t("observed"))
+	var observed := ScreenBuilder.add_button(content, AppState.t("observed"), "positive")
 	observed.pressed.connect(_answer.bind(GuidedReviewSession.ANSWER_OBSERVED))
-	var mismatch := ScreenBuilder.add_button(content, AppState.t("mismatch"))
+	var mismatch := ScreenBuilder.add_button(content, AppState.t("mismatch"), "warning")
 	mismatch.pressed.connect(_answer.bind(GuidedReviewSession.ANSWER_MISMATCH))
 	var unable := ScreenBuilder.add_button(content, AppState.t("unable"))
 	unable.pressed.connect(_answer.bind(GuidedReviewSession.ANSWER_UNABLE))
-	var back := ScreenBuilder.add_button(content, AppState.t("back"))
+	var back := ScreenBuilder.add_button(content, AppState.t("back"), "quiet")
 	back.pressed.connect(func() -> void: get_tree().change_scene_to_file(SETUP_SCENE))
 
 
