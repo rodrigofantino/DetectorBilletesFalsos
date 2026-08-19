@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 $expectedRecordCount = 72
-$expectedLegacyHash = "01b7d04931fabe6483f2434dd6bb7b78a9646d7d04ebc467e42c61e2d35b7f7b"
+$expectedLegacyHash = "2a9d6d6072d729252137324354ced5ca3563faf778b57dbf23a0d42d3c52514a"
 $supportedLocales = @("en", "es", "pt", "zh")
 $allowedMethods = @("touch", "backlight", "tilt", "visual", "uv")
 $allowedSides = @("front", "back", "both")
@@ -77,13 +77,38 @@ function Test-LocalizedValue {
 	}
 	$value = $Container.$Locale
 	if ($AllowArray) {
-		if (@($value).Count -eq 0) {
+		$items = @($value)
+		if ($items.Count -eq 0) {
 			Add-ValidationError "$Context locale '$Locale' must contain at least one item."
+			return
+		}
+		for ($index = 0; $index -lt $items.Count; $index++) {
+			if (-not (Is-NonEmptyString $items[$index])) {
+				Add-ValidationError "$Context locale '$Locale' item $index must be a non-empty string."
+			} elseif ([string]$items[$index] -match "\?") {
+				Add-ValidationError "$Context locale '$Locale' item $index contains a replacement question mark."
+			}
 		}
 		return
 	}
 	if (-not (Is-NonEmptyString $value)) {
 		Add-ValidationError "$Context locale '$Locale' must be a non-empty string."
+	} elseif ([string]$value -match "\?") {
+		Add-ValidationError "$Context locale '$Locale' contains a replacement question mark."
+	}
+}
+
+function Test-EnglishLocalization {
+	param(
+		[string]$Value,
+		[string]$Context
+	)
+
+	# Detect common untranslated prose, without flagging proper names such as
+	# Banco de Mexico, Bank of England, Antu, or official institution names.
+	$nonEnglishProse = "(?i)\b(billete|billetes|c[eé]dula|c[eé]dulas|marca de agua|marca-d['’]?agua|al trasluz|hilo de seguridad|faixa hologr[aá]fica|n[uú]mero escondido|tinta de variabilidad|relieve perceptible|fibras de seguridad|impresi[oó]n en relieve|ao inclinar)\b"
+	if ($Value -match $nonEnglishProse) {
+		Add-ValidationError "$Context contains untranslated Spanish or Portuguese prose."
 	}
 }
 
@@ -192,9 +217,22 @@ foreach ($entry in $entries) {
 			Add-ValidationError "$expectedId is missing '$localizedField'."
 			continue
 		}
-		$localesToCheck = if ($Mode -eq "release") { $supportedLocales } else { @("en") }
-		foreach ($locale in $localesToCheck) {
+		foreach ($locale in $supportedLocales) {
 			Test-LocalizedValue $entry.$localizedField $locale "$expectedId $localizedField" -AllowArray:($localizedField -eq "security_features_texts")
+		}
+		if ($localizedField -eq "security_features_texts") {
+			$englishFeatures = @($entry.$localizedField.en)
+			foreach ($locale in $supportedLocales) {
+				$localizedFeatures = @($entry.$localizedField.$locale)
+				if ($localizedFeatures.Count -ne $englishFeatures.Count) {
+					Add-ValidationError "$expectedId $localizedField locale '$locale' must preserve the English feature count and order: expected $($englishFeatures.Count), found $($localizedFeatures.Count)."
+				}
+			}
+			for ($index = 0; $index -lt $englishFeatures.Count; $index++) {
+				Test-EnglishLocalization ([string]$englishFeatures[$index]) "$expectedId $localizedField.en item $index"
+			}
+		} else {
+			Test-EnglishLocalization ([string]$entry.$localizedField.en) "$expectedId $localizedField.en"
 		}
 	}
 

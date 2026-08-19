@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 $expectedRecordCount = 72
-$expectedLegacyHash = "01b7d04931fabe6483f2434dd6bb7b78a9646d7d04ebc467e42c61e2d35b7f7b"
+$expectedLegacyHash = "2a9d6d6072d729252137324354ced5ca3563faf778b57dbf23a0d42d3c52514a"
 
 function Get-LegacyHash {
 	param([object[]]$Entries)

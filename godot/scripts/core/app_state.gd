@@ -2,14 +2,14 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.654"
+const APP_VERSION := "V.1.655"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Added assisted review, experimental on-device text suggestions, and a private review library.",
-	"es": "Se agregó la revisión asistida, sugerencias experimentales de texto en el dispositivo y una biblioteca privada.",
-	"pt": "Adicionamos revisão assistida, sugestões experimentais de texto no dispositivo e uma biblioteca privada.",
-	"zh": "新增辅助检查、设备端实验性文字建议和本地私人记录。"
+	"en": "Completed all banknote translations and removed the Godot boot splash.",
+	"es": "Se completaron todas las traducciones de billetes y se eliminó la pantalla de inicio de Godot.",
+	"pt": "Concluímos todas as traduções das cédulas e removemos a tela de inicialização do Godot.",
+	"zh": "已完成所有纸币内容翻译，并移除了 Godot 启动画面。"
 }
 
 const UI_TEXTS := {
@@ -32,6 +32,7 @@ const UI_TEXTS := {
 		"thumbnail_preview": "Thumbnail preview",
 		"no_note_selected": "No note selected",
 		"note_viewer_status": "The viewer uses data-driven note details and country-matched images.",
+		"note_title_format": "%s — %s %s",
 		"watermark_prefix": "Watermark: %s",
 		"source_prefix": "Source: %s",
 		"uv_title": "UV detector",
@@ -127,6 +128,7 @@ const UI_TEXTS := {
 		"thumbnail_preview": "Vista previa",
 		"no_note_selected": "No hay billete seleccionado",
 		"note_viewer_status": "El visor usa datos dinámicos y miniaturas correctas para cada país.",
+		"note_title_format": "%s — %s %s",
 		"watermark_prefix": "Marca de agua: %s",
 		"source_prefix": "Fuente: %s",
 		"uv_title": "Detector UV",
@@ -222,6 +224,7 @@ const UI_TEXTS := {
 		"thumbnail_preview": "Prévia da miniatura",
 		"no_note_selected": "Nenhuma nota selecionada",
 		"note_viewer_status": "O visualizador usa detalhes de notas baseados em dados e imagens correspondentes ao país.",
+		"note_title_format": "%s — %s %s",
 		"watermark_prefix": "Marca-d'água: %s",
 		"source_prefix": "Fonte: %s",
 		"uv_title": "Detector UV",
@@ -317,6 +320,7 @@ const UI_TEXTS := {
 		"thumbnail_preview": "缩略图预览",
 		"no_note_selected": "未选择纸币",
 		"note_viewer_status": "查看器使用数据驱动的纸币详情和与国家匹配的图像。",
+		"note_title_format": "%s · %s%s",
 		"watermark_prefix": "水印：%s",
 		"source_prefix": "来源：%s",
 		"uv_title": "UV 检测器",
@@ -882,7 +886,7 @@ func get_note_title(note: Dictionary) -> String:
 	var country := get_country_label(str(note.get("country", "")))
 	var denomination := str(note.get("denomination", ""))
 	var currency := get_currency_label(str(note.get("currency", "")))
-	return "%s - %s %s" % [country, denomination, currency]
+	return t("note_title_format") % [country, denomination, currency]
 
 
 func get_note_summary(note: Dictionary) -> String:

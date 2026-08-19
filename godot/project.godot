@@ -14,10 +14,16 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Counterfeit Banknote Detector"
+config/name="Banknote Security Guide"
+config/name_localized={
+"es": "Guía de Seguridad de Billetes",
+"pt": "Guia de Segurança de Cédulas",
+"zh": "纸币安全指南"
+}
 run/main_scene="res://scenes/Boot.tscn"
 config/features=PackedStringArray("4.6")
 config/icon="res://assets/ui/app_icon_512.png"
+boot_splash/show_image=false
 
 [autoload]
 
