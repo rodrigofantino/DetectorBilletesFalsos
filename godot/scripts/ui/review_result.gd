@@ -52,6 +52,8 @@ func _build_ui() -> void:
 			(child as Button).add_theme_font_size_override("font_size", 34)
 
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_REVIEW_RESULT)
+	if has_meta("show_review_interstitial"):
+		call_deferred("_show_review_interstitial")
 
 
 func _record_completion_once() -> void:
@@ -68,7 +70,12 @@ func _record_completion_once() -> void:
 	GuidedReviewSession.history_recorded = true
 	var play_review := get_node_or_null("/root/AppReview")
 	if play_review != null:
-		play_review.record_successful_use()
+		if play_review.record_completed_review():
+			set_meta("show_review_interstitial", true)
+
+
+func _show_review_interstitial() -> void:
+	AppAds.show_interstitial()
 
 
 func _toggle_favorite() -> void:

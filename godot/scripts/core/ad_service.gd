@@ -7,6 +7,8 @@ signal banner_failed(error: String)
 
 const ADMOB_BANNER_UNIT_ID := "ca-app-pub-4703386652643425/9145624203"
 const ADMOB_TEST_BANNER_UNIT_ID := "ca-app-pub-3940256099942544/6300978111"
+const ADMOB_INTERSTITIAL_UNIT_ID := "ca-app-pub-4703386652643425/5255319345"
+const ADMOB_TEST_INTERSTITIAL_UNIT_ID := "ca-app-pub-3940256099942544/1033173712"
 const BANNER_RESERVED_HEIGHT := 96
 const PLACEMENT_NONE := "none"
 const PLACEMENT_MAIN_MENU := "main_menu"
@@ -18,15 +20,19 @@ const PLACEMENT_CURRENCY_INFO := "currency_info"
 # Replace these placeholders with the supplied production unit IDs. Keeping the
 # mapping here makes each placement explicit without scattering IDs in screens.
 const BANNER_UNIT_IDS := {
-	PLACEMENT_MAIN_MENU: "ca-app-pub-4703386652643425/7909010195",
-	PLACEMENT_REVIEW_RESULT: "ca-app-pub-4703386652643425/6100768207",
-	PLACEMENT_GUIDED_REVIEW: "ca-app-pub-4703386652643425/6100768207",
-	PLACEMENT_TOOL: "ca-app-pub-4703386652643425/4448669986",
-	PLACEMENT_CURRENCY_INFO: "ca-app-pub-4703386652643425/3127170833",
+	PLACEMENT_MAIN_MENU: "ca-app-pub-4703386652643425/9145624203",
+	PLACEMENT_REVIEW_RESULT: "ca-app-pub-4703386652643425/6959388457",
+	PLACEMENT_GUIDED_REVIEW: "ca-app-pub-4703386652643425/6959388457",
+	PLACEMENT_TOOL: "ca-app-pub-4703386652643425/2253751481",
+	PLACEMENT_CURRENCY_INFO: "ca-app-pub-4703386652643425/9226353946",
 }
 
 var _ad_view: AdView
 var _ad_listener: AdListener
+var _interstitial_ad: InterstitialAd
+var _interstitial_load_callback: InterstitialAdLoadCallback
+var _interstitial_content_callback: FullScreenContentCallback
+var _interstitial_show_requested := false
 var _initialized := false
 var _initializing := false
 var _banner_loaded := false
@@ -36,6 +42,7 @@ var _banner_unit_id := ""
 
 
 func _ready() -> void:
+	_setup_interstitial_callbacks()
 	call_deferred("_connect_purchase_signals")
 
 
@@ -105,6 +112,15 @@ func show_main_menu_banner() -> void:
 
 func show_review_result_banner() -> void:
 	set_banner_placement(PLACEMENT_REVIEW_RESULT)
+
+
+func show_interstitial() -> void:
+	if _ads_removed() or not _is_android():
+		return
+	_interstitial_show_requested = true
+	_initialize_admob_once()
+	if _initialized:
+		_load_interstitial()
 
 
 func hide_banner() -> void:
@@ -192,6 +208,8 @@ func _on_admob_initialized(_status: InitializationStatus) -> void:
 		# Keep the placement selected by the current screen. Calling show_banner()
 		# here would always switch a review-result banner back to main_menu.
 		set_banner_placement(_placement)
+	if _interstitial_show_requested:
+		_load_interstitial()
 
 
 func _on_ad_loaded() -> void:
@@ -224,3 +242,51 @@ func _get_banner_unit_id() -> String:
 	if OS.is_debug_build():
 		return ADMOB_TEST_BANNER_UNIT_ID
 	return str(BANNER_UNIT_IDS.get(_placement, ADMOB_BANNER_UNIT_ID))
+
+
+func _setup_interstitial_callbacks() -> void:
+	_interstitial_load_callback = InterstitialAdLoadCallback.new()
+	_interstitial_load_callback.on_ad_loaded = _on_interstitial_loaded
+	_interstitial_load_callback.on_ad_failed_to_load = _on_interstitial_failed_to_load
+	_interstitial_content_callback = FullScreenContentCallback.new()
+	_interstitial_content_callback.on_ad_dismissed_full_screen_content = _on_interstitial_dismissed
+	_interstitial_content_callback.on_ad_failed_to_show_full_screen_content = _on_interstitial_failed_to_show
+
+
+func _load_interstitial() -> void:
+	if not _interstitial_show_requested or _interstitial_ad != null:
+		return
+	if not Engine.has_singleton("PoingGodotAdMobInterstitialAd"):
+		_interstitial_show_requested = false
+		_log_failure("interstitial singleton missing: PoingGodotAdMobInterstitialAd")
+		return
+	var unit_id := ADMOB_TEST_INTERSTITIAL_UNIT_ID if OS.is_debug_build() else ADMOB_INTERSTITIAL_UNIT_ID
+	InterstitialAdLoader.new().load(unit_id, AdRequest.new(), _interstitial_load_callback)
+
+
+func _on_interstitial_loaded(ad: InterstitialAd) -> void:
+	_interstitial_ad = ad
+	_interstitial_ad.full_screen_content_callback = _interstitial_content_callback
+	_interstitial_show_requested = false
+	_interstitial_ad.show()
+
+
+func _on_interstitial_failed_to_load(error: LoadAdError) -> void:
+	_interstitial_show_requested = false
+	_log_failure("interstitial failed to load: %s" % error.message)
+
+
+func _on_interstitial_dismissed() -> void:
+	_destroy_interstitial()
+
+
+func _on_interstitial_failed_to_show(error: AdError) -> void:
+	_interstitial_show_requested = false
+	_log_failure("interstitial failed to show: %s" % error.message)
+	_destroy_interstitial()
+
+
+func _destroy_interstitial() -> void:
+	if _interstitial_ad != null:
+		_interstitial_ad.destroy()
+		_interstitial_ad = null

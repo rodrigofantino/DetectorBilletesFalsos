@@ -22,7 +22,7 @@ Help users perform an assisted, step-by-step review of banknote security referen
 - Watermark viewer: rotating colors to help visualize marks and paper differences.
 - Currency info browser: country selection plus bill security details.
 - Minimal monetization: AdMob banners may appear on the main menu, guided-review flow, quick tools, country selection, currency information, and completed result; placements remain non-blocking and use configurable unit IDs.
-- After meaningful use, the app can show Google Play's native review card; users can also open the Play Store listing from the main menu.
+- After completing a guided banknote review, the app can show Google Play's native review card; users can also open the Play Store listing from the main menu.
 
 5. Content scope
 - The app currently focuses on the currencies and notes already present in the legacy data files.
@@ -39,7 +39,7 @@ Phase 1: rebuild the menu and navigation.
 Phase 2: rebuild the UV screen.
 Phase 3: rebuild the watermark screen.
 Phase 4: rebuild the currency info flow.
-Phase 5: keep monetization limited to banners on the main menu and completed guided-review result; avoid ads during inspection and never use interstitials.
+Phase 5: keep monetization limited to configured non-blocking banners and an interstitial only after every third fully completed guided review in a calendar day.
 Phase 6: polish UI and publish an Android build.
 
 8. Open questions

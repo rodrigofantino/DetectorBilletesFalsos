@@ -2,9 +2,12 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.2.001"
-const DEFAULT_LOCALE := "en"
-const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
+const APP_VERSION := "V.2.010"
+const FALLBACK_LOCALE := "en"
+const SUPPORTED_LOCALES := ["en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant"]
+const LOCALE_DISPLAY_NAMES := {
+	"tr": "Türkçe", "hi": "हिन्दी", "bn": "বাংলা", "ro": "Română", "nl": "Nederlands", "ru": "Русский", "sw": "Kiswahili", "th": "ไทย", "el": "Ελληνικά", "hu": "Magyar", "sr": "Српски", "uk": "Українська", "bg": "Български", "it": "Italiano", "pl": "Polski", "vi": "Tiếng Việt", "hr": "Hrvatski", "si": "සිංහල", "my": "မြန်မာ", "sv": "Svenska", "ps": "پښتو", "cs": "Čeština", "ko": "한국어", "no": "Norsk", "uz": "Oʻzbekcha", "sq": "Shqip", "bs": "Bosanski", "be": "Беларуская", "fi": "Suomi", "ht": "Kreyòl ayisyen", "ja": "日本語", "km": "ខ្មែរ", "lt": "Lietuvių", "lv": "Latviešu", "sk": "Slovenčina", "ta": "தமிழ்", "te": "తెలుగు", "mr": "मराठी", "pa": "ਪੰਜਾਬੀ", "gu": "ગુજરાતી", "kn": "ಕನ್ನಡ", "ml": "മലയാളം", "ne": "नेपाली", "az": "Azərbaycanca", "kk": "Қазақша", "da": "Dansk", "sl": "Slovenščina", "mn": "Монгол", "zh_hant": "繁體中文"
+}
 const ABOUT_UPDATE_SUMMARY := {
 	"en": "Improved readable UI styling, compact About content, configurable banner placements, and banknote information cards.",
 	"es": "Mejoramos la legibilidad de la interfaz, compactamos Acerca de, configuramos las ubicaciones de banners y añadimos tarjetas de información de billetes.",
@@ -425,6 +428,12 @@ const UI_TEXTS := {
 
 const COUNTRY_LABELS := {
 	"en": {
+		"Israel": "Israel",
+		"Bolivia": "Bolivia",
+		"Indonesia": "Indonesia",
+		"Iran": "Iran",
+		"Venezuela": "Venezuela",
+		"Pakistan": "Pakistan",
 		"Argentina": "Argentina",
 		"Brazil": "Brazil",
 		"Chile": "Chile",
@@ -447,6 +456,9 @@ const COUNTRY_LABELS := {
 		"United Kingdom": "United Kingdom"
 	},
 	"es": {
+		"Israel": "Israel",
+		"Bolivia": "Bolivia",
+		"Indonesia": "Indonesia",
 		"Argentina": "Argentina",
 		"Brazil": "Brasil",
 		"Chile": "Chile",
@@ -469,6 +481,10 @@ const COUNTRY_LABELS := {
 		"United Kingdom": "Reino Unido"
 	},
 	"pt": {
+		"Israel": "Israel",
+		"Bolivia": "Bolívia",
+		"Indonesia": "Indonésia",
+		"Iran": "Irã",
 		"Argentina": "Argentina",
 		"Brazil": "Brasil",
 		"Chile": "Chile",
@@ -491,6 +507,10 @@ const COUNTRY_LABELS := {
 		"United Kingdom": "Reino Unido"
 	},
 	"zh": {
+		"Israel": "以色列",
+		"Bolivia": "玻利维亚",
+		"Indonesia": "印度尼西亚",
+		"Iran": "伊朗",
 		"Argentina": "阿根廷",
 		"Brazil": "巴西",
 		"Chile": "智利",
@@ -516,6 +536,12 @@ const COUNTRY_LABELS := {
 
 const CURRENCY_LABELS := {
 	"en": {
+		"ils": "Israeli new shekel",
+		"bob": "Bolivian boliviano",
+		"idr": "Indonesian rupiah",
+		"irr": "Iranian rial",
+		"ves": "Venezuelan bolivar",
+		"pkr": "Pakistani rupee",
 		"ars": "Argentine peso",
 		"brl": "real",
 		"clp": "Chilean peso",
@@ -539,6 +565,12 @@ const CURRENCY_LABELS := {
 		"pei": "inti"
 	},
 	"es": {
+		"ils": "nuevo shequel israeli",
+		"bob": "boliviano",
+		"idr": "rupia indonesia",
+		"irr": "rial irani",
+		"ves": "bolivar venezolano",
+		"pkr": "rupia pakistani",
 		"ars": "peso argentino",
 		"brl": "real",
 		"clp": "peso chileno",
@@ -562,6 +594,10 @@ const CURRENCY_LABELS := {
 		"pei": "inti"
 	},
 	"pt": {
+		"ils": "novo shekel israelense",
+		"bob": "boliviano",
+		"idr": "rupia indonesia",
+		"irr": "伊朗里亚尔",
 		"ars": "peso argentino",
 		"brl": "real",
 		"clp": "peso chileno",
@@ -585,6 +621,9 @@ const CURRENCY_LABELS := {
 		"pei": "inti"
 	},
 	"zh": {
+		"ils": "以色列新谢克尔",
+		"bob": "玻利维亚诺",
+		"idr": "印度尼西亚盾",
 		"ars": "阿根廷比索",
 		"brl": "雷亚尔",
 		"clp": "智利比索",
@@ -610,6 +649,12 @@ const CURRENCY_LABELS := {
 }
 
 const COUNTRY_IMAGE_PATHS := {
+	"Israel": "res://assets/bills_official/il_200_front.jpg",
+	"Bolivia": "res://assets/bills_official/bo_200_front.jpg",
+	"Indonesia": "res://assets/bills_official/id_100000_front.jpg",
+	"Iran": "res://assets/bills_official/IRN0143ao.jpg",
+	"Venezuela": "res://assets/bills_official/ves_500_front.jpg",
+	"Pakistan": "res://assets/bills_official/pk_5000_front.jpg",
 	"Argentina": "res://assets/bills_official/ar_10000_front.jpg",
 	"Brazil": "res://assets/bills_official/br_100_front.jpg",
 	"Chile": "res://assets/bills_official/cl_10000_front.jpg",
@@ -633,6 +678,12 @@ const COUNTRY_IMAGE_PATHS := {
 }
 
 const COUNTRY_ACCENT_COLORS := {
+	"Israel": Color("#1565c0"),
+	"Bolivia": Color("#007a33"),
+	"Indonesia": Color("#d32f2f"),
+	"Iran": Color("#2e7d32"),
+	"Venezuela": Color("#1565c0"),
+	"Pakistan": Color("#2e7d32"),
 	"Argentina": Color("#2c7be5"),
 	"Brazil": Color("#16a085"),
 	"Chile": Color("#1abc9c"),
@@ -659,7 +710,8 @@ var currency_entries: Array[Dictionary] = []
 var selected_country: String = ""
 var selected_note_index: int = 0
 var tool_screen_holds: int = 0
-var current_locale: String = DEFAULT_LOCALE
+# Empty until _ready applies the phone locale; English is only the unsupported-locale fallback.
+var current_locale: String = ""
 var locale_override: String = ""
 
 
@@ -677,7 +729,7 @@ func set_locale_from_system() -> void:
 func set_locale_code(raw_locale: String) -> void:
 	var locale := _normalize_locale(raw_locale)
 	if not SUPPORTED_LOCALES.has(locale):
-		locale = DEFAULT_LOCALE
+		locale = FALLBACK_LOCALE
 	current_locale = locale
 	if TranslationServer.has_method("set_locale"):
 		TranslationServer.set_locale(current_locale)
@@ -686,7 +738,7 @@ func set_locale_code(raw_locale: String) -> void:
 func set_locale_override(locale_code: String) -> void:
 	var locale := _normalize_locale(locale_code)
 	if not SUPPORTED_LOCALES.has(locale):
-		locale = DEFAULT_LOCALE
+		locale = FALLBACK_LOCALE
 	locale_override = locale
 	_apply_locale()
 	save_user_settings()
@@ -710,6 +762,9 @@ func get_supported_locales() -> Array[String]:
 
 
 func get_locale_display_name(locale_code: String) -> String:
+	var normalized := _normalize_locale(locale_code)
+	if LOCALE_DISPLAY_NAMES.has(normalized):
+		return str(LOCALE_DISPLAY_NAMES[normalized])
 	match _normalize_locale(locale_code):
 		"es":
 			return "Español"
@@ -717,6 +772,24 @@ func get_locale_display_name(locale_code: String) -> String:
 			return "Português"
 		"zh":
 			return "中文"
+		"he":
+			return "עברית"
+		"id":
+			return "Bahasa Indonesia"
+		"ur":
+			return "اردو"
+		"fil":
+			return "Filipino"
+		"fa":
+			return "فارسی"
+		"ms":
+			return "Bahasa Melayu"
+		"de":
+			return "Deutsch"
+		"ar":
+			return "العربية"
+		"fr":
+			return "Français"
 		_:
 			return "English"
 
@@ -730,17 +803,17 @@ func get_app_version() -> String:
 
 
 func get_about_text() -> String:
-	var update_text := str(ABOUT_UPDATE_SUMMARY.get(current_locale, ABOUT_UPDATE_SUMMARY[DEFAULT_LOCALE]))
+	var update_text := str(ABOUT_UPDATE_SUMMARY.get(current_locale, ABOUT_UPDATE_SUMMARY[FALLBACK_LOCALE]))
 	var version_line := t("about_version_label") % APP_VERSION
 	var update_line := t("about_update_label") % update_text
 	return "%s\n%s" % [version_line, update_line]
 
 
 func t(key: String) -> String:
-	var locale_map: Dictionary = UI_TEXTS.get(current_locale, UI_TEXTS[DEFAULT_LOCALE])
+	var locale_map: Dictionary = UI_TEXTS.get(current_locale, UI_TEXTS[FALLBACK_LOCALE])
 	if locale_map.has(key):
 		return str(locale_map.get(key, key))
-	return str(UI_TEXTS[DEFAULT_LOCALE].get(key, key))
+	return str(UI_TEXTS[FALLBACK_LOCALE].get(key, key))
 
 
 func load_currency_data() -> void:
@@ -783,13 +856,13 @@ func get_countries() -> Array[String]:
 
 
 func get_country_label(country: String) -> String:
-	var locale_map: Dictionary = COUNTRY_LABELS.get(current_locale, COUNTRY_LABELS[DEFAULT_LOCALE])
-	return str(locale_map.get(country, COUNTRY_LABELS[DEFAULT_LOCALE].get(country, humanize_key(country))))
+	var locale_map: Dictionary = COUNTRY_LABELS.get(current_locale, COUNTRY_LABELS[FALLBACK_LOCALE])
+	return str(locale_map.get(country, COUNTRY_LABELS[FALLBACK_LOCALE].get(country, humanize_key(country))))
 
 
 func get_currency_label(code: String) -> String:
-	var locale_map: Dictionary = CURRENCY_LABELS.get(current_locale, CURRENCY_LABELS[DEFAULT_LOCALE])
-	return str(locale_map.get(code, CURRENCY_LABELS[DEFAULT_LOCALE].get(code, humanize_key(code))))
+	var locale_map: Dictionary = CURRENCY_LABELS.get(current_locale, CURRENCY_LABELS[FALLBACK_LOCALE])
+	return str(locale_map.get(code, CURRENCY_LABELS[FALLBACK_LOCALE].get(code, humanize_key(code))))
 
 
 func set_selected_country(country: String) -> void:
@@ -1007,15 +1080,17 @@ func _apply_locale() -> void:
 func _normalize_locale(raw_locale: String) -> String:
 	var cleaned := raw_locale.strip_edges().to_lower().replace("-", "_")
 	if cleaned.is_empty():
-		return DEFAULT_LOCALE
+		return FALLBACK_LOCALE
 
+	if cleaned.begins_with("zh_hant") or cleaned.begins_with("zh_tw") or cleaned.begins_with("zh_hk"):
+		return "zh_hant"
 	if cleaned.begins_with("zh"):
 		return "zh"
 
 	var language := cleaned.split("_", false, 1)[0]
-	if language == "es" or language == "pt" or language == "en":
+	if language in SUPPORTED_LOCALES:
 		return language
-	return DEFAULT_LOCALE
+	return FALLBACK_LOCALE
 
 
 func save_user_settings() -> void:
@@ -1059,8 +1134,8 @@ func _get_localized_note_string(note: Dictionary, base_key: String) -> String:
 func _get_localized_variant(values: Dictionary) -> Variant:
 	if values.has(current_locale):
 		return values.get(current_locale)
-	if values.has(DEFAULT_LOCALE):
-		return values.get(DEFAULT_LOCALE)
+	if values.has(FALLBACK_LOCALE):
+		return values.get(FALLBACK_LOCALE)
 	var variants: Array = values.values()
 	if not variants.is_empty():
 		return variants[0]

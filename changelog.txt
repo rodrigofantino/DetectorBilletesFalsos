@@ -1,3 +1,8 @@
+V.2.010_Committed the current banknote catalog, localization updates, and Android publishing changes
+V.2.009_Default language now follows the phone language with English only as fallback
+V.2.008_Added the requested language locales and Traditional Chinese support
+V.2.006_Added Hebrew Indonesian Urdu Filipino Persian Malay German Arabic and French locales
+V.320_Added requested banknotes with localized security review data
 V.301_Initial project docs, ignore rules, and Godot port roadmap
 V.302_Godot project skeleton and ad-free port plan
 V.303_Imported legacy assets and upgraded the Godot menu and bill viewer
@@ -56,3 +61,7 @@ V.1.657_Shortened assisted review startup text and moved the authenticity discla
 V.1.658_Refined the editable menu, guided security review references, tool screens, and in-app rating flow
 V.1.659_Improved readable UI styling, compact About content, configurable banner placements, and banknote information cards
 V.2.001_Released version 2.0 with improved UI, ads, and banknote review
+V.2.003_Requested in-app review after completed banknote checks with a one-day local cooldown
+V.2.004_Added Israel banknotes with official security review data
+V.2.005_Corrected banner IDs and added an interstitial after every third daily review
+V.2.007_Completed Argentina banknote recognition and security review metadata

@@ -9,7 +9,7 @@ This document records the current implementation state of the legacy Android app
 - Target product: an app for detecting counterfeit bills and reviewing currency security features.
 - Main launcher flow: `Splash -> NewMainActivity`.
 - Legacy alternate flow: `Menu`, `Information`, and `PesosArgentinos` still exist in the codebase.
-- Godot port baseline: `Boot -> MainMenu -> feature scenes`, with banners limited to the main menu and completed guided-review result.
+- Godot port baseline: `Boot -> MainMenu -> feature scenes`, with banners assigned by feature placement and an occasional third-review interstitial.
 
 3. Implemented features
 - UV detector screen.
@@ -17,11 +17,12 @@ This document records the current implementation state of the legacy Android app
 - Currency information browser by country.
 - Bill-specific information screen for selected notes.
 - Legacy ad hooks exist only in the Android tree and are not reused by the Godot port.
-- AdMob banners may appear on the main menu, guided-review flow, quick tools, country selection, currency information, and completed result. Each placement uses a separately configurable banner unit ID; production IDs must be supplied before release.
+- AdMob banners may appear on the main menu, guided-review flow, quick tools, country selection, currency information, and completed result. Main menu and unspecified placements use the main-menu unit; UV/watermark use the tool unit; guided review uses the reviewer unit; banknote information uses the information unit.
+- An interstitial may appear after every third fully completed guided banknote review in the same calendar day.
 
 4. Current implementation risks
 - The legacy ad integration was removed; the Godot port uses AdMob only.
-- Play Store ratings use the native Google Play In-App Review flow, with local frequency limits and no incentives for positive reviews.
+- Play Store ratings use the native Google Play In-App Review flow after a completed guided review, with a one-day local frequency limit and no incentives for positive reviews.
 - Currency JSON exists in more than one place and one path has a casing mismatch.
 - Old Android permissions and old SDK assumptions may not survive the port unchanged.
 - Signing keys are missing from the repo and must stay local.
@@ -33,7 +34,7 @@ Phase 3: port the UV light screen with full-screen brightness control.
 Phase 4: port the RGB watermark light screen with timed color cycling.
 Phase 5: port the currency browser and note details using JSON data.
 Phase 6: test Android export on device and compare behavior against the legacy app.
-Phase 7: keep banners limited to the main menu and completed guided-review result, and verify Android export/privacy requirements.
+Phase 7: verify configured banner placements, the daily third-review interstitial, and Android export/privacy requirements.
 
 6. Working notes
 - Android Studio can help validate the old Android project and inspect legacy behavior if needed.

@@ -7,9 +7,9 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
-$expectedRecordCount = 72
-$expectedLegacyHash = "2a9d6d6072d729252137324354ced5ca3563faf778b57dbf23a0d42d3c52514a"
-$supportedLocales = @("en", "es", "pt", "zh")
+$expectedRecordCount = 109
+$expectedLegacyHash = "96c44a60fa594fcd378b2e2113193fdcc5ab90c11b33a21d57812b463c31917d"
+$supportedLocales = @("en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant")
 $allowedMethods = @("touch", "backlight", "tilt", "visual", "uv")
 $allowedSides = @("front", "back", "both")
 $allowedEquipment = @("none", "white_backlight", "external_uv_lamp")

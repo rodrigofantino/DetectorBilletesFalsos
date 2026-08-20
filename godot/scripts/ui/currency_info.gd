@@ -143,14 +143,6 @@ func _build_ui() -> void:
 			ScreenBuilder.style_button(source_button, "secondary")
 			source_button.pressed.connect(_open_source.bind(source_url))
 			actions.add_child(source_button)
-		var open := Button.new()
-		open.text = AppState.t("show_banknote")
-		open.custom_minimum_size = Vector2(0, button_height)
-		open.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		open.add_theme_font_size_override("font_size", button_font)
-		ScreenBuilder.style_button(open, "secondary")
-		open.pressed.connect(_open_note.bind(i))
-		actions.add_child(open)
 
 		list.add_child(card)
 		if i < notes.size() - 1:
@@ -170,11 +162,6 @@ func _build_ui() -> void:
 	root.add_child(back)
 	set_meta("screen_builder_content", root)
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)
-
-
-func _open_note(index: int) -> void:
-	AppState.set_selected_note_index(index)
-	get_tree().change_scene_to_file("res://scenes/BillViewer.tscn")
 
 
 func _open_source(url: String) -> void:

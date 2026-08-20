@@ -1,16 +1,18 @@
 extends Node
 
 const STATE_PATH := "user://review_state.cfg"
-const REQUIRED_USES := 5
-const MIN_DAYS_BEFORE_REQUEST := 3
-const PROMPT_COOLDOWN_DAYS := 90
+const PROMPT_COOLDOWN_DAYS := 1
+const INTERSTITIAL_REVIEW_INTERVAL := 3
 
 var _usage_count := 0
 var _first_launch_unix := 0
 var _last_prompt_unix := 0
+var _completed_review_pending := false
 var _request_pending := false
 var _manual_review_requested := false
 var _manual_review_flow_pending := false
+var _review_day := ""
+var _daily_completed_reviews := 0
 
 
 func _ready() -> void:
@@ -23,7 +25,17 @@ func _ready() -> void:
 func record_successful_use() -> void:
 	_usage_count += 1
 	_save_state()
+
+
+func record_completed_review() -> bool:
+	# The native Play flow is requested only after the user completes all steps.
+	_usage_count += 1
+	_completed_review_pending = true
+	_roll_daily_review_count()
+	_daily_completed_reviews += 1
+	_save_state()
 	_maybe_request_review()
+	return _daily_completed_reviews % INTERSTITIAL_REVIEW_INTERVAL == 0
 
 
 func can_request_manual_review() -> bool:
@@ -50,13 +62,9 @@ func request_manual_review() -> bool:
 
 
 func _maybe_request_review() -> void:
-	if _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
+	if _request_pending or not _completed_review_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
 		return
 	var now := int(Time.get_unix_time_from_system())
-	if _usage_count < REQUIRED_USES:
-		return
-	if now - _first_launch_unix < MIN_DAYS_BEFORE_REQUEST * 86400:
-		return
 	if _last_prompt_unix > 0 and now - _last_prompt_unix < PROMPT_COOLDOWN_DAYS * 86400:
 		return
 	var billing := get_node_or_null("/root/AppPurchases")
@@ -65,6 +73,7 @@ func _maybe_request_review() -> void:
 	if billing.has_method("can_request_in_app_review") and not billing.can_request_in_app_review():
 		return
 	_request_pending = true
+	_completed_review_pending = false
 	_last_prompt_unix = now
 	_save_state()
 	if billing.has_signal("review_flow_completed"):
@@ -102,7 +111,11 @@ func _load_state() -> void:
 	_usage_count = int(config.get_value("review", "usage_count", 0))
 	_first_launch_unix = int(config.get_value("review", "first_launch_unix", Time.get_unix_time_from_system()))
 	_last_prompt_unix = int(config.get_value("review", "last_prompt_unix", 0))
+	_completed_review_pending = bool(config.get_value("review", "completed_review_pending", false))
 	_manual_review_requested = bool(config.get_value("review", "manual_review_requested", false))
+	_review_day = str(config.get_value("review", "review_day", ""))
+	_daily_completed_reviews = int(config.get_value("review", "daily_completed_reviews", 0))
+	_roll_daily_review_count()
 
 
 func _save_state() -> void:
@@ -110,5 +123,16 @@ func _save_state() -> void:
 	config.set_value("review", "usage_count", _usage_count)
 	config.set_value("review", "first_launch_unix", _first_launch_unix)
 	config.set_value("review", "last_prompt_unix", _last_prompt_unix)
+	config.set_value("review", "completed_review_pending", _completed_review_pending)
 	config.set_value("review", "manual_review_requested", _manual_review_requested)
+	config.set_value("review", "review_day", _review_day)
+	config.set_value("review", "daily_completed_reviews", _daily_completed_reviews)
 	config.save(STATE_PATH)
+
+
+func _roll_daily_review_count() -> void:
+	var today := Time.get_date_string_from_system()
+	if _review_day == today:
+		return
+	_review_day = today
+	_daily_completed_reviews = 0

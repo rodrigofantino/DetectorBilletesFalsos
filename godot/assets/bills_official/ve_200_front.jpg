@@ -1,0 +1,30 @@
+<html lang="en" >
+    <head>
+        <link href="/css/error.min.css" rel="stylesheet" type="text/css" />
+        <link href="/css/numismatica.min.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8">
+        <title>Not found</title>
+    </head>
+    <body>
+        <div id="web-f" class="web-f-s">
+            <div id="gh">
+                Numismatic Catalog of Venezuela<div id="header-aka">Cheng's Numismatic</div><div id="header-urls"><a href="https://www.numismatica.info.ve">www.numismatica.info.ve</a> - <a href="https://numismatica-venezuela.info">numismatica-venezuela.info</a></div>                    
+            </div>
+        </div>
+            <div class="errbox">
+                <div class="errbox-t">Not found</div>
+                <div class="errbox-c">
+                    <table>
+                        <tr>
+                            <td><img src="/img/site/icon_info-48.png" alt="-" /></td>
+                            <td>The page or file you requested cannot be found.<p><a href="/en/index.htm">Main page</a></p></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+
+    </body>
+</html>

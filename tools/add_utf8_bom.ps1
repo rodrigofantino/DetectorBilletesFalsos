@@ -1,0 +1,5 @@
+param([Parameter(Mandatory=$true)][string]$Path)
+$utf8 = [System.Text.UTF8Encoding]::new($false)
+$utf8Bom = [System.Text.UTF8Encoding]::new($true)
+$text = [System.IO.File]::ReadAllText($Path, $utf8)
+[System.IO.File]::WriteAllText($Path, $text, $utf8Bom)

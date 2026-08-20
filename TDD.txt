@@ -6,9 +6,10 @@ Detector de Billetes Falsos
 - Language: GDScript, typed where practical
 - Export target: Android
 - Legacy validation tool: Android Studio only if we need to inspect or run the old Java project
-- AdMob banners use explicit placement keys. Main menu, guided review, quick tools, country selection, currency information, and the completed result may each receive a separately configured unit ID.
+- AdMob banners use explicit placement keys. Main menu and unspecified placements use the main-menu unit; UV/watermark use the tool unit; guided review uses the reviewer unit; banknote information uses the information unit.
+- Interstitials use a dedicated unit and are eligible only on every third fully completed guided review in the same calendar day; the daily count is persisted in `user://review_state.cfg` and resets when the calendar day changes.
 - The remove-ads option uses Google Play Billing product `remove_ads` as a non-consumable one-time purchase.
-- Google Play In-App Review may be requested after three meaningful tool uses, with a 90-day local cooldown and a separate Play Store listing button.
+- Google Play In-App Review may be requested after a completed guided review, with a one-day local cooldown and a separate Play Store listing button. Google Play does not report whether the user submitted a rating, so the app must not claim that a rating was received.
 
 2. Architecture target
 - One root scene with menu navigation.
@@ -65,7 +66,7 @@ Step 3: port the UV screen.
 Step 4: port the watermark color cycle.
 Step 5: port currency browsing and detail screens.
 Step 6: add Android export testing and device verification.
-Step 7: keep banners limited to the main menu and completed guided-review result, and verify Android packaging/privacy disclosures before release.
+Step 7: keep banners in the configured placements, show the daily third-review interstitial, and verify Android packaging/privacy disclosures before release.
 Step 7a: add Google Play Billing for the non-consumable `remove_ads` product and restore its entitlement on app start.
 Step 7b: integrate Google Play In-App Review without promising or conditioning a positive rating.
 Step 8: import and reuse the legacy logo, note images, and button sound for a closer visual match.

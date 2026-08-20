@@ -34,6 +34,15 @@ Bootstrap steps:
 - Avoid breaking gameplay rules documented in IDD/GDD/TDD. If a request conflicts, flag it.
 - Never commit secrets or tokens.
 
+## Currency catalog compliance (MANDATORY)
+- Before adding or changing any banknote, read `add_banknote.md` completely and follow its checklist.
+- Independently exhaust official issuer sources and official assets before treating a banknote as blocked. Do not add incomplete data.
+- If blocked, report the exact missing data and every official resource attempted; do not substitute placeholders, generated specimens, or non-official sources.
+- Whenever adding one or more notes, include the complete `add_banknote.md` checklist in the response and mark its status accurately.
+- Run the compatibility validator and headless UI verification. Update expected count/hash baselines intentionally when required by the validator; never suppress, bypass, or weaken validation.
+- Every localized note field and release review-step text must have a nonempty value for every active locale in `AppState.SUPPORTED_LOCALES`; never add a note missing an active locale.
+- The validator `$supportedLocales` list must exactly mirror `AppState.SUPPORTED_LOCALES`. Update both atomically whenever language support changes.
+
 ## Local-only files
 - Keep `keys posibles/` for recovered or candidate signing keys. The folder is local-only and must stay ignored by git.
 - Treat `run_codex_full_permisions.bat` as a local helper script. Do not commit it unless the user explicitly asks.
