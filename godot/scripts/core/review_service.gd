@@ -24,6 +24,28 @@ func record_successful_use() -> void:
 	_maybe_request_review()
 
 
+func can_request_manual_review() -> bool:
+	if _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
+		return false
+	var billing := get_node_or_null("/root/AppPurchases")
+	if billing == null or not billing.has_method("request_in_app_review"):
+		return false
+	return not billing.has_method("can_request_in_app_review") or billing.can_request_in_app_review()
+
+
+func request_manual_review() -> bool:
+	if not can_request_manual_review():
+		return false
+	var billing := get_node_or_null("/root/AppPurchases")
+	_request_pending = true
+	if billing.has_signal("review_flow_completed"):
+		billing.review_flow_completed.connect(_on_review_finished, CONNECT_ONE_SHOT)
+	if billing.has_signal("review_flow_error"):
+		billing.review_flow_error.connect(_on_review_error, CONNECT_ONE_SHOT)
+	billing.request_in_app_review()
+	return true
+
+
 func _maybe_request_review() -> void:
 	if _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
 		return

@@ -8,183 +8,78 @@ const REVIEW_SETUP_SCENE := "res://scenes/ReviewSetup.tscn"
 const REVIEW_LIBRARY_SCENE := "res://scenes/ReviewLibrary.tscn"
 const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
-var _title_label: Label
-var _subtitle_label: Label
-var _language_label: Label
-var _icon: TextureRect
-var _language_select: OptionButton
-var _language_row: HBoxContainer
-var _action_buttons: Array[Button] = []
-var _layout_root: VBoxContainer
-var _button_rows: Array[Container] = []
+@onready var _background: ColorRect = $Background
+@onready var _margin: MarginContainer = %SafeAreaMargin
+@onready var _panel: PanelContainer = %SurfacePanel
+@onready var _root_content: VBoxContainer = %RootContent
+@onready var _layout_root: VBoxContainer = %MenuContent
+@onready var _title_label: Label = %TitleLabel
+@onready var _subtitle_label: Label = %SubtitleLabel
+@onready var _language_label: Label = %LanguageLabel
+@onready var _icon: TextureRect = %Icon
+@onready var _language_select: OptionButton = %LanguageSelect
+@onready var _language_row: HBoxContainer = %LanguageRow
+@onready var _library_button: Button = %LibraryButton
+@onready var _analytics_button: Button = %AnalyticsButton
+@onready var _action_buttons: Array[Button] = [
+	%GuidedReviewButton, %LibraryButton, %UvButton, %WatermarkButton,
+	%CurrencyButton, %AboutButton, %RemoveAdsButton, %AnalyticsButton, %ExitButton
+]
+@onready var _button_rows: Array[Container] = [%ToolsGrid, %ExploreGrid, %SettingsGrid]
 
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	_build_ui()
+	_configure_static_ui()
 	resized.connect(_apply_responsive_layout)
 	_apply_responsive_layout()
 	call_deferred("_maybe_request_analytics_consent")
 
 
-func _build_ui() -> void:
-	var root: VBoxContainer = ScreenBuilder.setup_root(self, ScreenBuilder.COLOR_BACKGROUND)
-	_layout_root = ScreenBuilder.add_scroll_content(root, 900.0)
-	_layout_root.add_theme_constant_override("separation", 22)
-
-	var header_card := ScreenBuilder.add_card(_layout_root)
-
-	var header := HBoxContainer.new()
-	header.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	header.add_theme_constant_override("separation", 16)
-	header_card.add_child(header)
-
-	_icon = TextureRect.new()
-	_icon.texture = load("res://assets/ui/ic_launcher.png")
-	_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	header.add_child(_icon)
-
-	var text_box := VBoxContainer.new()
-	text_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text_box.add_theme_constant_override("separation", 8)
-	header.add_child(text_box)
-
-	_title_label = Label.new()
+func _configure_static_ui() -> void:
+	theme = ScreenBuilder._make_app_theme(self)
+	_background.color = ScreenBuilder.COLOR_BACKGROUND
+	_panel.add_theme_stylebox_override("panel", ScreenBuilder._style_box(Color("101a2a"), Color("24324a"), 22, 1, 20))
+	set_meta("screen_builder_content", _root_content)
+	ScreenBuilder.set_root_margin(self, _margin, 24)
+	_layout_root.alignment = BoxContainer.ALIGNMENT_BEGIN
+	_layout_root.add_theme_constant_override("separation", 14)
 	_title_label.text = AppState.t("app_title")
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	text_box.add_child(_title_label)
-
-	_subtitle_label = Label.new()
 	_subtitle_label.text = AppState.t("menu_subtitle")
-	_subtitle_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_subtitle_label.add_theme_color_override("font_color", ScreenBuilder.COLOR_TEXT_MUTED)
-	text_box.add_child(_subtitle_label)
-
-	_language_row = HBoxContainer.new()
-	_language_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_language_row.add_theme_constant_override("separation", 12)
-	text_box.add_child(_language_row)
-
-	_language_label = Label.new()
-	_language_label.custom_minimum_size = Vector2(120, 0)
-	_language_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	_language_row.add_child(_language_label)
-
-	_language_select = OptionButton.new()
-	_language_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	%GuidedReviewHint.text = AppState.t("menu_review_hint")
+	%ContinueLabel.text = AppState.t("menu_continue").to_upper()
+	%GuidedReviewButton.text = AppState.t("menu_guided_review")
+	_library_button.text = AppState.t("menu_library")
+	%UvButton.text = AppState.t("menu_uv")
+	%WatermarkButton.text = AppState.t("menu_watermark")
+	%CurrencyButton.text = AppState.t("menu_currency")
+	%AboutButton.text = AppState.t("menu_about")
+	%RemoveAdsButton.text = AppState.t("menu_remove_ads")
+	%ExitButton.text = AppState.t("menu_exit")
+	_library_button.disabled = ReviewHistoryStore.get_recents().is_empty() and ReviewHistoryStore.get_favorites().is_empty()
+	_analytics_button.visible = AnalyticsService.is_available()
+	_analytics_button.text = AppState.t("analytics_disable") if AnalyticsService.is_collection_enabled() else AppState.t("analytics_enable")
 	_populate_language_options(_language_select)
 	_language_select.item_selected.connect(_on_language_selected.bind(_language_select))
-	_language_row.add_child(_language_select)
+	%GuidedReviewButton.pressed.connect(_open_guided_review)
+	_library_button.pressed.connect(_open_review_library)
+	%UvButton.pressed.connect(_open_uv)
+	%WatermarkButton.pressed.connect(_open_watermark)
+	%CurrencyButton.pressed.connect(_open_countries)
+	%AboutButton.pressed.connect(_show_about)
+	%RemoveAdsButton.pressed.connect(_purchase_remove_ads)
+	_analytics_button.pressed.connect(_toggle_analytics)
+	%ExitButton.pressed.connect(_exit_app)
+	for button in _action_buttons:
+		ScreenBuilder.style_button(button, str(button.get_meta("menu_variant", "secondary")))
+		if bool(button.get_meta("play_click", true)):
+			button.pressed.connect(_play_click)
 	ScreenBuilder.style_option_button(_language_select)
-
-	var primary := _add_menu_button(
-		_layout_root,
-		AppState.t("menu_guided_review"),
-		Callable(self, "_open_guided_review"),
-		"primary"
-	)
-	primary.set_meta("menu_size", "primary")
-	var cta_hint := ScreenBuilder.add_body(_layout_root, AppState.t("menu_review_hint"))
-	cta_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	if not ReviewHistoryStore.get_recents().is_empty() or not ReviewHistoryStore.get_favorites().is_empty():
-		ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_continue"))
-		_add_menu_button(
-			_layout_root,
-			AppState.t("menu_library"),
-			Callable(self, "_open_review_library"),
-			"secondary"
-		)
-
-	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_quick_tools"))
-	var tools_grid := _add_action_grid(_layout_root)
-	_add_menu_button(
-		tools_grid,
-		AppState.t("menu_uv"),
-		Callable(self, "_open_uv"),
-		"secondary"
-	)
-	_add_menu_button(
-		tools_grid,
-		AppState.t("menu_watermark"),
-		Callable(self, "_open_watermark"),
-		"secondary"
-	)
-
-	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_explore"))
-	var explore_grid := _add_action_grid(_layout_root)
-	_add_menu_button(
-		explore_grid,
-		AppState.t("menu_currency"),
-		Callable(self, "_open_countries"),
-		"secondary"
-	)
-	_add_menu_button(
-		explore_grid,
-		AppState.t("menu_about"),
-		Callable(self, "_show_about"),
-		"secondary",
-		false
-	)
-
-	ScreenBuilder.add_section_label(_layout_root, AppState.t("menu_more"))
-	_add_menu_button(
-		_layout_root,
-		AppState.t("menu_remove_ads"),
-		Callable(self, "_purchase_remove_ads"),
-		"quiet",
-		false
-	)
-	if AnalyticsService.is_available():
-		_add_menu_button(
-			_layout_root,
-			AppState.t("analytics_disable") if AnalyticsService.is_collection_enabled() else AppState.t("analytics_enable"),
-			Callable(self, "_toggle_analytics"),
-			"quiet",
-			false
-		)
-	_add_menu_button(
-		_layout_root,
-		AppState.t("menu_exit"),
-		Callable(self, "_exit_app"),
-		"quiet"
-	)
-
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_MAIN_MENU)
 	var purchases := get_node_or_null("/root/AppPurchases")
 	if purchases != null:
 		purchases.entitlement_changed.connect(_on_entitlement_changed)
 		purchases.purchase_message.connect(_on_purchase_message)
-
-
-func _add_action_grid(parent: Container) -> GridContainer:
-	var grid := GridContainer.new()
-	grid.columns = 2
-	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 14)
-	grid.add_theme_constant_override("v_separation", 14)
-	parent.add_child(grid)
-	_button_rows.append(grid)
-	return grid
-
-
-func _add_menu_button(parent: Container, text: String, callback: Callable, variant: String = "secondary", play_sound: bool = true) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	button.pressed.connect(callback)
-	if play_sound:
-		button.pressed.connect(_play_click)
-	parent.add_child(button)
-	ScreenBuilder.style_button(button, variant)
-	button.set_meta("menu_size", "compact" if variant == "quiet" else "standard")
-	_action_buttons.append(button)
-	return button
-
 
 func _apply_responsive_layout() -> void:
 	var viewport: Viewport = get_viewport()
@@ -196,6 +91,7 @@ func _apply_responsive_layout() -> void:
 		return
 
 	var ui_scale: float = ScreenBuilder.visual_ui_scale(self)
+	_layout_root.custom_minimum_size.x = min(900.0 * ui_scale, max(0.0, viewport_size.x - 72.0))
 	var margin: int = int(round(18.0 * ui_scale))
 	var icon_size: int = int(round(82.0 * ui_scale))
 	var title_size: int = int(round(34.0 * ui_scale))
@@ -326,10 +222,44 @@ func _record_review_use() -> void:
 
 
 func _show_about() -> void:
-	_show_dialog(
-		AppState.t("about_title"),
-		AppState.get_about_text()
+	var dialog := AcceptDialog.new()
+	dialog.theme = theme
+	dialog.borderless = true
+	dialog.unresizable = true
+	dialog.exclusive = true
+	dialog.min_size = Vector2(min(720.0, get_viewport_rect().size.x * 0.86), 0)
+	dialog.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))
+	add_child(dialog)
+	dialog.get_ok_button().hide()
+	dialog.close_requested.connect(dialog.queue_free)
+
+	var content := VBoxContainer.new()
+	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation", int(round(18.0 * ScreenBuilder.visual_ui_scale(self))))
+	dialog.add_child(content)
+
+	var title := ScreenBuilder.add_title(content, AppState.t("about_title"))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	var body := ScreenBuilder.add_body(content, AppState.get_about_text())
+	body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	var actions := HBoxContainer.new()
+	actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	actions.add_theme_constant_override("separation", int(round(14.0 * ScreenBuilder.visual_ui_scale(self))))
+	content.add_child(actions)
+	var back := ScreenBuilder.add_button(actions, AppState.t("back"), "secondary")
+	back.pressed.connect(dialog.queue_free)
+	var rate := ScreenBuilder.add_button(actions, AppState.t("rate_this_app"), "primary")
+	rate.disabled = not AppReview.can_request_manual_review()
+	rate.pressed.connect(func() -> void:
+		dialog.queue_free()
+		call_deferred("_request_manual_review")
 	)
+	dialog.popup_centered()
+
+
+func _request_manual_review() -> void:
+	AppReview.request_manual_review()
 
 
 func _maybe_request_analytics_consent() -> void:

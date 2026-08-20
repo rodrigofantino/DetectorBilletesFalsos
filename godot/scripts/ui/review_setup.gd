@@ -9,6 +9,9 @@ var _camera_status: Label
 var _camera_button: Button
 var _start_button: Button
 var _candidate_box: VBoxContainer
+var _camera_section: VBoxContainer
+var _manual_section: VBoxContainer
+var _scan_in_progress := false
 var _selection_path := "manual"
 
 
@@ -27,35 +30,46 @@ func _build_ui() -> void:
 	ScreenBuilder.add_subtitle(content, AppState.t("guided_review_subtitle"))
 	ScreenBuilder.add_body(content, AppState.t("review_setup_intro"))
 
-	var disclaimer := ScreenBuilder.add_body(content, AppState.t("review_disclaimer"))
-	disclaimer.modulate = Color(1.0, 0.82, 0.42)
+	ScreenBuilder.add_subtitle(content, AppState.t("review_choose_method"))
+	var camera_choice := ScreenBuilder.add_button(content, AppState.t("review_camera_option"), "primary")
+	camera_choice.pressed.connect(_choose_camera)
+	var manual_choice := ScreenBuilder.add_button(content, AppState.t("review_manual_option"))
+	manual_choice.pressed.connect(_choose_manual)
 
-	_camera_button = ScreenBuilder.add_button(content, AppState.t("identify_camera"))
+	_camera_section = VBoxContainer.new()
+	_camera_section.add_theme_constant_override("separation", 10)
+	_camera_section.visible = false
+	content.add_child(_camera_section)
+	_camera_button = ScreenBuilder.add_button(_camera_section, AppState.t("identify_camera"))
 	_camera_button.pressed.connect(_identify_with_camera)
-	_camera_status = ScreenBuilder.add_body(content, "")
+	_camera_status = ScreenBuilder.add_body(_camera_section, "")
 	_refresh_camera_availability()
 	call_deferred("_refresh_camera_availability")
 	_candidate_box = VBoxContainer.new()
 	_candidate_box.add_theme_constant_override("separation", 10)
-	content.add_child(_candidate_box)
+	_camera_section.add_child(_candidate_box)
 
-	ScreenBuilder.add_subtitle(content, AppState.t("choose_country"))
+	_manual_section = VBoxContainer.new()
+	_manual_section.add_theme_constant_override("separation", 12)
+	_manual_section.visible = false
+	content.add_child(_manual_section)
+	ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_country"))
 	_country_select = OptionButton.new()
 	_country_select.custom_minimum_size = Vector2(0, 96)
 	_country_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_country_select.item_selected.connect(_on_country_selected)
-	content.add_child(_country_select)
+	_manual_section.add_child(_country_select)
 	ScreenBuilder.style_option_button(_country_select)
 
-	ScreenBuilder.add_subtitle(content, AppState.t("choose_banknote"))
+	ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_banknote"))
 	_note_select = OptionButton.new()
 	_note_select.custom_minimum_size = Vector2(0, 96)
 	_note_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_note_select.item_selected.connect(_on_note_selected)
-	content.add_child(_note_select)
+	_manual_section.add_child(_note_select)
 	ScreenBuilder.style_option_button(_note_select)
 
-	_start_button = ScreenBuilder.add_button(content, AppState.t("start_review"), "primary")
+	_start_button = ScreenBuilder.add_button(_manual_section, AppState.t("start_review"), "primary")
 	_start_button.pressed.connect(_start_review)
 	var back := ScreenBuilder.add_button(content, AppState.t("back"), "quiet")
 	back.pressed.connect(_return_home)
@@ -65,9 +79,23 @@ func _build_ui() -> void:
 
 func _refresh_camera_availability() -> void:
 	var available := BillRecognitionService.is_available()
-	_camera_button.disabled = not available
+	_camera_button.disabled = not available or _scan_in_progress
 	_camera_status.visible = not available
 	_camera_status.text = "" if available else AppState.t("camera_unavailable")
+
+
+func _choose_camera() -> void:
+	_selection_path = "camera"
+	_camera_section.visible = true
+	_manual_section.visible = false
+	_identify_with_camera()
+
+
+func _choose_manual() -> void:
+	_selection_path = "manual"
+	_camera_section.visible = false
+	_manual_section.visible = true
+	_clear_candidates()
 
 
 func _populate_countries() -> void:
@@ -107,6 +135,11 @@ func _on_note_selected(index: int) -> void:
 
 
 func _identify_with_camera() -> void:
+	if _scan_in_progress or not BillRecognitionService.is_available():
+		_refresh_camera_availability()
+		return
+	_scan_in_progress = true
+	_camera_button.disabled = true
 	_camera_status.visible = true
 	_camera_status.text = AppState.t("scan_processing")
 	_clear_candidates()
@@ -114,6 +147,8 @@ func _identify_with_camera() -> void:
 
 
 func _on_recognition_finished(result: Dictionary) -> void:
+	_scan_in_progress = false
+	_refresh_camera_availability()
 	var status := str(result.get("status", "unknown"))
 	AnalyticsService.track("camera_result", {"result_kind": status})
 	var candidates: Variant = result.get("candidates", [])
@@ -159,6 +194,7 @@ func _confirm_candidate(note_id: String) -> void:
 			break
 	_selection_path = "camera"
 	_clear_candidates()
+	_start_review()
 
 
 func _clear_candidates() -> void:

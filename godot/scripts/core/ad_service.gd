@@ -6,6 +6,7 @@ signal banner_loaded
 signal banner_failed(error: String)
 
 const ADMOB_BANNER_UNIT_ID := "ca-app-pub-4703386652643425/9145624203"
+const ADMOB_TEST_BANNER_UNIT_ID := "ca-app-pub-3940256099942544/6300978111"
 const BANNER_RESERVED_HEIGHT := 96
 const PLACEMENT_NONE := "none"
 const PLACEMENT_MAIN_MENU := "main_menu"
@@ -25,7 +26,7 @@ func _ready() -> void:
 
 
 func should_reserve_banner_space() -> bool:
-	return _placement != PLACEMENT_NONE and _is_android() and not _ads_removed()
+	return _placement != PLACEMENT_NONE and _banner_loaded and _is_android() and not _ads_removed()
 
 
 func get_reserved_banner_height() -> int:
@@ -149,7 +150,9 @@ func _create_banner() -> void:
 	if ad_size.width <= 0 or ad_size.height <= 0:
 		ad_size = AdSize.BANNER
 
-	_ad_view = AdView.new(ADMOB_BANNER_UNIT_ID, ad_size, AdPosition.Values.BOTTOM)
+	var banner_unit_id := _get_banner_unit_id()
+	print("AdMob: creating %s banner." % ("test" if banner_unit_id == ADMOB_TEST_BANNER_UNIT_ID else "production"))
+	_ad_view = AdView.new(banner_unit_id, ad_size, AdPosition.Values.BOTTOM)
 	_ad_view.ad_listener = _ad_listener
 	banner_attached.emit()
 
@@ -165,6 +168,7 @@ func _on_admob_initialized(_status: InitializationStatus) -> void:
 
 func _on_ad_loaded() -> void:
 	_banner_loaded = true
+	print("AdMob: banner loaded.")
 	if _show_requested and _ad_view != null:
 		_ad_view.show()
 	banner_loaded.emit()
@@ -186,3 +190,9 @@ func _on_ad_closed() -> void:
 
 func _log_failure(message: String) -> void:
 	push_warning("AdMob: %s" % message)
+
+
+func _get_banner_unit_id() -> String:
+	if OS.is_debug_build():
+		return ADMOB_TEST_BANNER_UNIT_ID
+	return ADMOB_BANNER_UNIT_ID

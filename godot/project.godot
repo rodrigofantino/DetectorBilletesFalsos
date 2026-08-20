@@ -22,8 +22,8 @@ config/name_localized={
 }
 run/main_scene="res://scenes/Boot.tscn"
 config/features=PackedStringArray("4.6")
-config/icon="res://assets/ui/app_icon_512.png"
 boot_splash/show_image=false
+config/icon="res://assets/ui/app_icon_512.png"
 
 [autoload]
 

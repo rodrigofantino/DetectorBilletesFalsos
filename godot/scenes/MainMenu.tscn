@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/ui/ic_launcher.png" id="2"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,3 +11,185 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SafeAreaMargin" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SurfacePanel" type="PanelContainer" parent="SafeAreaMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RootContent" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MenuScroll" type="ScrollContainer" parent="SafeAreaMargin/SurfacePanel/RootContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="MenuCenter" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MenuContent" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(900, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 1
+
+[node name="HeaderCard" type="PanelContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeaderContent" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HeaderRow" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Icon" type="TextureRect" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HeaderText" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="SubtitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="LanguageRow" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LanguageLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText/LanguageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LanguageSelect" type="OptionButton" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText/LanguageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GuidedReviewButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_size = "primary"
+metadata/menu_variant = "primary"
+
+[node name="GuidedReviewHint" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="ContinueLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LibraryButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+
+[node name="ToolsGrid" type="GridContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="UvButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/ToolsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+
+[node name="WatermarkButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/ToolsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+
+[node name="ExploreGrid" type="GridContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="CurrencyButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/ExploreGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+
+[node name="AboutButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/ExploreGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+metadata/play_click = false
+
+[node name="SettingsGrid" type="GridContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+
+[node name="RemoveAdsButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/SettingsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+metadata/play_click = false
+
+[node name="ExitButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/SettingsGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/menu_variant = "secondary"
+
+[node name="AnalyticsButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+visible = false
+metadata/menu_variant = "quiet"
+metadata/play_click = false
