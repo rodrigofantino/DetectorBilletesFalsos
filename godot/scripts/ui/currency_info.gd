@@ -3,6 +3,7 @@ extends Control
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	theme = ScreenBuilder._make_app_theme(self)
 	_build_ui()
 
 
@@ -35,15 +36,6 @@ func _build_ui() -> void:
 	root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_theme_constant_override("separation", int(round(22.0 * ui_scale)))
 	margin.add_child(root)
-
-	var back := Button.new()
-	back.text = AppState.t("back")
-	back.custom_minimum_size = Vector2(0, button_height)
-	back.add_theme_font_size_override("font_size", button_font)
-	back.pressed.connect(func() -> void:
-		get_tree().change_scene_to_file("res://scenes/CountrySelect.tscn")
-	)
-	root.add_child(back)
 
 	var title := Label.new()
 	title.text = AppState.t("currency_info_title")
@@ -89,21 +81,17 @@ func _build_ui() -> void:
 		card_margin.add_theme_constant_override("margin_bottom", card_padding)
 		card.add_child(card_margin)
 
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", int(round(18.0 * ui_scale)))
-		card_margin.add_child(row)
-
-		row.add_child(_build_thumbnail(note, ui_scale))
-
 		var inner := VBoxContainer.new()
 		inner.add_theme_constant_override("separation", int(round(14.0 * ui_scale)))
 		inner.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		row.add_child(inner)
+		card_margin.add_child(inner)
 
 		var header := Label.new()
 		header.text = AppState.get_note_badge(note)
 		header.add_theme_font_size_override("font_size", header_font)
+		header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		inner.add_child(header)
+		inner.add_child(_build_thumbnail(note, ui_scale))
 
 		var summary := Label.new()
 		summary.text = AppState.get_note_summary(note)
@@ -117,6 +105,7 @@ func _build_ui() -> void:
 		watermark.add_theme_font_size_override("font_size", body_font)
 		inner.add_child(watermark)
 
+		var source_url := AppState.get_note_source_url(note)
 		var source := AppState.get_note_source(note)
 		if not source.is_empty():
 			var source_label := Label.new()
@@ -126,14 +115,6 @@ func _build_ui() -> void:
 			source_label.add_theme_font_size_override("font_size", body_font)
 			inner.add_child(source_label)
 
-			var source_url := AppState.get_note_source_url(note)
-			if ScreenBuilder.is_valid_web_url(source_url):
-				var source_button := Button.new()
-				source_button.text = AppState.t("open_official_source")
-				source_button.custom_minimum_size = Vector2(0, button_height)
-				source_button.add_theme_font_size_override("font_size", button_font)
-				source_button.pressed.connect(_open_source.bind(source_url))
-				inner.add_child(source_button)
 
 		var features := AppState.get_note_features(note)
 		if not features.is_empty():
@@ -149,16 +130,46 @@ func _build_ui() -> void:
 				bullet.add_theme_font_size_override("font_size", body_font)
 				inner.add_child(bullet)
 
+		var actions := HBoxContainer.new()
+		actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		actions.add_theme_constant_override("separation", int(round(14.0 * ui_scale)))
+		inner.add_child(actions)
+		if ScreenBuilder.is_valid_web_url(source_url):
+			var source_button := Button.new()
+			source_button.text = AppState.t("open_official_source")
+			source_button.custom_minimum_size = Vector2(0, button_height)
+			source_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			source_button.add_theme_font_size_override("font_size", button_font)
+			ScreenBuilder.style_button(source_button, "secondary")
+			source_button.pressed.connect(_open_source.bind(source_url))
+			actions.add_child(source_button)
 		var open := Button.new()
-		open.text = AppState.t("open_note_viewer")
+		open.text = AppState.t("show_banknote")
 		open.custom_minimum_size = Vector2(0, button_height)
+		open.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		open.add_theme_font_size_override("font_size", button_font)
+		ScreenBuilder.style_button(open, "secondary")
 		open.pressed.connect(_open_note.bind(i))
-		inner.add_child(open)
+		actions.add_child(open)
 
 		list.add_child(card)
+		if i < notes.size() - 1:
+			var separator := HSeparator.new()
+			separator.add_theme_constant_override("separation", int(round(12.0 * ui_scale)))
+			list.add_child(separator)
 
 	ScreenBuilder.enable_touch_scroll(scroll, list)
+	var back := Button.new()
+	back.text = AppState.t("back")
+	back.custom_minimum_size = Vector2(0, button_height)
+	back.add_theme_font_size_override("font_size", button_font)
+	ScreenBuilder.style_button(back, "secondary")
+	back.pressed.connect(func() -> void:
+		get_tree().change_scene_to_file("res://scenes/CountrySelect.tscn")
+	)
+	root.add_child(back)
+	set_meta("screen_builder_content", root)
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)
 
 
 func _open_note(index: int) -> void:
@@ -172,18 +183,20 @@ func _open_source(url: String) -> void:
 
 
 func _build_thumbnail(note: Dictionary, ui_scale: float) -> Control:
-	var thumb_size := int(round(168.0 * ui_scale))
+	var thumb_width := int(round(720.0 * ui_scale))
+	var thumb_height := int(round(360.0 * ui_scale))
 	var texture := _load_note_texture(note)
 	if texture != null:
 		var image := TextureRect.new()
-		image.custom_minimum_size = Vector2(thumb_size, thumb_size)
+		image.custom_minimum_size = Vector2(thumb_width, thumb_height)
+		image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		image.texture = texture
 		return image
 
 	var thumb := Control.new()
-	thumb.custom_minimum_size = Vector2(thumb_size, thumb_size)
+	thumb.custom_minimum_size = Vector2(thumb_width, thumb_height)
 
 	var bg := ColorRect.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -212,20 +225,20 @@ func _build_thumbnail(note: Dictionary, ui_scale: float) -> Control:
 	country.text = AppState.get_country_label(str(note.get("country", "")))
 	country.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	country.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	country.add_theme_font_size_override("font_size", int(round(18.0 * ui_scale)))
+	country.add_theme_font_size_override("font_size", int(round(32.0 * ui_scale)))
 	col.add_child(country)
 
 	var denom := Label.new()
 	denom.text = AppState.get_note_badge(note)
 	denom.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	denom.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	denom.add_theme_font_size_override("font_size", int(round(26.0 * ui_scale)))
+	denom.add_theme_font_size_override("font_size", int(round(42.0 * ui_scale)))
 	col.add_child(denom)
 
 	var hint := Label.new()
 	hint.text = AppState.t("thumbnail")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.add_theme_font_size_override("font_size", int(round(15.0 * ui_scale)))
+	hint.add_theme_font_size_override("font_size", int(round(28.0 * ui_scale)))
 	hint.modulate = Color(0.95, 0.95, 0.95, 0.8)
 	col.add_child(hint)
 

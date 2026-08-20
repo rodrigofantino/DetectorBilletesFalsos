@@ -19,17 +19,21 @@ func _ready() -> void:
 func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, Color(0.04, 0.07, 0.11, 1.0))
 	var content := ScreenBuilder.add_scroll_content(root)
-	ScreenBuilder.add_title(content, AppState.t("review_result_title"))
+	var title := ScreenBuilder.add_title(content, AppState.t("review_result_title"))
+	title.add_theme_font_size_override("font_size", 52)
 	var note := GuidedReviewSession.get_note()
-	ScreenBuilder.add_subtitle(content, AppState.get_note_title(note))
+	var note_title := ScreenBuilder.add_subtitle(content, AppState.get_note_title(note))
+	note_title.add_theme_font_size_override("font_size", 32)
 	var counts := GuidedReviewSession.get_counts()
-	ScreenBuilder.add_body(content, AppState.t("result_observed") % int(counts.get(GuidedReviewSession.ANSWER_OBSERVED, 0)))
-	ScreenBuilder.add_body(content, AppState.t("result_mismatch") % int(counts.get(GuidedReviewSession.ANSWER_MISMATCH, 0)))
-	ScreenBuilder.add_body(content, AppState.t("result_unable") % int(counts.get(GuidedReviewSession.ANSWER_UNABLE, 0)))
+	for text in [AppState.t("result_observed") % int(counts.get(GuidedReviewSession.ANSWER_OBSERVED, 0)), AppState.t("result_mismatch") % int(counts.get(GuidedReviewSession.ANSWER_MISMATCH, 0)), AppState.t("result_unable") % int(counts.get(GuidedReviewSession.ANSWER_UNABLE, 0))]:
+		var result_line := ScreenBuilder.add_body(content, text)
+		result_line.add_theme_font_size_override("font_size", 30)
 
 	var disclaimer := ScreenBuilder.add_body(content, AppState.t("review_disclaimer"))
+	disclaimer.add_theme_font_size_override("font_size", 30)
 	disclaimer.modulate = Color(1.0, 0.82, 0.42)
-	ScreenBuilder.add_body(content, AppState.t("review_result_advice"))
+	var advice := ScreenBuilder.add_body(content, AppState.t("review_result_advice"))
+	advice.add_theme_font_size_override("font_size", 30)
 
 	var source_url := AppState.get_note_source_url(note)
 	if ScreenBuilder.is_valid_web_url(source_url):
@@ -41,8 +45,11 @@ func _build_ui() -> void:
 	_refresh_favorite_button()
 	var another := ScreenBuilder.add_button(content, AppState.t("review_another"), "primary")
 	another.pressed.connect(_review_another)
-	var home := ScreenBuilder.add_button(content, AppState.t("return_home"), "quiet")
+	var home := ScreenBuilder.add_button(content, AppState.t("return_home"), "secondary")
 	home.pressed.connect(_return_home)
+	for child in content.get_children():
+		if child is Button:
+			(child as Button).add_theme_font_size_override("font_size", 34)
 
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_REVIEW_RESULT)
 

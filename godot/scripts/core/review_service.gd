@@ -9,6 +9,8 @@ var _usage_count := 0
 var _first_launch_unix := 0
 var _last_prompt_unix := 0
 var _request_pending := false
+var _manual_review_requested := false
+var _manual_review_flow_pending := false
 
 
 func _ready() -> void:
@@ -25,7 +27,7 @@ func record_successful_use() -> void:
 
 
 func can_request_manual_review() -> bool:
-	if _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
+	if _manual_review_requested or _request_pending or not (OS.has_feature("android") or OS.has_feature("Android")):
 		return false
 	var billing := get_node_or_null("/root/AppPurchases")
 	if billing == null or not billing.has_method("request_in_app_review"):
@@ -38,6 +40,7 @@ func request_manual_review() -> bool:
 		return false
 	var billing := get_node_or_null("/root/AppPurchases")
 	_request_pending = true
+	_manual_review_flow_pending = true
 	if billing.has_signal("review_flow_completed"):
 		billing.review_flow_completed.connect(_on_review_finished, CONNECT_ONE_SHOT)
 	if billing.has_signal("review_flow_error"):
@@ -77,10 +80,17 @@ func _on_billing_ready() -> void:
 
 func _on_review_finished() -> void:
 	_request_pending = false
+	if _manual_review_flow_pending:
+		# Google Play does not disclose whether a rating was submitted; record only
+		# that its native review flow finished so the manual control is not repeated.
+		_manual_review_requested = true
+		_manual_review_flow_pending = false
+		_save_state()
 
 
 func _on_review_error(_message: String) -> void:
 	_request_pending = false
+	_manual_review_flow_pending = false
 
 
 func _load_state() -> void:
@@ -92,6 +102,7 @@ func _load_state() -> void:
 	_usage_count = int(config.get_value("review", "usage_count", 0))
 	_first_launch_unix = int(config.get_value("review", "first_launch_unix", Time.get_unix_time_from_system()))
 	_last_prompt_unix = int(config.get_value("review", "last_prompt_unix", 0))
+	_manual_review_requested = bool(config.get_value("review", "manual_review_requested", false))
 
 
 func _save_state() -> void:
@@ -99,4 +110,5 @@ func _save_state() -> void:
 	config.set_value("review", "usage_count", _usage_count)
 	config.set_value("review", "first_launch_unix", _first_launch_unix)
 	config.set_value("review", "last_prompt_unix", _last_prompt_unix)
+	config.set_value("review", "manual_review_requested", _manual_review_requested)
 	config.save(STATE_PATH)

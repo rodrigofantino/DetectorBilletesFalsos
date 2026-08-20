@@ -7,7 +7,6 @@ var _content: VBoxContainer
 
 
 func _ready() -> void:
-	AppAds.hide_banner()
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	_build_ui()
 
@@ -15,24 +14,31 @@ func _ready() -> void:
 func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, Color(0.04, 0.07, 0.11, 1.0))
 	_content = ScreenBuilder.add_scroll_content(root)
-	ScreenBuilder.add_title(_content, AppState.t("library_title"))
-	var back := ScreenBuilder.add_button(_content, AppState.t("back"), "quiet")
-	back.pressed.connect(func() -> void: get_tree().change_scene_to_file(MAIN_MENU_SCENE))
+	var title := ScreenBuilder.add_title(_content, AppState.t("library_title"))
+	title.add_theme_font_size_override("font_size", 52)
 
 	var favorites := ReviewHistoryStore.get_favorites()
 	var recents := ReviewHistoryStore.get_recents()
 	if favorites.is_empty() and recents.is_empty():
-		ScreenBuilder.add_body(_content, AppState.t("library_empty"))
-		return
+		var empty := ScreenBuilder.add_body(_content, AppState.t("library_empty"))
+		empty.add_theme_font_size_override("font_size", 30)
+	else:
+		if not favorites.is_empty():
+			var favorites_title := ScreenBuilder.add_subtitle(_content, AppState.t("library_favorites"))
+			favorites_title.add_theme_font_size_override("font_size", 32)
+			_add_note_buttons(favorites)
+		if not recents.is_empty():
+			var recent_title := ScreenBuilder.add_subtitle(_content, AppState.t("library_recent"))
+			recent_title.add_theme_font_size_override("font_size", 32)
+			_add_note_buttons(recents)
+			var clear := ScreenBuilder.add_button(_content, AppState.t("clear_history"), "warning")
+			clear.add_theme_font_size_override("font_size", 34)
+			clear.pressed.connect(_clear_history)
 
-	if not favorites.is_empty():
-		ScreenBuilder.add_subtitle(_content, AppState.t("library_favorites"))
-		_add_note_buttons(favorites)
-	if not recents.is_empty():
-		ScreenBuilder.add_subtitle(_content, AppState.t("library_recent"))
-		_add_note_buttons(recents)
-		var clear := ScreenBuilder.add_button(_content, AppState.t("clear_history"), "warning")
-		clear.pressed.connect(_clear_history)
+	var back := ScreenBuilder.add_button(root, AppState.t("back"), "secondary")
+	back.add_theme_font_size_override("font_size", 34)
+	back.pressed.connect(func() -> void: get_tree().change_scene_to_file(MAIN_MENU_SCENE))
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_GUIDED_REVIEW)
 
 
 func _add_note_buttons(note_ids: Array[String]) -> void:
@@ -45,6 +51,7 @@ func _add_note_buttons(note_ids: Array[String]) -> void:
 		if note.is_empty():
 			continue
 		var button := ScreenBuilder.add_button(_content, AppState.get_note_title(note))
+		button.add_theme_font_size_override("font_size", 34)
 		button.pressed.connect(_start_review.bind(note_id))
 
 

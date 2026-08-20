@@ -54,3 +54,5 @@ V.1.655_Completed four-language banknote content and removed the Godot boot spla
 V.1.656_Fixed banner placement persistence and removed legacy screen reserves
 V.1.657_Shortened assisted review startup text and moved the authenticity disclaimer to the result
 V.1.658_Refined the editable menu, guided security review references, tool screens, and in-app rating flow
+V.1.659_Improved readable UI styling, compact About content, configurable banner placements, and banknote information cards
+V.2.001_Released version 2.0 with improved UI, ads, and banknote review

@@ -21,7 +21,7 @@ Help users perform an assisted, step-by-step review of banknote security referen
 - UV detector: a strong blue/violet light mode that simulates UV inspection.
 - Watermark viewer: rotating colors to help visualize marks and paper differences.
 - Currency info browser: country selection plus bill security details.
-- Minimal monetization: AdMob banners may appear only on the main menu and the completed guided-review result. Capture, checklist, UV, watermark, and note-inspection screens stay ad-free.
+- Minimal monetization: AdMob banners may appear on the main menu, guided-review flow, quick tools, country selection, currency information, and completed result; placements remain non-blocking and use configurable unit IDs.
 - After meaningful use, the app can show Google Play's native review card; users can also open the Play Store listing from the main menu.
 
 5. Content scope

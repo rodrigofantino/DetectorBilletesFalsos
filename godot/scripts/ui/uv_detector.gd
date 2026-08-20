@@ -6,7 +6,6 @@ var _tool_light: ColorRect
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	AppAds.hide_banner()
 	AppState.acquire_tool_screen()
 	_build_ui()
 
@@ -22,8 +21,10 @@ func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, ScreenBuilder.COLOR_BACKGROUND)
 	var title := ScreenBuilder.add_title(root, AppState.t("uv_title"))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 52)
 	var message := ScreenBuilder.add_body(root, AppState.t("uv_message"))
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	message.add_theme_font_size_override("font_size", 30)
 
 	_tool_light = ColorRect.new()
 	_tool_light.name = "ToolLight"
@@ -35,9 +36,11 @@ func _build_ui() -> void:
 	root.add_child(_tool_light)
 
 	var back := ScreenBuilder.add_button(root, AppState.t("back"), "secondary")
+	back.add_theme_font_size_override("font_size", 34)
 	back.pressed.connect(func() -> void:
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 	)
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_TOOL)
 
 
 func _exit_tree() -> void:

@@ -2,14 +2,14 @@ extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.1.658"
+const APP_VERSION := "V.2.001"
 const DEFAULT_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh"]
 const ABOUT_UPDATE_SUMMARY := {
-	"en": "Completed all banknote translations and removed the Godot boot splash.",
-	"es": "Se completaron todas las traducciones de billetes y se eliminó la pantalla de inicio de Godot.",
-	"pt": "Concluímos todas as traduções das cédulas e removemos a tela de inicialização do Godot.",
-	"zh": "已完成所有纸币内容翻译，并移除了 Godot 启动画面。"
+	"en": "Improved readable UI styling, compact About content, configurable banner placements, and banknote information cards.",
+	"es": "Mejoramos la legibilidad de la interfaz, compactamos Acerca de, configuramos las ubicaciones de banners y añadimos tarjetas de información de billetes.",
+	"pt": "Melhoramos a legibilidade da interface, compactamos o conteúdo Sobre, configuramos os posicionamentos de banners e adicionamos cartões de informações sobre cédulas.",
+	"zh": "优化了易读的界面样式、精简了“关于”内容、支持可配置的横幅广告位置，并新增了纸币信息卡片。"
 }
 
 const UI_TEXTS := {
@@ -28,6 +28,7 @@ const UI_TEXTS := {
 		"open_official_source": "Open official source",
 		"security_features": "Security features",
 		"open_note_viewer": "Open note viewer",
+		"show_banknote": "Show banknote",
 		"thumbnail": "Thumbnail",
 		"thumbnail_preview": "Thumbnail preview",
 		"no_note_selected": "No note selected",
@@ -129,6 +130,7 @@ const UI_TEXTS := {
 		"open_official_source": "Abrir fuente oficial",
 		"security_features": "Medidas de seguridad",
 		"open_note_viewer": "Abrir visor de billete",
+		"show_banknote": "Mostrar billete",
 		"thumbnail": "Miniatura",
 		"thumbnail_preview": "Vista previa",
 		"no_note_selected": "No hay billete seleccionado",
@@ -230,6 +232,7 @@ const UI_TEXTS := {
 		"open_official_source": "Abrir fonte oficial",
 		"security_features": "Recursos de segurança",
 		"open_note_viewer": "Abrir visualizador da nota",
+		"show_banknote": "Mostrar cédula",
 		"thumbnail": "Miniatura",
 		"thumbnail_preview": "Prévia da miniatura",
 		"no_note_selected": "Nenhuma nota selecionada",
@@ -331,6 +334,7 @@ const UI_TEXTS := {
 		"open_official_source": "打开官方来源",
 		"security_features": "防伪特征",
 		"open_note_viewer": "打开纸币查看器",
+		"show_banknote": "显示纸币",
 		"thumbnail": "缩略图",
 		"thumbnail_preview": "缩略图预览",
 		"no_note_selected": "未选择纸币",

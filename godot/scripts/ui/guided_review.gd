@@ -12,7 +12,6 @@ var _expected: Label
 
 
 func _ready() -> void:
-	AppAds.hide_banner()
 	if not GuidedReviewSession.has_active_session():
 		get_tree().change_scene_to_file(SETUP_SCENE)
 		return
@@ -46,11 +45,11 @@ func _build_ui() -> void:
 	_reference_caption.add_theme_color_override("font_color", ScreenBuilder.COLOR_TEXT_MUTED)
 	_expected = ScreenBuilder.add_body(content, "")
 	var review_scale := ScreenBuilder.visual_ui_scale(self)
-	_step_title.add_theme_font_size_override("font_size", int(round(42.0 * review_scale)))
-	_instruction.add_theme_font_size_override("font_size", int(round(23.0 * review_scale)))
+	_step_title.add_theme_font_size_override("font_size", int(round(54.0 * review_scale)))
+	_instruction.add_theme_font_size_override("font_size", int(round(34.0 * review_scale)))
 	_reference_image.custom_minimum_size.y = int(round(260.0 * review_scale))
-	_reference_caption.add_theme_font_size_override("font_size", int(round(16.0 * review_scale)))
-	_expected.add_theme_font_size_override("font_size", int(round(26.0 * review_scale)))
+	_reference_caption.add_theme_font_size_override("font_size", int(round(28.0 * review_scale)))
+	_expected.add_theme_font_size_override("font_size", int(round(36.0 * review_scale)))
 	_expected.modulate = Color(0.78, 0.9, 1.0)
 
 	var observed := ScreenBuilder.add_button(content, AppState.t("observed"), "positive")
@@ -61,6 +60,7 @@ func _build_ui() -> void:
 	unable.pressed.connect(_answer.bind(GuidedReviewSession.ANSWER_UNABLE))
 	var back := ScreenBuilder.add_button(content, AppState.t("back"), "secondary")
 	back.pressed.connect(func() -> void: get_tree().change_scene_to_file(SETUP_SCENE))
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_GUIDED_REVIEW)
 
 
 func _refresh_step() -> void:

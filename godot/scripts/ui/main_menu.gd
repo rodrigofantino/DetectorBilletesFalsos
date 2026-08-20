@@ -94,13 +94,13 @@ func _apply_responsive_layout() -> void:
 	_layout_root.custom_minimum_size.x = min(900.0 * ui_scale, max(0.0, viewport_size.x - 72.0))
 	var margin: int = int(round(18.0 * ui_scale))
 	var icon_size: int = int(round(82.0 * ui_scale))
-	var title_size: int = int(round(34.0 * ui_scale))
-	var subtitle_size: int = int(round(17.0 * ui_scale))
-	var label_size: int = int(round(18.0 * ui_scale))
+	var title_size: int = int(round(48.0 * ui_scale))
+	var subtitle_size: int = int(round(30.0 * ui_scale))
+	var label_size: int = int(round(30.0 * ui_scale))
 	var language_height: int = int(round(96.0 * ui_scale))
 	var language_label_width: int = int(round(112.0 * ui_scale))
 	var button_height: int = int(round(96.0 * ui_scale))
-	var button_size: int = int(round(20.0 * ui_scale))
+	var button_size: int = int(round(34.0 * ui_scale))
 
 	_icon.custom_minimum_size = Vector2(icon_size, icon_size)
 	_title_label.add_theme_font_size_override("font_size", title_size)
@@ -127,10 +127,10 @@ func _apply_responsive_layout() -> void:
 		var font_size := button_size
 		if size_kind == "primary":
 			height = int(round(122.0 * ui_scale))
-			font_size = int(round(24.0 * ui_scale))
+			font_size = int(round(40.0 * ui_scale))
 		elif size_kind == "compact":
 			height = int(round(96.0 * ui_scale))
-			font_size = int(round(17.0 * ui_scale))
+			font_size = int(round(28.0 * ui_scale))
 		button.custom_minimum_size = Vector2(0, height)
 		button.add_theme_font_size_override("font_size", font_size)
 
@@ -225,9 +225,12 @@ func _show_about() -> void:
 	var dialog := AcceptDialog.new()
 	dialog.theme = theme
 	dialog.borderless = true
+	# Keep only the rounded panel visible; otherwise the native dialog window
+	# paints a rectangular background behind the custom StyleBox.
+	dialog.transparent = true
 	dialog.unresizable = true
 	dialog.exclusive = true
-	dialog.min_size = Vector2(min(720.0, get_viewport_rect().size.x * 0.86), 0)
+	dialog.min_size = Vector2(min(720.0, get_viewport_rect().size.x * 0.86), min(760.0, get_viewport_rect().size.y * 0.58))
 	dialog.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))
 	add_child(dialog)
 	dialog.get_ok_button().hide()
@@ -240,8 +243,13 @@ func _show_about() -> void:
 
 	var title := ScreenBuilder.add_title(content, AppState.t("about_title"))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	var body := ScreenBuilder.add_body(content, AppState.get_about_text())
+	var about_scroll := ScrollContainer.new()
+	about_scroll.custom_minimum_size = Vector2(0.0, min(340.0, get_viewport_rect().size.y * 0.28))
+	about_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content.add_child(about_scroll)
+	var body := ScreenBuilder.add_body(about_scroll, AppState.get_about_text())
 	body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	ScreenBuilder.enable_touch_scroll(about_scroll, body)
 
 	var actions := HBoxContainer.new()
 	actions.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -301,24 +309,30 @@ func _on_purchase_message(message_key: String) -> void:
 
 func _show_dialog(title_text: String, body_text: String) -> void:
 	var dialog := AcceptDialog.new()
+	dialog.theme = theme
+	dialog.borderless = true
+	dialog.transparent = true
+	dialog.unresizable = true
+	dialog.exclusive = true
+	dialog.min_size = Vector2(min(720.0, get_viewport_rect().size.x * 0.86), min(520.0, get_viewport_rect().size.y * 0.46))
+	dialog.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))
 	add_child(dialog)
-	var dialog_scale := ScreenBuilder.configure_large_dialog(dialog, self, title_text, AppState.t("close"))
+	dialog.get_ok_button().hide()
+	dialog.close_requested.connect(dialog.queue_free)
 
 	var content := VBoxContainer.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	content.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_theme_constant_override("separation", int(round(24.0 * dialog_scale)))
+	content.add_theme_constant_override("separation", int(round(18.0 * ScreenBuilder.visual_ui_scale(self))))
 	dialog.add_child(content)
 
-	ScreenBuilder.add_dialog_header(content, title_text, dialog.queue_free, dialog_scale)
+	var title := ScreenBuilder.add_title(content, title_text)
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
-	var body := Label.new()
-	body.text = body_text
-	body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	body.add_theme_font_size_override("font_size", int(round(32.0 * dialog_scale)))
-	content.add_child(body)
+	var body := ScreenBuilder.add_body(content, body_text)
+	body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	var close := ScreenBuilder.add_button(content, AppState.t("close"), "secondary")
+	close.pressed.connect(dialog.queue_free)
 
 	dialog.popup_centered()
 

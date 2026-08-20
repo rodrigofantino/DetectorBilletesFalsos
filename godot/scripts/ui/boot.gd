@@ -24,12 +24,13 @@ func _ready() -> void:
 	var title := Label.new()
 	title.text = AppState.t("app_title")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 42)
+	title.add_theme_font_size_override("font_size", 64)
 	panel.add_child(title)
 
 	var subtitle := Label.new()
 	subtitle.text = AppState.t("boot_subtitle")
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	subtitle.add_theme_font_size_override("font_size", 36)
 	panel.add_child(subtitle)
 
 	await get_tree().create_timer(0.5).timeout

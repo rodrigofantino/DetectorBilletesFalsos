@@ -11,6 +11,19 @@ const BANNER_RESERVED_HEIGHT := 96
 const PLACEMENT_NONE := "none"
 const PLACEMENT_MAIN_MENU := "main_menu"
 const PLACEMENT_REVIEW_RESULT := "review_result"
+const PLACEMENT_GUIDED_REVIEW := "guided_review"
+const PLACEMENT_TOOL := "tool"
+const PLACEMENT_CURRENCY_INFO := "currency_info"
+
+# Replace these placeholders with the supplied production unit IDs. Keeping the
+# mapping here makes each placement explicit without scattering IDs in screens.
+const BANNER_UNIT_IDS := {
+	PLACEMENT_MAIN_MENU: "ca-app-pub-4703386652643425/7909010195",
+	PLACEMENT_REVIEW_RESULT: "ca-app-pub-4703386652643425/6100768207",
+	PLACEMENT_GUIDED_REVIEW: "ca-app-pub-4703386652643425/6100768207",
+	PLACEMENT_TOOL: "ca-app-pub-4703386652643425/4448669986",
+	PLACEMENT_CURRENCY_INFO: "ca-app-pub-4703386652643425/3127170833",
+}
 
 var _ad_view: AdView
 var _ad_listener: AdListener
@@ -19,6 +32,7 @@ var _initializing := false
 var _banner_loaded := false
 var _show_requested := false
 var _placement := PLACEMENT_NONE
+var _banner_unit_id := ""
 
 
 func _ready() -> void:
@@ -56,7 +70,7 @@ func show_banner() -> void:
 
 
 func set_banner_placement(placement: String) -> void:
-	if not [PLACEMENT_NONE, PLACEMENT_MAIN_MENU, PLACEMENT_REVIEW_RESULT].has(placement):
+	if not [PLACEMENT_NONE, PLACEMENT_MAIN_MENU, PLACEMENT_REVIEW_RESULT, PLACEMENT_GUIDED_REVIEW, PLACEMENT_TOOL, PLACEMENT_CURRENCY_INFO].has(placement):
 		placement = PLACEMENT_NONE
 	_placement = placement
 	if _placement == PLACEMENT_NONE:
@@ -73,6 +87,9 @@ func set_banner_placement(placement: String) -> void:
 	if not _initialized:
 		return
 
+	var requested_unit_id := _get_banner_unit_id()
+	if _ad_view != null and _banner_unit_id != requested_unit_id:
+		_dispose_banner()
 	if _ad_view == null:
 		_create_banner()
 
@@ -153,8 +170,19 @@ func _create_banner() -> void:
 	var banner_unit_id := _get_banner_unit_id()
 	print("AdMob: creating %s banner." % ("test" if banner_unit_id == ADMOB_TEST_BANNER_UNIT_ID else "production"))
 	_ad_view = AdView.new(banner_unit_id, ad_size, AdPosition.Values.BOTTOM)
+	_banner_unit_id = banner_unit_id
 	_ad_view.ad_listener = _ad_listener
 	banner_attached.emit()
+
+
+func _dispose_banner() -> void:
+	if _ad_view != null:
+		_ad_view.hide()
+		_ad_view.destroy()
+	_ad_view = null
+	_ad_listener = null
+	_banner_unit_id = ""
+	_banner_loaded = false
 
 
 func _on_admob_initialized(_status: InitializationStatus) -> void:
@@ -195,4 +223,4 @@ func _log_failure(message: String) -> void:
 func _get_banner_unit_id() -> String:
 	if OS.is_debug_build():
 		return ADMOB_TEST_BANNER_UNIT_ID
-	return ADMOB_BANNER_UNIT_ID
+	return str(BANNER_UNIT_IDS.get(_placement, ADMOB_BANNER_UNIT_ID))

@@ -22,7 +22,10 @@ var _nav_buttons: Array[Button] = []
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	theme = ScreenBuilder._make_app_theme(self)
 	_build_ui()
+	set_meta("screen_builder_content", _root)
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)
 	_apply_layout()
 	_refresh()
 
@@ -198,6 +201,8 @@ func _apply_layout() -> void:
 	for button in _nav_buttons:
 		button.custom_minimum_size = Vector2(0, button_height)
 		button.add_theme_font_size_override("font_size", button_font_size)
+		ScreenBuilder.style_button(button, "secondary")
+	ScreenBuilder.style_button(_source_button, "secondary")
 
 	for child in _feature_box.get_children():
 		if child is Label:

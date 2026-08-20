@@ -6,7 +6,7 @@ Detector de Billetes Falsos
 - Language: GDScript, typed where practical
 - Export target: Android
 - Legacy validation tool: Android Studio only if we need to inspect or run the old Java project
-- Ads are limited to an AdMob banner on the main menu and completed guided-review result. Setup, camera, checklist, UV, watermark, and note-inspection screens remain ad-free.
+- AdMob banners use explicit placement keys. Main menu, guided review, quick tools, country selection, currency information, and the completed result may each receive a separately configured unit ID.
 - The remove-ads option uses Google Play Billing product `remove_ads` as a non-consumable one-time purchase.
 - Google Play In-App Review may be requested after three meaningful tool uses, with a 90-day local cooldown and a separate Play Store listing button.
 
@@ -50,7 +50,7 @@ Detector de Billetes Falsos
 - Keep the watermark viewer responsive and lightweight.
 - Keep the currency info screens readable on small devices.
 - Never upscale a banknote texture beyond its native resolution; cap preview rendering to avoid pixelation on small official assets.
-- Keep ads isolated to approved menu/result placements and do not block any review, UV, watermark, or currency behavior on ad availability.
+- Keep ads non-blocking and reserve bottom space only after a banner loads; review, UV, watermark, and currency behavior must not depend on ad availability.
 
 7. Android-specific concerns
 - Brightness control and screen wake behavior must be re-implemented using Godot-friendly Android hooks or a lightweight plugin.

@@ -3,6 +3,7 @@ extends Control
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	theme = ScreenBuilder._make_app_theme(self)
 	_build_ui()
 
 
@@ -35,6 +36,7 @@ func _build_ui() -> void:
 	back.text = AppState.t("back")
 	back.custom_minimum_size = Vector2(0, button_height)
 	back.add_theme_font_size_override("font_size", button_font)
+	ScreenBuilder.style_button(back, "secondary")
 	back.pressed.connect(func() -> void:
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 	)
@@ -70,10 +72,13 @@ func _build_ui() -> void:
 		button.custom_minimum_size = Vector2(0, button_height)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.add_theme_font_size_override("font_size", button_font)
+		ScreenBuilder.style_button(button, "secondary")
 		button.pressed.connect(_open_country.bind(country))
 		list.add_child(button)
 
 	ScreenBuilder.enable_touch_scroll(scroll, list)
+	set_meta("screen_builder_content", root)
+	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)
 
 
 func _open_country(country: String) -> void:
