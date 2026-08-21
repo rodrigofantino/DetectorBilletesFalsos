@@ -1,8 +1,9 @@
 extends Node
 
 const DATA_PATH := "res://data/currencyinfo.json"
+const UI_LOCALIZATIONS_PATH := "res://data/ui_localizations.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.2.010"
+const APP_VERSION := "V.2.011"
 const FALLBACK_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant"]
 const LOCALE_DISPLAY_NAMES := {
@@ -713,9 +714,11 @@ var tool_screen_holds: int = 0
 # Empty until _ready applies the phone locale; English is only the unsupported-locale fallback.
 var current_locale: String = ""
 var locale_override: String = ""
+var external_ui_localizations: Dictionary = {}
 
 
 func _ready() -> void:
+	load_ui_localizations()
 	load_user_settings()
 	_apply_locale()
 	load_currency_data()
@@ -803,17 +806,52 @@ func get_app_version() -> String:
 
 
 func get_about_text() -> String:
-	var update_text := str(ABOUT_UPDATE_SUMMARY.get(current_locale, ABOUT_UPDATE_SUMMARY[FALLBACK_LOCALE]))
+	var update_text := _get_localized_ui_value("about_update_summary", ABOUT_UPDATE_SUMMARY)
 	var version_line := t("about_version_label") % APP_VERSION
 	var update_line := t("about_update_label") % update_text
 	return "%s\n%s" % [version_line, update_line]
 
 
 func t(key: String) -> String:
-	var locale_map: Dictionary = UI_TEXTS.get(current_locale, UI_TEXTS[FALLBACK_LOCALE])
+	var locale_map := _get_localized_ui_map("ui_texts", UI_TEXTS)
 	if locale_map.has(key):
 		return str(locale_map.get(key, key))
 	return str(UI_TEXTS[FALLBACK_LOCALE].get(key, key))
+
+
+func load_ui_localizations() -> void:
+	external_ui_localizations.clear()
+	if not FileAccess.file_exists(UI_LOCALIZATIONS_PATH):
+		return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(UI_LOCALIZATIONS_PATH))
+	if parsed is Dictionary:
+		external_ui_localizations = parsed as Dictionary
+	else:
+		push_warning("UI localization data is not a dictionary.")
+
+
+func _get_localized_ui_map(section: String, built_in: Dictionary) -> Dictionary:
+	var external_section: Variant = external_ui_localizations.get(section, {})
+	if external_section is Dictionary:
+		var external_map: Variant = (external_section as Dictionary).get(current_locale, {})
+		if external_map is Dictionary and not (external_map as Dictionary).is_empty():
+			for value in (external_map as Dictionary).values():
+				if not value is String:
+					push_warning("Ignoring malformed UI localization data for locale: %s" % current_locale)
+					return built_in.get(current_locale, built_in[FALLBACK_LOCALE]) as Dictionary
+			return external_map as Dictionary
+	return built_in.get(current_locale, built_in[FALLBACK_LOCALE]) as Dictionary
+
+
+func _get_localized_ui_value(section: String, built_in: Dictionary) -> String:
+	var external_section: Variant = external_ui_localizations.get(section, {})
+	if external_section is Dictionary:
+		var raw_external_value: Variant = (external_section as Dictionary).get(current_locale, "")
+		if raw_external_value is String:
+			var external_value := str(raw_external_value).strip_edges()
+			if not external_value.is_empty():
+				return external_value
+	return str(built_in.get(current_locale, built_in[FALLBACK_LOCALE]))
 
 
 func load_currency_data() -> void:
@@ -856,12 +894,12 @@ func get_countries() -> Array[String]:
 
 
 func get_country_label(country: String) -> String:
-	var locale_map: Dictionary = COUNTRY_LABELS.get(current_locale, COUNTRY_LABELS[FALLBACK_LOCALE])
+	var locale_map := _get_localized_ui_map("country_labels", COUNTRY_LABELS)
 	return str(locale_map.get(country, COUNTRY_LABELS[FALLBACK_LOCALE].get(country, humanize_key(country))))
 
 
 func get_currency_label(code: String) -> String:
-	var locale_map: Dictionary = CURRENCY_LABELS.get(current_locale, CURRENCY_LABELS[FALLBACK_LOCALE])
+	var locale_map := _get_localized_ui_map("currency_labels", CURRENCY_LABELS)
 	return str(locale_map.get(code, CURRENCY_LABELS[FALLBACK_LOCALE].get(code, humanize_key(code))))
 
 

@@ -75,13 +75,13 @@ static func _style_box(background: Color, border: Color = Color.TRANSPARENT, rad
 static func _make_app_theme(control: Control) -> Theme:
 	var scale := visual_ui_scale(control)
 	var theme := Theme.new()
-	theme.default_font_size = int(round(18.0 * scale))
+	theme.default_font_size = int(round(24.0 * scale))
 	theme.set_color("font_color", "Label", COLOR_TEXT)
 	theme.set_color("font_color", "Button", COLOR_TEXT)
 	theme.set_color("font_hover_color", "Button", COLOR_TEXT)
 	theme.set_color("font_pressed_color", "Button", COLOR_TEXT)
 	theme.set_color("font_disabled_color", "Button", Color(COLOR_TEXT_MUTED, 0.46))
-	theme.set_font_size("font_size", "Button", int(round(20.0 * scale)))
+	theme.set_font_size("font_size", "Button", int(round(26.0 * scale)))
 	theme.set_stylebox("normal", "Button", _style_box(COLOR_SURFACE_ALT, COLOR_BORDER, 16, 1, int(round(16.0 * scale))))
 	theme.set_stylebox("hover", "Button", _style_box(COLOR_SURFACE_HOVER, COLOR_FOCUS, 16, 1, int(round(16.0 * scale))))
 	theme.set_stylebox("pressed", "Button", _style_box(Color("172238"), COLOR_FOCUS, 16, 2, int(round(16.0 * scale))))
@@ -91,18 +91,19 @@ static func _make_app_theme(control: Control) -> Theme:
 		theme.set_stylebox(state, "OptionButton", theme.get_stylebox(state, "Button"))
 	for color_name in ["font_color", "font_hover_color", "font_pressed_color", "font_disabled_color"]:
 		theme.set_color(color_name, "OptionButton", theme.get_color(color_name, "Button"))
-	theme.set_font_size("font_size", "OptionButton", int(round(19.0 * scale)))
+	theme.set_font_size("font_size", "OptionButton", int(round(25.0 * scale)))
 	theme.set_stylebox("panel", "PanelContainer", _style_box(COLOR_SURFACE, COLOR_BORDER, 22, 1, int(round(22.0 * scale))))
 	theme.set_stylebox("panel", "PopupMenu", _style_box(COLOR_SURFACE, COLOR_BORDER, 14, 1, int(round(10.0 * scale))))
 	theme.set_stylebox("hover", "PopupMenu", _style_box(COLOR_SURFACE_HOVER, Color.TRANSPARENT, 10, 0, int(round(8.0 * scale))))
 	theme.set_color("font_color", "PopupMenu", COLOR_TEXT)
 	theme.set_color("font_hover_color", "PopupMenu", COLOR_TEXT)
-	theme.set_font_size("font_size", "PopupMenu", int(round(18.0 * scale)))
+	theme.set_font_size("font_size", "PopupMenu", int(round(24.0 * scale)))
 	return theme
 
 static func style_button(button: Button, variant: String = "secondary") -> void:
 	if button == null:
 		return
+	enable_button_text_fit(button)
 	var scale := visual_ui_scale(button)
 	var padding := int(round(16.0 * scale))
 	match variant:
@@ -111,7 +112,7 @@ static func style_button(button: Button, variant: String = "secondary") -> void:
 			button.add_theme_stylebox_override("hover", _style_box(COLOR_PRIMARY_HOVER, Color("93c5fd"), 20, 2, padding))
 			button.add_theme_stylebox_override("pressed", _style_box(COLOR_PRIMARY_PRESSED, COLOR_FOCUS, 20, 2, padding))
 			button.add_theme_stylebox_override("focus", _style_box(Color.TRANSPARENT, Color("bfdbfe"), 20, 3, max(8, padding - 3)))
-			button.add_theme_font_size_override("font_size", int(round(24.0 * scale)))
+			button.add_theme_font_size_override("font_size", int(round(30.0 * scale)))
 		"positive":
 			button.add_theme_stylebox_override("normal", _style_box(Color("047857"), Color("34d399"), 16, 1, padding))
 			button.add_theme_stylebox_override("hover", _style_box(Color("059669"), Color("6ee7b7"), 16, 2, padding))
@@ -129,6 +130,37 @@ static func style_button(button: Button, variant: String = "secondary") -> void:
 			button.add_theme_stylebox_override("normal", _style_box(COLOR_SURFACE_ALT, COLOR_BORDER, 16, 1, padding))
 			button.add_theme_stylebox_override("hover", _style_box(COLOR_SURFACE_HOVER, COLOR_FOCUS, 16, 1, padding))
 			button.add_theme_stylebox_override("pressed", _style_box(Color("172238"), COLOR_FOCUS, 16, 2, padding))
+
+
+static func enable_button_text_fit(button: Button, minimum_font_size: int = 18) -> void:
+	if button == null or button.has_meta("text_fit_enabled"):
+		return
+	button.set_meta("text_fit_enabled", true)
+	button.set_meta("text_fit_minimum", minimum_font_size)
+	button.autowrap_mode = TextServer.AUTOWRAP_OFF
+	button.clip_text = true
+	button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	button.resized.connect(func() -> void: _fit_button_text(button))
+
+
+static func _fit_button_text(button: Button) -> void:
+	if button == null or button.text.is_empty() or button.size.x <= 0.0:
+		return
+	var current_size := button.get_theme_font_size("font_size")
+	var base_size := maxi(current_size, int(button.get_meta("text_fit_base", current_size)))
+	button.set_meta("text_fit_base", base_size)
+	var minimum_size := maxi(int(button.get_meta("text_fit_minimum", 18)), int(round(base_size * 0.72)))
+	var stylebox := button.get_theme_stylebox("normal")
+	var available_width := button.size.x - stylebox.get_margin(SIDE_LEFT) - stylebox.get_margin(SIDE_RIGHT)
+	if button.icon != null:
+		available_width -= button.icon.get_width() + button.get_theme_constant("h_separation")
+	var font := button.get_theme_font("font")
+	if font == null or available_width <= 0.0:
+		return
+	var fitted_size := base_size
+	while fitted_size > minimum_size and font.get_string_size(button.text, HORIZONTAL_ALIGNMENT_LEFT, -1.0, fitted_size).x > available_width:
+		fitted_size -= 1
+	button.add_theme_font_size_override("font_size", fitted_size)
 
 static func style_option_button(button: OptionButton) -> void:
 	if button == null:
@@ -158,7 +190,7 @@ static func add_section_label(parent: Control, text: String) -> Label:
 	label.text = text.to_upper()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
-	label.add_theme_font_size_override("font_size", int(round(14.0 * visual_ui_scale(parent))))
+	label.add_theme_font_size_override("font_size", int(round(20.0 * visual_ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
@@ -180,7 +212,7 @@ static func configure_large_dialog(dialog: AcceptDialog, parent: Control, title_
 
 	var ok_button := dialog.get_ok_button()
 	ok_button.custom_minimum_size = Vector2(0, MIN_DIALOG_BUTTON_HEIGHT * scale)
-	ok_button.add_theme_font_size_override("font_size", int(round(34.0 * scale)))
+	ok_button.add_theme_font_size_override("font_size", int(round(40.0 * scale)))
 	return scale
 
 static func is_valid_web_url(url: String) -> bool:
@@ -212,13 +244,13 @@ static func add_dialog_header(parent: Control, title_text: String, close_callbac
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.add_theme_font_size_override("font_size", int(round(38.0 * scale)))
+	title.add_theme_font_size_override("font_size", int(round(44.0 * scale)))
 	header.add_child(title)
 
 	var close_button := Button.new()
 	close_button.text = "X"
 	close_button.custom_minimum_size = Vector2(104.0 * scale, 104.0 * scale)
-	close_button.add_theme_font_size_override("font_size", int(round(42.0 * scale)))
+	close_button.add_theme_font_size_override("font_size", int(round(48.0 * scale)))
 	close_button.pressed.connect(close_callback)
 	header.add_child(close_button)
 
@@ -397,7 +429,7 @@ static func add_title(parent: Control, text: String) -> Label:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_color_override("font_color", COLOR_TEXT)
-	label.add_theme_font_size_override("font_size", int(round(32.0 * visual_ui_scale(parent))))
+	label.add_theme_font_size_override("font_size", int(round(38.0 * visual_ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
@@ -407,7 +439,7 @@ static func add_subtitle(parent: Control, text: String) -> Label:
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
-	label.add_theme_font_size_override("font_size", int(round(19.0 * visual_ui_scale(parent))))
+	label.add_theme_font_size_override("font_size", int(round(25.0 * visual_ui_scale(parent))))
 	parent.add_child(label)
 	return label
 
@@ -417,7 +449,7 @@ static func add_body(parent: Control, text: String) -> Label:
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	label.add_theme_color_override("font_color", COLOR_TEXT_MUTED)
-	label.add_theme_font_size_override("font_size", int(round(17.0 * visual_ui_scale(parent))))
+	label.add_theme_font_size_override("font_size", int(round(23.0 * visual_ui_scale(parent))))
 	parent.add_child(label)
 	return label
 

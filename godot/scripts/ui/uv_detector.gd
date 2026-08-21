@@ -21,10 +21,10 @@ func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, ScreenBuilder.COLOR_BACKGROUND)
 	var title := ScreenBuilder.add_title(root, AppState.t("uv_title"))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 52)
+	title.add_theme_font_size_override("font_size", 58)
 	var message := ScreenBuilder.add_body(root, AppState.t("uv_message"))
 	message.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	message.add_theme_font_size_override("font_size", 30)
+	message.add_theme_font_size_override("font_size", 36)
 
 	_tool_light = ColorRect.new()
 	_tool_light.name = "ToolLight"
@@ -36,7 +36,7 @@ func _build_ui() -> void:
 	root.add_child(_tool_light)
 
 	var back := ScreenBuilder.add_button(root, AppState.t("back"), "secondary")
-	back.add_theme_font_size_override("font_size", 34)
+	back.add_theme_font_size_override("font_size", 40)
 	back.pressed.connect(func() -> void:
 		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
 	)

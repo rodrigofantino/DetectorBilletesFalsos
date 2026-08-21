@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1"]
-[ext_resource type="Texture2D" path="res://assets/ui/ic_launcher.png" id="2"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -59,54 +58,50 @@ unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(900, 0)
 size_flags_horizontal = 4
-size_flags_vertical = 1
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+horizontal_alignment = 1
 
 [node name="HeaderCard" type="PanelContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HeaderContent" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HeaderRow" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Icon" type="TextureRect" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow"]
+[node name="LanguageRow" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("2")
-expand_mode = 1
-stretch_mode = 5
+size_flags_horizontal = 3
 
-[node name="HeaderText" type="VBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow"]
+[node name="LanguageLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/LanguageRow"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="LanguageSelect" type="OptionButton" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/LanguageRow"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
+[node name="GuideTopSpacer" type="Control" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="GuidedReviewHint" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
-
-[node name="SubtitleLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
-unique_name_in_owner = true
-layout_mode = 2
-autowrap_mode = 3
-
-[node name="LanguageRow" type="HBoxContainer" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="LanguageLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText/LanguageRow"]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="LanguageSelect" type="OptionButton" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent/HeaderCard/HeaderContent/HeaderRow/HeaderText/LanguageRow"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="GuidedReviewButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
 unique_name_in_owner = true
@@ -115,14 +110,10 @@ size_flags_horizontal = 3
 metadata/menu_size = "primary"
 metadata/menu_variant = "primary"
 
-[node name="GuidedReviewHint" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
-unique_name_in_owner = true
+[node name="GuideBottomSpacer" type="Control" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
 layout_mode = 2
-autowrap_mode = 3
-
-[node name="ContinueLabel" type="Label" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
-unique_name_in_owner = true
-layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="LibraryButton" type="Button" parent="SafeAreaMargin/SurfacePanel/RootContent/MenuScroll/MenuCenter/MenuContent"]
 unique_name_in_owner = true

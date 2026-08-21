@@ -26,14 +26,14 @@ func _build_ui() -> void:
 	var root := ScreenBuilder.setup_root(self, Color(0.04, 0.07, 0.11, 1.0))
 	var content := ScreenBuilder.add_scroll_content(root)
 	var title := ScreenBuilder.add_title(content, AppState.t("review_setup_title"))
-	title.add_theme_font_size_override("font_size", 52)
+	title.add_theme_font_size_override("font_size", 58)
 	var subtitle := ScreenBuilder.add_subtitle(content, AppState.t("guided_review_subtitle"))
-	subtitle.add_theme_font_size_override("font_size", 32)
+	subtitle.add_theme_font_size_override("font_size", 38)
 	var intro := ScreenBuilder.add_body(content, AppState.t("review_setup_intro"))
-	intro.add_theme_font_size_override("font_size", 30)
+	intro.add_theme_font_size_override("font_size", 36)
 
 	var method_label := ScreenBuilder.add_subtitle(content, AppState.t("review_choose_method"))
-	method_label.add_theme_font_size_override("font_size", 32)
+	method_label.add_theme_font_size_override("font_size", 38)
 	var camera_choice := ScreenBuilder.add_button(content, AppState.t("review_camera_option"), "primary")
 	camera_choice.pressed.connect(_choose_camera)
 	var manual_choice := ScreenBuilder.add_button(content, AppState.t("review_manual_option"))
@@ -46,7 +46,7 @@ func _build_ui() -> void:
 	_camera_button = ScreenBuilder.add_button(_camera_section, AppState.t("identify_camera"))
 	_camera_button.pressed.connect(_identify_with_camera)
 	_camera_status = ScreenBuilder.add_body(_camera_section, "")
-	_camera_status.add_theme_font_size_override("font_size", 30)
+	_camera_status.add_theme_font_size_override("font_size", 36)
 	_refresh_camera_availability()
 	call_deferred("_refresh_camera_availability")
 	_candidate_box = VBoxContainer.new()
@@ -58,33 +58,33 @@ func _build_ui() -> void:
 	_manual_section.visible = false
 	content.add_child(_manual_section)
 	var country_label := ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_country"))
-	country_label.add_theme_font_size_override("font_size", 32)
+	country_label.add_theme_font_size_override("font_size", 38)
 	_country_select = OptionButton.new()
 	_country_select.custom_minimum_size = Vector2(0, 96)
-	_country_select.add_theme_font_size_override("font_size", 34)
+	_country_select.add_theme_font_size_override("font_size", 40)
 	_country_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_country_select.item_selected.connect(_on_country_selected)
 	_manual_section.add_child(_country_select)
 	ScreenBuilder.style_option_button(_country_select)
-	_country_select.get_popup().add_theme_font_size_override("font_size", 34)
+	_country_select.get_popup().add_theme_font_size_override("font_size", 40)
 
 	var banknote_label := ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_banknote"))
-	banknote_label.add_theme_font_size_override("font_size", 32)
+	banknote_label.add_theme_font_size_override("font_size", 38)
 	_note_select = OptionButton.new()
 	_note_select.custom_minimum_size = Vector2(0, 96)
-	_note_select.add_theme_font_size_override("font_size", 34)
+	_note_select.add_theme_font_size_override("font_size", 40)
 	_note_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_note_select.item_selected.connect(_on_note_selected)
 	_manual_section.add_child(_note_select)
 	ScreenBuilder.style_option_button(_note_select)
-	_note_select.get_popup().add_theme_font_size_override("font_size", 34)
+	_note_select.get_popup().add_theme_font_size_override("font_size", 40)
 
 	_start_button = ScreenBuilder.add_button(_manual_section, AppState.t("start_review"), "primary")
 	_start_button.pressed.connect(_start_review)
 	var back := ScreenBuilder.add_button(content, AppState.t("back"), "secondary")
 	back.pressed.connect(_return_home)
 	for button in [camera_choice, manual_choice, _camera_button, _start_button, back]:
-		button.add_theme_font_size_override("font_size", 34)
+		button.add_theme_font_size_override("font_size", 40)
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_GUIDED_REVIEW)
 
 	_populate_countries()
@@ -176,7 +176,7 @@ func _on_recognition_finished(result: Dictionary) -> void:
 			if note.is_empty():
 				continue
 			var button := ScreenBuilder.add_button(_candidate_box, AppState.get_note_title(note))
-			button.add_theme_font_size_override("font_size", 34)
+			button.add_theme_font_size_override("font_size", 40)
 			button.pressed.connect(_confirm_candidate.bind(note_id))
 		return
 	match status:

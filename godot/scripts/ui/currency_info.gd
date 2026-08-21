@@ -12,11 +12,11 @@ func _build_ui() -> void:
 	var margin_size := int(round(30.0 * ui_scale))
 	var bottom_margin := margin_size + ScreenBuilder.get_bottom_ad_reserve_height(self)
 	var button_height := int(round(124.0 * ui_scale))
-	var button_font := int(round(32.0 * ui_scale))
-	var title_font := int(round(50.0 * ui_scale))
-	var body_font := int(round(27.0 * ui_scale))
-	var header_font := int(round(34.0 * ui_scale))
-	var section_font := int(round(30.0 * ui_scale))
+	var button_font := int(round(44.0 * ui_scale))
+	var title_font := int(round(62.0 * ui_scale))
+	var body_font := int(round(39.0 * ui_scale))
+	var header_font := int(round(46.0 * ui_scale))
+	var section_font := int(round(42.0 * ui_scale))
 	var card_padding := int(round(18.0 * ui_scale))
 
 	var background := ColorRect.new()
@@ -212,20 +212,20 @@ func _build_thumbnail(note: Dictionary, ui_scale: float) -> Control:
 	country.text = AppState.get_country_label(str(note.get("country", "")))
 	country.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	country.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	country.add_theme_font_size_override("font_size", int(round(32.0 * ui_scale)))
+	country.add_theme_font_size_override("font_size", int(round(44.0 * ui_scale)))
 	col.add_child(country)
 
 	var denom := Label.new()
 	denom.text = AppState.get_note_badge(note)
 	denom.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	denom.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	denom.add_theme_font_size_override("font_size", int(round(42.0 * ui_scale)))
+	denom.add_theme_font_size_override("font_size", int(round(54.0 * ui_scale)))
 	col.add_child(denom)
 
 	var hint := Label.new()
 	hint.text = AppState.t("thumbnail")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.add_theme_font_size_override("font_size", int(round(28.0 * ui_scale)))
+	hint.add_theme_font_size_override("font_size", int(round(40.0 * ui_scale)))
 	hint.modulate = Color(0.95, 0.95, 0.95, 0.8)
 	col.add_child(hint)
 

@@ -16,7 +16,6 @@ const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 @onready var _title_label: Label = %TitleLabel
 @onready var _subtitle_label: Label = %SubtitleLabel
 @onready var _language_label: Label = %LanguageLabel
-@onready var _icon: TextureRect = %Icon
 @onready var _language_select: OptionButton = %LanguageSelect
 @onready var _language_row: HBoxContainer = %LanguageRow
 @onready var _library_button: Button = %LibraryButton
@@ -47,7 +46,6 @@ func _configure_static_ui() -> void:
 	_title_label.text = AppState.t("app_title")
 	_subtitle_label.text = AppState.t("menu_subtitle")
 	%GuidedReviewHint.text = AppState.t("menu_review_hint")
-	%ContinueLabel.text = AppState.t("menu_continue").to_upper()
 	%GuidedReviewButton.text = AppState.t("menu_guided_review")
 	_library_button.text = AppState.t("menu_library")
 	%UvButton.text = AppState.t("menu_uv")
@@ -93,18 +91,18 @@ func _apply_responsive_layout() -> void:
 	var ui_scale: float = ScreenBuilder.visual_ui_scale(self)
 	_layout_root.custom_minimum_size.x = min(900.0 * ui_scale, max(0.0, viewport_size.x - 72.0))
 	var margin: int = int(round(18.0 * ui_scale))
-	var icon_size: int = int(round(82.0 * ui_scale))
-	var title_size: int = int(round(48.0 * ui_scale))
-	var subtitle_size: int = int(round(30.0 * ui_scale))
-	var label_size: int = int(round(30.0 * ui_scale))
+	var title_size: int = int(round(60.0 * ui_scale))
+	var subtitle_size: int = int(round(42.0 * ui_scale))
+	var label_size: int = int(round(42.0 * ui_scale))
+	var hint_size: int = int(round(30.0 * ui_scale))
 	var language_height: int = int(round(96.0 * ui_scale))
 	var language_label_width: int = int(round(112.0 * ui_scale))
 	var button_height: int = int(round(96.0 * ui_scale))
-	var button_size: int = int(round(34.0 * ui_scale))
+	var button_size: int = int(round(46.0 * ui_scale))
 
-	_icon.custom_minimum_size = Vector2(icon_size, icon_size)
 	_title_label.add_theme_font_size_override("font_size", title_size)
 	_subtitle_label.add_theme_font_size_override("font_size", subtitle_size)
+	%GuidedReviewHint.add_theme_font_size_override("font_size", hint_size)
 	_language_label.text = "%s:" % AppState.t("language_label")
 	_language_label.custom_minimum_size = Vector2(language_label_width, language_height)
 	_language_label.add_theme_font_size_override("font_size", label_size)
@@ -127,10 +125,10 @@ func _apply_responsive_layout() -> void:
 		var font_size := button_size
 		if size_kind == "primary":
 			height = int(round(122.0 * ui_scale))
-			font_size = int(round(40.0 * ui_scale))
+			font_size = int(round(52.0 * ui_scale))
 		elif size_kind == "compact":
 			height = int(round(96.0 * ui_scale))
-			font_size = int(round(28.0 * ui_scale))
+			font_size = int(round(40.0 * ui_scale))
 		button.custom_minimum_size = Vector2(0, height)
 		button.add_theme_font_size_override("font_size", font_size)
 
@@ -240,15 +238,18 @@ func _show_about() -> void:
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation", int(round(18.0 * ScreenBuilder.visual_ui_scale(self))))
 	dialog.add_child(content)
+	var about_scale := ScreenBuilder.visual_ui_scale(self)
 
 	var title := ScreenBuilder.add_title(content, AppState.t("about_title"))
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", int(round(48.0 * about_scale)))
 	var about_scroll := ScrollContainer.new()
 	about_scroll.custom_minimum_size = Vector2(0.0, min(340.0, get_viewport_rect().size.y * 0.28))
 	about_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content.add_child(about_scroll)
 	var body := ScreenBuilder.add_body(about_scroll, AppState.get_about_text())
 	body.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	body.add_theme_font_size_override("font_size", int(round(33.0 * about_scale)))
 	ScreenBuilder.enable_touch_scroll(about_scroll, body)
 
 	var actions := HBoxContainer.new()
@@ -256,8 +257,10 @@ func _show_about() -> void:
 	actions.add_theme_constant_override("separation", int(round(14.0 * ScreenBuilder.visual_ui_scale(self))))
 	content.add_child(actions)
 	var back := ScreenBuilder.add_button(actions, AppState.t("back"), "secondary")
+	back.add_theme_font_size_override("font_size", int(round(36.0 * about_scale)))
 	back.pressed.connect(dialog.queue_free)
 	var rate := ScreenBuilder.add_button(actions, AppState.t("rate_this_app"), "primary")
+	rate.add_theme_font_size_override("font_size", int(round(40.0 * about_scale)))
 	rate.disabled = not AppReview.can_request_manual_review()
 	rate.pressed.connect(func() -> void:
 		dialog.queue_free()

@@ -12,7 +12,7 @@ func _build_ui() -> void:
 	var margin_size := int(round(30.0 * ui_scale))
 	var bottom_margin := margin_size + ScreenBuilder.get_bottom_ad_reserve_height(self)
 	var button_height := int(round(132.0 * ui_scale))
-	var button_font := int(round(34.0 * ui_scale))
+	var button_font := int(round(46.0 * ui_scale))
 
 	var background := ColorRect.new()
 	background.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -32,28 +32,18 @@ func _build_ui() -> void:
 	root.add_theme_constant_override("separation", int(round(22.0 * ui_scale)))
 	margin.add_child(root)
 
-	var back := Button.new()
-	back.text = AppState.t("back")
-	back.custom_minimum_size = Vector2(0, button_height)
-	back.add_theme_font_size_override("font_size", button_font)
-	ScreenBuilder.style_button(back, "secondary")
-	back.pressed.connect(func() -> void:
-		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
-	)
-	root.add_child(back)
-
 	var title := Label.new()
 	title.text = AppState.t("select_country_title")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.add_theme_font_size_override("font_size", int(round(56.0 * ui_scale)))
+	title.add_theme_font_size_override("font_size", int(round(68.0 * ui_scale)))
 	root.add_child(title)
 
 	var hint := Label.new()
 	hint.text = AppState.t("country_hint")
 	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.add_theme_font_size_override("font_size", int(round(30.0 * ui_scale)))
+	hint.add_theme_font_size_override("font_size", int(round(42.0 * ui_scale)))
 	root.add_child(hint)
 
 	var scroll := ScrollContainer.new()
@@ -73,10 +63,21 @@ func _build_ui() -> void:
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.add_theme_font_size_override("font_size", button_font)
 		ScreenBuilder.style_button(button, "secondary")
-		button.pressed.connect(_open_country.bind(country))
+		_configure_country_button(button, country, ui_scale)
 		list.add_child(button)
 
 	ScreenBuilder.enable_touch_scroll(scroll, list)
+
+	var back := Button.new()
+	back.text = AppState.t("back")
+	back.custom_minimum_size = Vector2(0, button_height)
+	back.add_theme_font_size_override("font_size", button_font)
+	ScreenBuilder.style_button(back, "secondary")
+	back.pressed.connect(func() -> void:
+		get_tree().change_scene_to_file("res://scenes/MainMenu.tscn")
+	)
+	root.add_child(back)
+
 	set_meta("screen_builder_content", root)
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)
 
@@ -84,3 +85,25 @@ func _build_ui() -> void:
 func _open_country(country: String) -> void:
 	AppState.set_selected_country(country)
 	get_tree().change_scene_to_file("res://scenes/CurrencyInfo.tscn")
+
+
+func _configure_country_button(button: Button, country: String, ui_scale: float) -> void:
+	var gesture := {"dragged": false, "distance": 0.0}
+	button.gui_input.connect(func(event: InputEvent) -> void:
+		if event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed:
+			gesture.dragged = false
+			gesture.distance = 0.0
+		elif event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT and (event as InputEventMouseButton).pressed:
+			gesture.dragged = false
+			gesture.distance = 0.0
+		elif event is InputEventScreenDrag:
+			gesture.distance += (event as InputEventScreenDrag).relative.length()
+		elif event is InputEventMouseMotion and ((event as InputEventMouseMotion).button_mask & MOUSE_BUTTON_MASK_LEFT) != 0:
+			gesture.distance += (event as InputEventMouseMotion).relative.length()
+		if gesture.distance >= 12.0 * ui_scale:
+			gesture.dragged = true
+	)
+	button.pressed.connect(func() -> void:
+		if not gesture.dragged:
+			_open_country(country)
+	)

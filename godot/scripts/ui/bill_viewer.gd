@@ -16,7 +16,7 @@ var _preview: PanelContainer
 var _root: VBoxContainer
 var _preview_box: VBoxContainer
 var _artwork_max_size: Vector2 = Vector2.ZERO
-var _body_font_size := 28
+var _body_font_size := 34
 var _nav_buttons: Array[Button] = []
 
 
@@ -85,7 +85,7 @@ func _build_ui() -> void:
 
 	_title_label = Label.new()
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.add_theme_font_size_override("font_size", 32)
+	_title_label.add_theme_font_size_override("font_size", 38)
 	_root.add_child(_title_label)
 
 	_preview = PanelContainer.new()
@@ -107,7 +107,7 @@ func _build_ui() -> void:
 
 	_denomination_label = Label.new()
 	_denomination_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_denomination_label.add_theme_font_size_override("font_size", 40)
+	_denomination_label.add_theme_font_size_override("font_size", 46)
 	_preview_box.add_child(_denomination_label)
 
 	_currency_label = Label.new()
@@ -137,7 +137,7 @@ func _build_ui() -> void:
 	_features_title = Label.new()
 	_features_title.text = AppState.t("security_features")
 	_features_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_features_title.add_theme_font_size_override("font_size", 22)
+	_features_title.add_theme_font_size_override("font_size", 28)
 	_preview_box.add_child(_features_title)
 
 	_feature_box = VBoxContainer.new()
@@ -159,14 +159,14 @@ func _apply_layout() -> void:
 	var compact := viewport_size.x < 720.0 or viewport_size.y < 960.0
 	var margin_size := 18 if compact else 34
 	var bottom_margin := margin_size + ScreenBuilder.get_bottom_ad_reserve_height(self)
-	var title_size := 34 if compact else 50
-	var denomination_size := 42 if compact else 60
-	var currency_size := 28 if compact else 38
-	_body_font_size = 26 if compact else 34
-	var button_font_size := 26 if compact else 34
+	var title_size := 40 if compact else 56
+	var denomination_size := 48 if compact else 66
+	var currency_size := 34 if compact else 44
+	_body_font_size = 32 if compact else 40
+	var button_font_size := 32 if compact else 40
 	var button_height := 88 if compact else 112
-	var feature_title_size := 30 if compact else 40
-	var status_size := 25 if compact else 32
+	var feature_title_size := 36 if compact else 46
+	var status_size := 31 if compact else 38
 	var preview_height := 620 if compact else 900
 	var artwork_height := 380 if compact else 610
 	var separation := 14 if compact else 22
@@ -303,19 +303,19 @@ func _build_fallback_artwork(note: Dictionary) -> Control:
 	var country := Label.new()
 	country.text = AppState.get_country_label(str(note.get("country", "")))
 	country.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	country.add_theme_font_size_override("font_size", 34)
+	country.add_theme_font_size_override("font_size", 40)
 	col.add_child(country)
 
 	var denom := Label.new()
 	denom.text = AppState.get_note_badge(note)
 	denom.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	denom.add_theme_font_size_override("font_size", 48)
+	denom.add_theme_font_size_override("font_size", 54)
 	col.add_child(denom)
 
 	var hint := Label.new()
 	hint.text = AppState.t("thumbnail_preview")
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.add_theme_font_size_override("font_size", 28)
+	hint.add_theme_font_size_override("font_size", 34)
 	hint.modulate = Color(1, 1, 1, 0.8)
 	col.add_child(hint)
 
