@@ -8,6 +8,8 @@ signal query_purchases_response(response: Dictionary)
 signal on_purchase_updated(response: Dictionary)
 signal consume_purchase_response(response: Dictionary)
 signal acknowledge_purchase_response(response: Dictionary)
+signal review_flow_completed
+signal review_flow_error(message: String)
 
 
 enum BillingResponseCode {
@@ -84,6 +86,8 @@ func _connect_signals() -> void:
 	_plugin_singleton.connect("on_purchase_updated", on_purchase_updated.emit)
 	_plugin_singleton.connect("consume_purchase_response", consume_purchase_response.emit)
 	_plugin_singleton.connect("acknowledge_purchase_response", acknowledge_purchase_response.emit)
+	_plugin_singleton.connect("review_flow_completed", review_flow_completed.emit)
+	_plugin_singleton.connect("review_flow_error", review_flow_error.emit)
 
 func start_connection() -> void:
 	if _plugin_singleton:
@@ -153,3 +157,7 @@ func set_obfuscated_profile_id(profile_id: String):
 func open_subscriptions_page(product_id: String = ""):
 	if _plugin_singleton:
 		_plugin_singleton.openSubscriptions(product_id)
+
+func request_in_app_review() -> void:
+	if _plugin_singleton:
+		_plugin_singleton.requestInAppReview()

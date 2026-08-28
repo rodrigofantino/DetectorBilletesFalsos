@@ -25,6 +25,13 @@ extends EditorExportPlugin
 const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
 const Config := preload("res://addons/admob/android/config.gd")
 
+# Google Play flags LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES from older
+# Google Mobile Ads builds in Android 15. Keep the platform package's
+# dependency declaration overridable so downloaded/ignored AdMob templates
+# cannot silently reintroduce the deprecated SDK.
+const GOOGLE_MOBILE_ADS_COORDINATE_PREFIX := "com.google.android.gms:play-services-ads:"
+const GOOGLE_MOBILE_ADS_VERSION := "25.4.0"
+
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
 	var config := _create_config()
@@ -51,9 +58,18 @@ func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> Pack
 
 func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
 	var dependencies := PackedStringArray()
+	var ads_dependency_found := false
 
 	for plugin in _get_plugins():
-		dependencies.append_array(plugin._get_android_dependencies(platform, debug))
+		for dependency in plugin._get_android_dependencies(platform, debug):
+			if dependency.begins_with(GOOGLE_MOBILE_ADS_COORDINATE_PREFIX):
+				dependencies.append(GOOGLE_MOBILE_ADS_COORDINATE_PREFIX + GOOGLE_MOBILE_ADS_VERSION)
+				ads_dependency_found = true
+			else:
+				dependencies.append(dependency)
+
+	if _is_ads_enabled() and not ads_dependency_found:
+		dependencies.append(GOOGLE_MOBILE_ADS_COORDINATE_PREFIX + GOOGLE_MOBILE_ADS_VERSION)
 
 	return dependencies
 

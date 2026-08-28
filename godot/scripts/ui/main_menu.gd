@@ -29,6 +29,7 @@ const BASE_VIEWPORT := Vector2(1080.0, 1920.0)
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	AnalyticsService.track_screen("main_menu")
 	_configure_static_ui()
 	resized.connect(_apply_responsive_layout)
 	_apply_responsive_layout()
@@ -261,7 +262,7 @@ func _show_about() -> void:
 	back.pressed.connect(dialog.queue_free)
 	var rate := ScreenBuilder.add_button(actions, AppState.t("rate_this_app"), "primary")
 	rate.add_theme_font_size_override("font_size", int(round(40.0 * about_scale)))
-	rate.disabled = not AppReview.can_request_manual_review()
+	rate.disabled = not AppReview.can_show_manual_review_action()
 	rate.pressed.connect(func() -> void:
 		dialog.queue_free()
 		call_deferred("_request_manual_review")
@@ -277,10 +278,30 @@ func _maybe_request_analytics_consent() -> void:
 	if not AnalyticsService.should_request_consent():
 		return
 	var dialog := ConfirmationDialog.new()
+	dialog.theme = theme
+	dialog.borderless = true
+	dialog.transparent = true
+	dialog.unresizable = true
+	dialog.exclusive = true
+	dialog.min_size = Vector2(min(720.0, get_viewport_rect().size.x * 0.86), min(420.0, get_viewport_rect().size.y * 0.36))
+	dialog.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))
 	dialog.title = AppState.t("analytics_consent_title")
 	dialog.dialog_text = AppState.t("analytics_consent_body")
 	dialog.ok_button_text = AppState.t("analytics_allow")
 	dialog.cancel_button_text = AppState.t("analytics_decline")
+	var consent_scale := ScreenBuilder.visual_ui_scale(self)
+	var dialog_label := dialog.get_label()
+	dialog_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dialog_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	dialog_label.add_theme_font_size_override("font_size", int(round(28.0 * consent_scale)))
+	var allow_button := dialog.get_ok_button()
+	allow_button.custom_minimum_size = Vector2(250.0 * consent_scale, max(96.0, 72.0 * consent_scale))
+	allow_button.add_theme_font_size_override("font_size", int(round(28.0 * consent_scale)))
+	ScreenBuilder.style_button(allow_button, "primary")
+	var decline_button := dialog.get_cancel_button()
+	decline_button.custom_minimum_size = Vector2(250.0 * consent_scale, max(96.0, 72.0 * consent_scale))
+	decline_button.add_theme_font_size_override("font_size", int(round(28.0 * consent_scale)))
+	ScreenBuilder.style_button(decline_button, "secondary")
 	dialog.confirmed.connect(AnalyticsService.set_consent.bind(true))
 	dialog.canceled.connect(AnalyticsService.set_consent.bind(false))
 	dialog.close_requested.connect(AnalyticsService.set_consent.bind(false))
@@ -288,7 +309,7 @@ func _maybe_request_analytics_consent() -> void:
 	dialog.confirmed.connect(dialog.queue_free)
 	dialog.canceled.connect(dialog.queue_free)
 	add_child(dialog)
-	dialog.popup_centered_ratio(0.88)
+	dialog.popup_centered()
 
 
 func _toggle_analytics() -> void:

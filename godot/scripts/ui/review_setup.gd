@@ -17,6 +17,7 @@ var _selection_path := "manual"
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	AnalyticsService.track_screen("review_setup")
 	_build_ui()
 	if not BillRecognitionService.recognition_finished.is_connected(_on_recognition_finished):
 		BillRecognitionService.recognition_finished.connect(_on_recognition_finished)

@@ -1,3 +1,4 @@
+V.2.021_Deferred feedback prompts and fixed Google Play rating flows with usage analytics
 V.2.011_Increased UI typography and repositioned the main menu review guidance
 V.2.010_Committed the current banknote catalog, localization updates, and Android publishing changes
 V.2.009_Default language now follows the phone language with English only as fallback

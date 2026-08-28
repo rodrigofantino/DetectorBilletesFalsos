@@ -3,12 +3,27 @@ extends Node
 const SETTINGS_PATH := "user://analytics_consent.cfg"
 const FIREBASE_OPTIONS_PATH := "res://firebase_options.json"
 const ALLOWED_EVENTS := {
+	"screen_view": ["screen_name"],
 	"review_started": ["path"],
 	"camera_result": ["result_kind"],
 	"candidate_confirmed": [],
 	"guide_step_answered": ["method"],
 	"guide_completed": ["guide_kind"],
 	"favorite_toggled": ["enabled"],
+}
+
+const ALLOWED_SCREENS := {
+	"main_menu": true,
+	"about": true,
+	"uv_detector": true,
+	"watermark_viewer": true,
+	"country_select": true,
+	"currency_info": true,
+	"bill_viewer": true,
+	"review_setup": true,
+	"guided_review": true,
+	"review_result": true,
+	"review_library": true,
 }
 
 var _consent_decided := false
@@ -57,6 +72,14 @@ func track(event_name: String, parameters: Dictionary = {}) -> void:
 			filtered[key] = parameters[key]
 	if _plugin.has_method("log_event"):
 		_plugin.log_event(event_name, filtered)
+
+
+func track_screen(screen_name: String) -> void:
+	if not ALLOWED_SCREENS.has(screen_name):
+		return
+	track("screen_view", {
+		"screen_name": screen_name,
+	})
 
 
 func _load_consent() -> void:

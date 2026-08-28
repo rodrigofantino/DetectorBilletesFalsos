@@ -3,7 +3,7 @@ extends Node
 const DATA_PATH := "res://data/currencyinfo.json"
 const UI_LOCALIZATIONS_PATH := "res://data/ui_localizations.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.2.011"
+const APP_VERSION := "V.2.021"
 const FALLBACK_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant"]
 const LOCALE_DISPLAY_NAMES := {
@@ -64,6 +64,10 @@ const UI_TEXTS := {
 		"about_update_label": "Last update: %s",
 		"about_body": "This app provides an assisted review of banknote security references.",
 		"rate_this_app": "Rate this app",
+		"completion_feedback_title": "Are you enjoying the app?",
+		"completion_feedback_body": "I am working to improve it. If it was useful, you can rate it on Google Play and tell me which banknote, currency, or improvement you would like next.",
+		"completion_feedback_open_play": "Rate or suggest on Google Play",
+		"completion_feedback_not_now": "Not now",
 		"menu_guided_review": "Check security features",
 		"menu_review_hint": "Follow the guide to check the banknote's security references. This app does not determine authenticity.",
 		"menu_continue": "Continue",
@@ -166,6 +170,10 @@ const UI_TEXTS := {
 		"about_update_label": "Última actualización: %s",
 		"about_body": "Esta app ofrece una revisión asistida de referencias de seguridad de billetes.",
 		"rate_this_app": "Calificar esta app",
+		"completion_feedback_title": "¿Te gusta la app?",
+		"completion_feedback_body": "Estoy trabajando para mejorarla. Si te resultó útil, podés calificarla en Google Play y contarme qué billete, moneda o mejora te gustaría ver.",
+		"completion_feedback_open_play": "Calificar o sugerir en Google Play",
+		"completion_feedback_not_now": "Ahora no",
 		"menu_guided_review": "Verificar medidas de seguridad",
 		"menu_review_hint": "Seguí la guía para comprobar las referencias de seguridad del billete. Esta app no determina autenticidad.",
 		"menu_continue": "Continuar",
@@ -268,6 +276,10 @@ const UI_TEXTS := {
 		"about_update_label": "Última atualização: %s",
 		"about_body": "Este aplicativo oferece uma revisão assistida de referências de segurança de cédulas.",
 		"rate_this_app": "Avaliar este aplicativo",
+		"completion_feedback_title": "Você está gostando do aplicativo?",
+		"completion_feedback_body": "Estou trabalhando para melhorá-lo. Se ele foi útil, você pode avaliá-lo no Google Play e me contar qual cédula, moeda ou melhoria gostaria de ver em seguida.",
+		"completion_feedback_open_play": "Avaliar ou sugerir no Google Play",
+		"completion_feedback_not_now": "Agora não",
 		"menu_guided_review": "Verificar recursos de segurança",
 		"menu_review_hint": "Siga o guia para verificar as referências de segurança da cédula. Este aplicativo não determina a autenticidade.",
 		"menu_continue": "Continuar",
@@ -370,6 +382,10 @@ const UI_TEXTS := {
 		"about_update_label": "最近更新：%s",
 		"about_body": "本应用提供纸币安全特征参考的辅助检查。",
 		"rate_this_app": "评价此应用",
+		"completion_feedback_title": "您喜欢这款应用吗？",
+		"completion_feedback_body": "我正在努力改进它。如果它对您有帮助，您可以在 Google Play 上评分，并告诉我您希望接下来看到哪种纸币、货币或改进。",
+		"completion_feedback_open_play": "在 Google Play 上评分或建议",
+		"completion_feedback_not_now": "暂不",
 		"menu_guided_review": "检查防伪特征",
 		"menu_review_hint": "请按照指南核对纸币的安全参考特征。本应用不判定真伪。",
 		"menu_continue": "继续",
@@ -816,6 +832,9 @@ func t(key: String) -> String:
 	var locale_map := _get_localized_ui_map("ui_texts", UI_TEXTS)
 	if locale_map.has(key):
 		return str(locale_map.get(key, key))
+	var built_in_locale_map: Dictionary = UI_TEXTS.get(current_locale, UI_TEXTS[FALLBACK_LOCALE]) as Dictionary
+	if built_in_locale_map.has(key):
+		return str(built_in_locale_map.get(key, key))
 	return str(UI_TEXTS[FALLBACK_LOCALE].get(key, key))
 
 

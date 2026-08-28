@@ -16,6 +16,7 @@ func _ready() -> void:
 		get_tree().change_scene_to_file(SETUP_SCENE)
 		return
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	AnalyticsService.track_screen("guided_review")
 	_build_ui()
 	_refresh_step()
 

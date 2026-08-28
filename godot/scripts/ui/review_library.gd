@@ -8,6 +8,7 @@ var _content: VBoxContainer
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	AnalyticsService.track_screen("review_library")
 	_build_ui()
 
 

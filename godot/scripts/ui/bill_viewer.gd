@@ -23,6 +23,7 @@ var _nav_buttons: Array[Button] = []
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	theme = ScreenBuilder._make_app_theme(self)
+	AnalyticsService.track_screen("bill_viewer")
 	_build_ui()
 	set_meta("screen_builder_content", _root)
 	ScreenBuilder.add_bottom_ad_reserve(self, true, AppAds.PLACEMENT_CURRENCY_INFO)

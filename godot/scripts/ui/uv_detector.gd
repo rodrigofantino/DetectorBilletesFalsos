@@ -6,6 +6,7 @@ var _tool_light: ColorRect
 
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
+	AnalyticsService.track_screen("uv_detector")
 	AppState.acquire_tool_screen()
 	_build_ui()
 

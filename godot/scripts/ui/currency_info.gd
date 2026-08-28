@@ -4,6 +4,7 @@ extends Control
 func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	theme = ScreenBuilder._make_app_theme(self)
+	AnalyticsService.track_screen("currency_info")
 	_build_ui()
 
 

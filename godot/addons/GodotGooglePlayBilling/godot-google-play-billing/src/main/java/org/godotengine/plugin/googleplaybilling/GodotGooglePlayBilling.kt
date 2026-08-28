@@ -68,7 +68,13 @@ class GodotGooglePlayBilling(godot: Godot): GodotPlugin(godot), PurchasesUpdated
 		reviewManager.requestReviewFlow().addOnCompleteListener { request ->
 			if (request.isSuccessful) {
 				reviewManager.launchReviewFlow(activity!!, request.result)
-					.addOnCompleteListener { emitSignal("review_flow_completed") }
+					.addOnCompleteListener { launch ->
+						if (launch.isSuccessful) {
+							emitSignal("review_flow_completed")
+						} else {
+							emitSignal("review_flow_error", launch.exception?.message ?: "Review launch failed")
+						}
+					}
 			} else {
 				emitSignal("review_flow_error", request.exception?.message ?: "Review request failed")
 			}
