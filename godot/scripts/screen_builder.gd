@@ -54,6 +54,33 @@ static func dialog_ui_scale(control: Control) -> float:
 static func visual_ui_scale(control: Control) -> float:
 	return clamp(readable_ui_scale(control), 1.0, 1.25)
 
+
+static func make_specimen_preview(texture: Texture2D, minimum_size: Vector2) -> Control:
+	var holder := Control.new()
+	holder.custom_minimum_size = minimum_size
+	holder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	holder.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	holder.clip_contents = true
+	var image := TextureRect.new()
+	image.set_anchors_preset(Control.PRESET_FULL_RECT)
+	image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	image.texture = texture
+	image.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.add_child(image)
+	var mark := Label.new()
+	mark.set_anchors_preset(Control.PRESET_FULL_RECT)
+	mark.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	mark.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	mark.text = "SPECIMEN"
+	mark.add_theme_font_size_override("font_size", int(clamp(minimum_size.x * 0.12, 28.0, 72.0)))
+	mark.add_theme_color_override("font_color", Color(0.9, 0.05, 0.05, 0.72))
+	mark.rotation_degrees = -45.0
+	mark.pivot_offset = minimum_size * 0.5
+	mark.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	holder.add_child(mark)
+	return holder
+
 static func _style_box(background: Color, border: Color = Color.TRANSPARENT, radius: int = 18, border_width: int = 0, padding: int = 18) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
 	style.bg_color = background

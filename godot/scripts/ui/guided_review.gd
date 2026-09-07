@@ -7,6 +7,8 @@ var _progress: Label
 var _step_title: Label
 var _instruction: Label
 var _reference_image: TextureRect
+var _reference_holder: Control
+var _reference_specimen: Label
 var _reference_caption: Label
 var _expected: Label
 
@@ -34,13 +36,28 @@ func _build_ui() -> void:
 	_progress = ScreenBuilder.add_subtitle(content, "")
 	_step_title = ScreenBuilder.add_title(content, "")
 	_instruction = ScreenBuilder.add_body(content, "")
+	_reference_holder = Control.new()
+	_reference_holder.custom_minimum_size = Vector2(0, 260)
+	_reference_holder.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_reference_holder.clip_contents = true
+	content.add_child(_reference_holder)
 	_reference_image = TextureRect.new()
-	_reference_image.custom_minimum_size = Vector2(0, 260)
-	_reference_image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_reference_image.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_reference_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	_reference_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 	_reference_image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	content.add_child(_reference_image)
+	_reference_holder.add_child(_reference_image)
+	_reference_specimen = Label.new()
+	_reference_specimen.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_reference_specimen.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_reference_specimen.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_reference_specimen.text = "SPECIMEN"
+	_reference_specimen.add_theme_font_size_override("font_size", 72)
+	_reference_specimen.add_theme_color_override("font_color", Color(0.9, 0.05, 0.05, 0.72))
+	_reference_specimen.rotation_degrees = -45.0
+	_reference_specimen.pivot_offset = Vector2(360, 130)
+	_reference_specimen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_reference_holder.add_child(_reference_specimen)
 	_reference_caption = ScreenBuilder.add_body(content, AppState.t("review_reference_caption"))
 	_reference_caption.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_reference_caption.add_theme_color_override("font_color", ScreenBuilder.COLOR_TEXT_MUTED)
@@ -48,7 +65,7 @@ func _build_ui() -> void:
 	var review_scale := ScreenBuilder.visual_ui_scale(self)
 	_step_title.add_theme_font_size_override("font_size", int(round(60.0 * review_scale)))
 	_instruction.add_theme_font_size_override("font_size", int(round(40.0 * review_scale)))
-	_reference_image.custom_minimum_size.y = int(round(260.0 * review_scale))
+	_reference_holder.custom_minimum_size.y = int(round(260.0 * review_scale))
 	_reference_caption.add_theme_font_size_override("font_size", int(round(34.0 * review_scale)))
 	_expected.add_theme_font_size_override("font_size", int(round(42.0 * review_scale)))
 	_expected.modulate = Color(0.78, 0.9, 1.0)
@@ -75,6 +92,7 @@ func _refresh_step() -> void:
 	var reference_texture: Texture2D = load(reference_path) if not reference_path.is_empty() else null
 	_reference_image.texture = reference_texture
 	_reference_image.visible = reference_texture != null
+	_reference_specimen.visible = reference_texture != null and AppState.requires_specimen_overlay(GuidedReviewSession.get_note())
 	_reference_caption.visible = reference_texture != null
 	_expected.text = str(step.get("expected", ""))
 

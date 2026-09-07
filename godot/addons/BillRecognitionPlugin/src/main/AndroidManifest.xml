@@ -8,7 +8,6 @@
         <activity
             android:name="com.appsimple.billrecognition.BillScanActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Material.Light.NoActionBar" />
         <meta-data
             android:name="org.godotengine.plugin.v2.BillRecognitionPluginV2"

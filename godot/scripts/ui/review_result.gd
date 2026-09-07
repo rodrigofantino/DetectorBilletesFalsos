@@ -111,9 +111,9 @@ func _show_completion_feedback() -> void:
 	dialog.unresizable = true
 	dialog.exclusive = true
 	var viewport_size := get_viewport_rect().size
-	var dialog_width := min(760.0, viewport_size.x * 0.88)
-	var dialog_height := floor(viewport_size.y * 0.50)
-	var dialog_size := Vector2(max(1.0, dialog_width), max(1.0, dialog_height))
+	var dialog_width: float = minf(760.0, viewport_size.x * 0.88)
+	var dialog_height: float = floor(viewport_size.y * 0.50)
+	var dialog_size: Vector2 = Vector2(maxf(1.0, dialog_width), maxf(1.0, dialog_height))
 	dialog.min_size = dialog_size
 	dialog.max_size = Vector2i(int(dialog_size.x), int(dialog_size.y))
 	dialog.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))

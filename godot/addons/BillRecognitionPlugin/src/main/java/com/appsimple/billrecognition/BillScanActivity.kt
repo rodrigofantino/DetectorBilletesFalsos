@@ -64,7 +64,6 @@ class BillScanActivity : ComponentActivity() {
             ?.lowercase()
             ?.takeIf { it in setOf("en", "es", "pt", "zh") }
             ?: "en"
-        requestedOrientation = android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         clearOrphanedCaptures()
         buildUi()
         cameraExecutor = Executors.newSingleThreadExecutor()

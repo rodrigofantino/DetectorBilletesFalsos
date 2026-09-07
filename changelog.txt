@@ -1,3 +1,24 @@
+V.2.042_Updated Android compatibility for large screens and Android 15/16
+V.2.041_Added Gabon current BEAC Type 2020 banknotes with official images and localized security reviews
+V.2.040_Added Democratic Republic of the Congo current franc banknotes with official BCC images and localized security reviews
+V.2.039_Added Albania current lek banknotes with official Bank of Albania images and localized security reviews
+V.2.038_Added Syria current pound banknotes with official CBoS images and localized security reviews
+V.2.037_Added Morocco current dirham banknotes with official Bank Al-Maghrib images and localized security reviews
+V.2.036_Added Ethiopia current birr banknotes with official NBE images and localized security reviews
+V.2.035_Added Qatar current riyal banknotes with official QCB images and localized security reviews
+V.2.034_Added Ukraine current hryvnia banknotes with official NBU images and localized security reviews
+V.2.033_Added Serbia current dinar banknotes with official NBS images and localized security reviews
+V.2.032_Added Hungary current forint banknotes with official MNB images and localized security reviews
+V.2.031_Added Cote d'Ivoire current BCEAO banknotes with official images and localized security reviews
+V.2.030_Added Thailand current banknotes with official Bank of Thailand images and localized security reviews
+V.2.029_Added Russia 2023 2017 and 2025 banknotes with official Bank of Russia source metadata and ready review flows
+V.2.028_Added Guatemala current circulation banknotes with official Banguat images and ready review metadata
+V.2.027_Added Dominican Republic banknotes with BCRD source metadata and ready review flows
+V.2.026_Added Bangladesh current banknotes with official images and localized security reviews
+V.2.025_Added Taiwan current New Taiwan Dollar banknotes with official images and localized security reviews
+V.2.024_Added Nigeria redesigned 2022 banknotes with official images and localized security reviews
+V.2.023_Added Saudi Arabia sixth issue banknotes with official images and localized security reviews
+V.2.022_Added Uruguay Costa Rica Turkey Malaysia and United Arab Emirates with official banknote data and localized security reviews
 V.2.021_Deferred feedback prompts and fixed Google Play rating flows with usage analytics
 V.2.011_Increased UI typography and repositioned the main menu review guidance
 V.2.010_Committed the current banknote catalog, localization updates, and Android publishing changes
@@ -67,3 +88,5 @@ V.2.003_Requested in-app review after completed banknote checks with a one-day l
 V.2.004_Added Israel banknotes with official security review data
 V.2.005_Corrected banner IDs and added an interstitial after every third daily review
 V.2.007_Completed Argentina banknote recognition and security review metadata
+V.2.035_Added Qatar current riyal banknotes with official QCB images and localized security reviews
+V.2.036_Added Ethiopia current birr banknotes with official NBE images and localized security reviews

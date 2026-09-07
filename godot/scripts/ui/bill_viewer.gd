@@ -247,7 +247,7 @@ func _refresh() -> void:
 
 	var texture := _load_note_texture(note)
 	if texture != null:
-		_set_artwork(texture)
+		_set_artwork(texture, AppState.requires_specimen_overlay(note))
 	else:
 		_set_artwork(_build_fallback_artwork(note))
 
@@ -257,11 +257,14 @@ func _clear_features() -> void:
 		child.queue_free()
 
 
-func _set_artwork(content: Variant) -> void:
+func _set_artwork(content: Variant, show_specimen: bool = false) -> void:
 	for child in _artwork_holder.get_children():
 		child.queue_free()
 	if content is Texture2D:
 		var texture := content as Texture2D
+		if show_specimen:
+			_artwork_holder.add_child(ScreenBuilder.make_specimen_preview(texture, _cap_texture_size(texture, _artwork_max_size)))
+			return
 		var image := TextureRect.new()
 		image.set_anchors_preset(Control.PRESET_FULL_RECT)
 		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE

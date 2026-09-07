@@ -175,6 +175,8 @@ func _build_thumbnail(note: Dictionary, ui_scale: float) -> Control:
 	var thumb_height := int(round(360.0 * ui_scale))
 	var texture := _load_note_texture(note)
 	if texture != null:
+		if AppState.requires_specimen_overlay(note):
+			return ScreenBuilder.make_specimen_preview(texture, Vector2(thumb_width, thumb_height))
 		var image := TextureRect.new()
 		image.custom_minimum_size = Vector2(thumb_width, thumb_height)
 		image.size_flags_horizontal = Control.SIZE_EXPAND_FILL
