@@ -475,7 +475,7 @@ static func _start_touch_scroll_inertia(scroll: ScrollContainer) -> void:
 		return
 
 	var scrollbar := scroll.get_v_scroll_bar()
-	var max_scroll := max(0, int(round(scrollbar.max_value - scrollbar.page)))
+	var max_scroll: int = maxi(0, int(round(scrollbar.max_value - scrollbar.page)))
 	var target_scroll := clampi(
 		scroll.scroll_vertical - int(round(velocity * TOUCH_SCROLL_INERTIA_DISTANCE_SECONDS)),
 		0,

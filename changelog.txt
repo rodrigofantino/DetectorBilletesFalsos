@@ -1,3 +1,4 @@
+V.2.107_Fixed Variant inference in touch scroll calculations
 V.2.106_Hardened Android runtime texture import preparation
 V.2.105_Optimized runtime banknote assets and Android package size
 V.2.104_Added reproducible banknote asset optimization tooling
