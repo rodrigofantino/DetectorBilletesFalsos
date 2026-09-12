@@ -67,6 +67,7 @@ func _on_native_recognition_completed(status: String, recognized_text: String) -
 
 
 func _match_candidates(recognized_text: String) -> Array[Dictionary]:
+	AppState.ensure_currency_data_loaded()
 	var normalized := _normalize_text(recognized_text)
 	var candidates: Array[Dictionary] = []
 	for note in AppState.currency_entries:

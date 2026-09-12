@@ -57,7 +57,7 @@ func _build_ui() -> void:
 	_root.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_root.add_theme_constant_override("separation", 14)
 	scroll.add_child(_root)
-	ScreenBuilder.enable_touch_scroll(scroll, _root)
+	ScreenBuilder.enable_touch_scroll(scroll, _root, true)
 
 	var bar := HBoxContainer.new()
 	bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL

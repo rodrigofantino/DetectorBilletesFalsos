@@ -3,7 +3,7 @@ extends Node
 const DATA_PATH := "res://data/currencyinfo.json"
 const UI_LOCALIZATIONS_PATH := "res://data/ui_localizations.json"
 const SETTINGS_PATH := "user://settings.cfg"
-const APP_VERSION := "V.2.041"
+const APP_VERSION := "V.2.046"
 const FALLBACK_LOCALE := "en"
 const SUPPORTED_LOCALES := ["en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant"]
 const LOCALE_DISPLAY_NAMES := {
@@ -14,6 +14,13 @@ const ABOUT_UPDATE_SUMMARY := {
 	"es": "Mejoramos la legibilidad de la interfaz, compactamos Acerca de, configuramos las ubicaciones de banners y añadimos tarjetas de información de billetes.",
 	"pt": "Melhoramos a legibilidade da interface, compactamos o conteúdo Sobre, configuramos os posicionamentos de banners e adicionamos cartões de informações sobre cédulas.",
 	"zh": "优化了易读的界面样式、精简了“关于”内容、支持可配置的横幅广告位置，并新增了纸币信息卡片。"
+}
+
+const ABOUT_UPDATE_HISTORY := {
+	"en": "Recent updates:\n2.046 — In-app rating now falls back to the Google Play listing when unavailable.\n2.045 — Switched Android to the Compatibility renderer to prevent Vulkan startup crashes.\n2.044 — Android phones are locked to portrait orientation.",
+	"es": "Cambios recientes:\n2.046 — La calificación in-app ahora abre la ficha de Google Play cuando no está disponible.\n2.045 — Cambiamos Android al renderizador Compatibility para evitar cierres de Vulkan al iniciar.\n2.044 — Los celulares Android quedan bloqueados en orientación vertical.",
+	"pt": "Atualizações recentes:\n2.046 — A avaliação no app agora abre a página do Google Play quando não está disponível.\n2.045 — Alteramos o Android para o renderizador Compatibility para evitar falhas do Vulkan na inicialização.\n2.044 — Os celulares Android ficam bloqueados na orientação vertical.",
+	"zh": "最近更新：\n2.046 — 应用内评分不可用时，现在会打开 Google Play 商店页面。\n2.045 — Android 改用 Compatibility 渲染器，以避免 Vulkan 启动崩溃。\n2.044 — Android 手机锁定为竖屏方向。"
 }
 
 const UI_TEXTS := {
@@ -995,13 +1002,13 @@ var tool_screen_holds: int = 0
 var current_locale: String = ""
 var locale_override: String = ""
 var external_ui_localizations: Dictionary = {}
+var _currency_data_loaded := false
 
 
 func _ready() -> void:
 	load_ui_localizations()
 	load_user_settings()
 	_apply_locale()
-	load_currency_data()
 
 
 func set_locale_from_system() -> void:
@@ -1087,9 +1094,10 @@ func get_app_version() -> String:
 
 func get_about_text() -> String:
 	var update_text := _get_localized_ui_value("about_update_summary", ABOUT_UPDATE_SUMMARY)
+	var update_history := _get_localized_ui_value("about_update_history", ABOUT_UPDATE_HISTORY)
 	var version_line := t("about_version_label") % APP_VERSION
 	var update_line := t("about_update_label") % update_text
-	return "%s\n%s" % [version_line, update_line]
+	return "%s\n%s\n\n%s" % [version_line, update_line, update_history]
 
 
 func t(key: String) -> String:
@@ -1138,6 +1146,9 @@ func _get_localized_ui_value(section: String, built_in: Dictionary) -> String:
 
 
 func load_currency_data() -> void:
+	if _currency_data_loaded:
+		return
+	_currency_data_loaded = true
 	currency_entries.clear()
 	if not FileAccess.file_exists(DATA_PATH):
 		push_error("Currency data not found: %s" % DATA_PATH)
@@ -1162,7 +1173,12 @@ func load_currency_data() -> void:
 		selected_country = str(currency_entries[0].get("country", ""))
 
 
+func ensure_currency_data_loaded() -> void:
+	load_currency_data()
+
+
 func get_countries() -> Array[String]:
+	ensure_currency_data_loaded()
 	var seen: Dictionary = {}
 	for entry in currency_entries:
 		var country := str(entry.get("country", "")).strip_edges()
@@ -1196,6 +1212,7 @@ func get_selected_notes() -> Array[Dictionary]:
 
 
 func get_notes_for_country(country: String) -> Array[Dictionary]:
+	ensure_currency_data_loaded()
 	var notes: Array[Dictionary] = []
 	for entry in currency_entries:
 		if str(entry.get("country", "")) == country:
@@ -1220,6 +1237,7 @@ func get_note_id(note: Dictionary) -> String:
 
 
 func find_note_by_id(note_id: String) -> Dictionary:
+	ensure_currency_data_loaded()
 	for note in currency_entries:
 		if get_note_id(note) == note_id:
 			return note

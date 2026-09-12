@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 
 $expectedRecordCount = 334
-$expectedLegacyHash = "e9574b1bb01aa6ff7d6c53d4842d155d030060fdbacbf7c5a814be1eae039661"
+$expectedLegacyHash = "8ddc4e8d38848acd84b7f8d51374888a840a82b64227bc57dfcbd7f266fafda6"
 $supportedLocales = @("en", "es", "pt", "zh", "he", "id", "ur", "fil", "fa", "ms", "de", "ar", "fr", "tr", "hi", "bn", "ro", "nl", "ru", "sw", "th", "el", "hu", "sr", "uk", "bg", "it", "pl", "vi", "hr", "si", "my", "sv", "ps", "cs", "ko", "no", "uz", "sq", "bs", "be", "fi", "ht", "ja", "km", "lt", "lv", "sk", "ta", "te", "mr", "pa", "gu", "kn", "ml", "ne", "az", "kk", "da", "sl", "mn", "zh_hant")
 $allowedMethods = @("touch", "backlight", "tilt", "visual", "uv")
 $allowedSides = @("front", "back", "both")

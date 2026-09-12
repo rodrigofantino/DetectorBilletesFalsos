@@ -1,10 +1,13 @@
 extends Node
 
 const STATE_PATH := "user://review_state.cfg"
+const PLAY_STORE_APP_URI := "market://details?id=com.appsimple.DetectorBilleteFalso2"
 const PLAY_STORE_LISTING_URL := "https://play.google.com/store/apps/details?id=com.appsimple.DetectorBilleteFalso2"
 const PROMPT_COOLDOWN_DAYS := 1
 const FEEDBACK_PROMPT_COOLDOWN_DAYS := 14
 const INTERSTITIAL_REVIEW_INTERVAL := 3
+const MANUAL_REVIEW_MIN_VISIBLE_MSEC := 1200
+const MANUAL_REVIEW_TIMEOUT_SECONDS := 12.0
 
 var _usage_count := 0
 var _first_launch_unix := 0
@@ -14,6 +17,8 @@ var _completed_review_pending := false
 var _request_pending := false
 var _manual_review_requested := false
 var _manual_review_flow_pending := false
+var _manual_review_started_msec := 0
+var _manual_review_request_id := 0
 var _review_day := ""
 var _daily_completed_reviews := 0
 
@@ -69,11 +74,17 @@ func request_manual_review() -> bool:
 	var billing := get_node_or_null("/root/AppPurchases")
 	_request_pending = true
 	_manual_review_flow_pending = true
+	_manual_review_started_msec = Time.get_ticks_msec()
+	_manual_review_request_id += 1
+	var request_id := _manual_review_request_id
 	if billing.has_signal("review_flow_completed"):
 		billing.review_flow_completed.connect(_on_review_finished, CONNECT_ONE_SHOT)
 	if billing.has_signal("review_flow_error"):
 		billing.review_flow_error.connect(_on_review_error, CONNECT_ONE_SHOT)
 	billing.request_in_app_review()
+	get_tree().create_timer(MANUAL_REVIEW_TIMEOUT_SECONDS).timeout.connect(
+		func() -> void: _on_manual_review_timeout(request_id)
+	)
 	return true
 
 
@@ -104,13 +115,19 @@ func _on_billing_ready() -> void:
 
 
 func _on_review_finished() -> void:
+	var was_manual_request := _manual_review_flow_pending
+	var elapsed_msec := Time.get_ticks_msec() - _manual_review_started_msec
 	_request_pending = false
-	if _manual_review_flow_pending:
+	_manual_review_flow_pending = false
+	if was_manual_request:
 		# Google Play does not disclose whether a rating was submitted; record only
 		# that its native review flow finished so the manual control is not repeated.
 		_manual_review_requested = true
-		_manual_review_flow_pending = false
 		_save_state()
+		# Play Core reports success even when quota or eligibility prevents the
+		# dialog from appearing. A near-instant completion indicates that case.
+		if elapsed_msec < MANUAL_REVIEW_MIN_VISIBLE_MSEC:
+			call_deferred("_open_play_store_listing")
 
 
 func _on_review_error(_message: String) -> void:
@@ -121,8 +138,19 @@ func _on_review_error(_message: String) -> void:
 		_open_play_store_listing()
 
 
+func _on_manual_review_timeout(request_id: int) -> void:
+	if request_id != _manual_review_request_id or not _manual_review_flow_pending:
+		return
+	_request_pending = false
+	_manual_review_flow_pending = false
+	_open_play_store_listing()
+
+
 func _open_play_store_listing() -> void:
-	var error := OS.shell_open(PLAY_STORE_LISTING_URL)
+	var error := OS.shell_open(PLAY_STORE_APP_URI)
+	if error == OK:
+		return
+	error = OS.shell_open(PLAY_STORE_LISTING_URL)
 	if error != OK:
 		push_warning("Could not open Google Play listing: %s" % PLAY_STORE_LISTING_URL)
 

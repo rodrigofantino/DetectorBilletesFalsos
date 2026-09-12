@@ -16,6 +16,11 @@ const COLOR_TEXT_MUTED := Color("cbd5e1")
 const COLOR_BORDER := Color("334155")
 const COLOR_FOCUS := Color("60a5fa")
 const COLOR_WARNING := Color("fbbf24")
+const TOUCH_SCROLL_INERTIA_VELOCITY_META := "touch_scroll_inertia_velocity"
+const TOUCH_SCROLL_INERTIA_TWEEN_META := "touch_scroll_inertia_tween"
+const TOUCH_SCROLL_INERTIA_DISTANCE_SECONDS := 0.18
+const TOUCH_SCROLL_INERTIA_DURATION_SECONDS := 0.22
+const TOUCH_SCROLL_INERTIA_MIN_VELOCITY := 80.0
 
 static func _ui_scale(control: Control) -> float:
 	if control == null:
@@ -412,34 +417,83 @@ static func _make_ad_fallback_texture() -> Texture2D:
 	image.fill(Color(0.35, 0.35, 0.35, 1.0))
 	return ImageTexture.create_from_image(image)
 
-static func enable_touch_scroll(scroll: ScrollContainer, content: Control) -> void:
+static func enable_touch_scroll(scroll: ScrollContainer, content: Control, use_inertia: bool = false) -> void:
 	if scroll == null or content == null:
 		return
 
 	scroll.mouse_filter = Control.MOUSE_FILTER_STOP
-	_connect_touch_scroll(scroll, content)
+	if use_inertia:
+		scroll.set_meta(TOUCH_SCROLL_INERTIA_VELOCITY_META, 0.0)
+	_connect_touch_scroll(scroll, content, use_inertia)
 
-static func _connect_touch_scroll(scroll: ScrollContainer, node: Node) -> void:
+static func _connect_touch_scroll(scroll: ScrollContainer, node: Node, use_inertia: bool) -> void:
 	if node is Control:
 		var control := node as Control
-		if not control.gui_input.is_connected(_relay_touch_scroll.bind(scroll)):
-			control.gui_input.connect(_relay_touch_scroll.bind(scroll))
+		if not control.gui_input.is_connected(_relay_touch_scroll.bind(scroll, use_inertia)):
+			control.gui_input.connect(_relay_touch_scroll.bind(scroll, use_inertia))
 
 	for child in node.get_children():
-		_connect_touch_scroll(scroll, child)
+		_connect_touch_scroll(scroll, child, use_inertia)
 
-static func _relay_touch_scroll(event: InputEvent, scroll: ScrollContainer) -> void:
+static func _relay_touch_scroll(event: InputEvent, scroll: ScrollContainer, use_inertia: bool) -> void:
 	if scroll == null:
 		return
 
-	if event is InputEventScreenDrag:
+	if use_inertia and event is InputEventScreenTouch:
+		var touch := event as InputEventScreenTouch
+		if touch.pressed:
+			_cancel_touch_scroll_inertia(scroll)
+			scroll.set_meta(TOUCH_SCROLL_INERTIA_VELOCITY_META, 0.0)
+		else:
+			_start_touch_scroll_inertia(scroll)
+	elif event is InputEventScreenDrag:
 		var drag := event as InputEventScreenDrag
+		if use_inertia:
+			_cancel_touch_scroll_inertia(scroll)
+			scroll.set_meta(TOUCH_SCROLL_INERTIA_VELOCITY_META, drag.velocity.y)
 		scroll.scroll_vertical = max(0, scroll.scroll_vertical - int(round(drag.relative.y)))
 		scroll.accept_event()
 	elif event is InputEventPanGesture:
 		var pan := event as InputEventPanGesture
 		scroll.scroll_vertical = max(0, scroll.scroll_vertical + int(round(pan.delta.y * 48.0)))
 		scroll.accept_event()
+
+
+static func _cancel_touch_scroll_inertia(scroll: ScrollContainer) -> void:
+	if not scroll.has_meta(TOUCH_SCROLL_INERTIA_TWEEN_META):
+		return
+
+	var tween: Variant = scroll.get_meta(TOUCH_SCROLL_INERTIA_TWEEN_META)
+	if tween is Tween:
+		(tween as Tween).kill()
+	scroll.remove_meta(TOUCH_SCROLL_INERTIA_TWEEN_META)
+
+
+static func _start_touch_scroll_inertia(scroll: ScrollContainer) -> void:
+	var velocity := float(scroll.get_meta(TOUCH_SCROLL_INERTIA_VELOCITY_META, 0.0))
+	if absf(velocity) < TOUCH_SCROLL_INERTIA_MIN_VELOCITY:
+		return
+
+	var scrollbar := scroll.get_v_scroll_bar()
+	var max_scroll := max(0, int(round(scrollbar.max_value - scrollbar.page)))
+	var target_scroll := clampi(
+		scroll.scroll_vertical - int(round(velocity * TOUCH_SCROLL_INERTIA_DISTANCE_SECONDS)),
+		0,
+		max_scroll
+	)
+	if target_scroll == scroll.scroll_vertical:
+		return
+
+	_cancel_touch_scroll_inertia(scroll)
+	var tween := scroll.create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(scroll, "scroll_vertical", target_scroll, TOUCH_SCROLL_INERTIA_DURATION_SECONDS)
+	tween.finished.connect(func() -> void:
+		if is_instance_valid(scroll):
+			scroll.remove_meta(TOUCH_SCROLL_INERTIA_TWEEN_META)
+	)
+	scroll.set_meta(TOUCH_SCROLL_INERTIA_TWEEN_META, tween)
 
 static func open_source_url(url: String) -> void:
 	url = url.strip_edges()

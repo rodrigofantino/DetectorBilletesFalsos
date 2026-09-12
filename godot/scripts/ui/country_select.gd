@@ -67,7 +67,7 @@ func _build_ui() -> void:
 		_configure_country_button(button, country, ui_scale)
 		list.add_child(button)
 
-	ScreenBuilder.enable_touch_scroll(scroll, list)
+	ScreenBuilder.enable_touch_scroll(scroll, list, true)
 
 	var back := Button.new()
 	back.text = AppState.t("back")

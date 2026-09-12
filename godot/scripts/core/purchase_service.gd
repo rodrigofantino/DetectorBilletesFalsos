@@ -19,7 +19,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	if not _is_android():
+	if not _is_android() or not Engine.has_singleton("GodotGooglePlayBilling"):
 		return
 
 	_billing_client = BillingClient.new()

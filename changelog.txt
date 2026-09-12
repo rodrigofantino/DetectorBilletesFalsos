@@ -1,3 +1,8 @@
+V.2.103_Created a release checkpoint before application size optimization
+V.2.046_Added Google Play fallback when the in-app rating dialog is unavailable
+V.2.045_Switched Android to the Compatibility renderer to prevent Vulkan startup crashes
+V.2.044_Locked Android phones to portrait orientation
+V.2.043_Fixed Android release startup with R8 JNI/plugin keep rules and normalized exported banknote assets
 V.2.042_Updated Android compatibility for large screens and Android 15/16
 V.2.041_Added Gabon current BEAC Type 2020 banknotes with official images and localized security reviews
 V.2.040_Added Democratic Republic of the Congo current franc banknotes with official BCC images and localized security reviews

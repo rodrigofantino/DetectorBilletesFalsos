@@ -151,7 +151,7 @@ func _build_ui() -> void:
 			separator.add_theme_constant_override("separation", int(round(12.0 * ui_scale)))
 			list.add_child(separator)
 
-	ScreenBuilder.enable_touch_scroll(scroll, list)
+	ScreenBuilder.enable_touch_scroll(scroll, list, true)
 	var back := Button.new()
 	back.text = AppState.t("back")
 	back.custom_minimum_size = Vector2(0, button_height)

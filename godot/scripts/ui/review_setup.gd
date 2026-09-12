@@ -3,7 +3,11 @@ extends Control
 const MAIN_MENU_SCENE := "res://scenes/MainMenu.tscn"
 const GUIDED_REVIEW_SCENE := "res://scenes/GuidedReview.tscn"
 
-var _country_select: OptionButton
+var _country_select: Button
+var _country_popup: PopupPanel
+var _country_scroll: ScrollContainer
+var _country_list: VBoxContainer
+var _countries: Array[String] = []
 var _note_select: OptionButton
 var _camera_status: Label
 var _camera_button: Button
@@ -60,14 +64,14 @@ func _build_ui() -> void:
 	content.add_child(_manual_section)
 	var country_label := ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_country"))
 	country_label.add_theme_font_size_override("font_size", 38)
-	_country_select = OptionButton.new()
+	_country_select = Button.new()
 	_country_select.custom_minimum_size = Vector2(0, 96)
 	_country_select.add_theme_font_size_override("font_size", 40)
 	_country_select.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_country_select.item_selected.connect(_on_country_selected)
+	_country_select.pressed.connect(_show_country_popup)
 	_manual_section.add_child(_country_select)
-	ScreenBuilder.style_option_button(_country_select)
-	_country_select.get_popup().add_theme_font_size_override("font_size", 40)
+	ScreenBuilder.style_button(_country_select, "secondary")
+	_build_country_popup()
 
 	var banknote_label := ScreenBuilder.add_subtitle(_manual_section, AppState.t("choose_banknote"))
 	banknote_label.add_theme_font_size_override("font_size", 38)
@@ -113,24 +117,34 @@ func _choose_manual() -> void:
 
 
 func _populate_countries() -> void:
-	_country_select.clear()
-	var countries := AppState.get_countries()
-	var selected_index := 0
-	for index in countries.size():
-		var country := countries[index]
-		_country_select.add_item(AppState.get_country_label(country))
-		_country_select.set_item_metadata(index, country)
-		if country == AppState.selected_country:
-			selected_index = index
-	_country_select.select(selected_index)
-	_on_country_selected(selected_index)
-
-
-func _on_country_selected(index: int) -> void:
-	if index < 0 or index >= _country_select.item_count:
+	_countries = AppState.get_countries()
+	for child in _country_list.get_children():
+		child.queue_free()
+	for country_value in _countries:
+		var country := str(country_value)
+		var button := ScreenBuilder.add_button(_country_list, AppState.get_country_label(country), "secondary")
+		button.custom_minimum_size = Vector2(0, 96)
+		button.add_theme_font_size_override("font_size", 40)
+		_configure_country_button(button, country)
+	ScreenBuilder.enable_touch_scroll(_country_scroll, _country_list, true)
+	if _countries.is_empty():
+		_country_select.text = ""
+		_country_select.disabled = true
+		_note_select.clear()
+		_start_button.disabled = true
 		return
-	var country := str(_country_select.get_item_metadata(index))
+	_country_select.disabled = false
+	var selected_country := AppState.selected_country
+	if not _countries.has(selected_country):
+		selected_country = str(_countries[0])
+	_select_country(selected_country)
+
+
+func _select_country(country: String) -> void:
+	if not _countries.has(country):
+		return
 	AppState.set_selected_country(country)
+	_country_select.text = AppState.get_country_label(country)
 	_note_select.clear()
 	var notes := AppState.get_notes_for_country(country)
 	for note_index in notes.size():
@@ -140,6 +154,71 @@ func _on_country_selected(index: int) -> void:
 	_start_button.disabled = notes.is_empty()
 	if not notes.is_empty():
 		_note_select.select(0)
+
+
+func _build_country_popup() -> void:
+	_country_popup = PopupPanel.new()
+	_country_popup.theme = theme
+	_country_popup.exclusive = true
+	_country_popup.add_theme_stylebox_override("panel", ScreenBuilder._style_box(ScreenBuilder.COLOR_SURFACE, ScreenBuilder.COLOR_BORDER, 22, 1, 24))
+	add_child(_country_popup)
+
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_top", 20)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_bottom", 20)
+	_country_popup.add_child(margin)
+	var content := VBoxContainer.new()
+	content.add_theme_constant_override("separation", 14)
+	margin.add_child(content)
+	var title := ScreenBuilder.add_subtitle(content, AppState.t("choose_country"))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 38)
+	_country_scroll = ScrollContainer.new()
+	_country_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_country_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_country_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	content.add_child(_country_scroll)
+	_country_list = VBoxContainer.new()
+	_country_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_country_list.add_theme_constant_override("separation", 12)
+	_country_scroll.add_child(_country_list)
+
+
+func _show_country_popup() -> void:
+	var viewport_size := get_viewport_rect().size
+	var popup_size := Vector2i(
+		int(maxf(1.0, minf(760.0, viewport_size.x * 0.90))),
+		int(maxf(1.0, viewport_size.y * 0.72))
+	)
+	_country_popup.popup_centered(popup_size)
+
+
+func _configure_country_button(button: Button, country: String) -> void:
+	var gesture := {"dragged": false, "distance": 0.0}
+	var ui_scale := ScreenBuilder.readable_ui_scale(self)
+	button.gui_input.connect(func(event: InputEvent) -> void:
+		if event is InputEventScreenTouch and (event as InputEventScreenTouch).pressed:
+			gesture.dragged = false
+			gesture.distance = 0.0
+		elif event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT and (event as InputEventMouseButton).pressed:
+			gesture.dragged = false
+			gesture.distance = 0.0
+		elif event is InputEventScreenDrag:
+			gesture.distance += (event as InputEventScreenDrag).relative.length()
+		elif event is InputEventMouseMotion and ((event as InputEventMouseMotion).button_mask & MOUSE_BUTTON_MASK_LEFT) != 0:
+			gesture.distance += (event as InputEventMouseMotion).relative.length()
+		if gesture.distance >= 12.0 * ui_scale:
+			gesture.dragged = true
+	)
+	button.pressed.connect(func() -> void:
+		if gesture.dragged:
+			return
+		_select_country(country)
+		_country_popup.hide()
+	)
 
 
 func _on_note_selected(index: int) -> void:
@@ -197,11 +276,7 @@ func _confirm_candidate(note_id: String) -> void:
 	if not AppState.select_note_by_id(note_id):
 		return
 	AnalyticsService.track("candidate_confirmed")
-	for country_index in _country_select.item_count:
-		if str(_country_select.get_item_metadata(country_index)) == AppState.selected_country:
-			_country_select.select(country_index)
-			_on_country_selected(country_index)
-			break
+	_select_country(AppState.selected_country)
 	for note_index in _note_select.item_count:
 		if str(_note_select.get_item_metadata(note_index)) == note_id:
 			_note_select.select(note_index)
@@ -232,4 +307,7 @@ func _start_review() -> void:
 
 
 func _return_home() -> void:
+	if _country_popup != null and _country_popup.visible:
+		_country_popup.hide()
+		return
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
