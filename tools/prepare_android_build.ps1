@@ -13,6 +13,38 @@ if (-not (Test-Path -LiteralPath $configPath)) {
     throw "Godot Android build template is missing. Install the 4.6.3 template before preparing Android export."
 }
 
+$runtimeAssetRoot = Join-Path $repoRoot "godot/assets/bills_runtime"
+if (Test-Path -LiteralPath $runtimeAssetRoot -PathType Container) {
+	$runtimeTextureFiles = @(Get-ChildItem -LiteralPath $runtimeAssetRoot -File -Recurse | Where-Object {
+		$_.Extension.ToLowerInvariant() -in @(".webp", ".png", ".jpg", ".jpeg", ".svg")
+	})
+	$missingImportFiles = @($runtimeTextureFiles | Where-Object {
+		-not (Test-Path -LiteralPath ("{0}.import" -f $_.FullName) -PathType Leaf)
+	})
+	if ($missingImportFiles.Count -gt 0) {
+		throw "Runtime texture imports are missing for $($missingImportFiles.Count) files. Run Godot headless once to import the project, then rerun this script."
+	}
+	if ($runtimeTextureFiles.Count -ne 334) {
+		throw "Expected 334 runtime texture files, found $($runtimeTextureFiles.Count). The runtime asset set is incomplete."
+	}
+	$runtimeImportFiles = @(Get-ChildItem -LiteralPath $runtimeAssetRoot -File -Recurse -Filter *.import)
+	$updatedImportCount = 0
+	foreach ($importFile in $runtimeImportFiles) {
+		$importContent = [IO.File]::ReadAllText($importFile.FullName)
+		$updatedImportContent = $importContent
+		$updatedImportContent = $updatedImportContent.Replace("compress/mode=0", "compress/mode=1")
+		$updatedImportContent = $updatedImportContent.Replace("compress/lossy_quality=0.7", "compress/lossy_quality=0.88")
+		$updatedImportContent = $updatedImportContent.Replace("process/size_limit=0", "process/size_limit=2048")
+		if ($updatedImportContent -ne $importContent) {
+			$updatedImportCount++
+			if ($Write) {
+				[IO.File]::WriteAllText($importFile.FullName, $updatedImportContent, [Text.UTF8Encoding]::new($false))
+			}
+		}
+	}
+	Write-Output "Configured $($runtimeImportFiles.Count) runtime texture imports for lossy high-quality compression; updated $updatedImportCount."
+}
+
 # Older generated Gradle projects can retain the pre-rename BillScan plugin
 # manifest even after the source AAR moved from billscan to billrecognition.
 # That leaves both plugin entry points in the merged manifest and can make the
