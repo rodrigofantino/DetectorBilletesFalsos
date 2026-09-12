@@ -1,3 +1,4 @@
+V.2.104_Added reproducible banknote asset optimization tooling
 V.2.103_Created a release checkpoint before application size optimization
 V.2.046_Added Google Play fallback when the in-app rating dialog is unavailable
 V.2.045_Switched Android to the Compatibility renderer to prevent Vulkan startup crashes
